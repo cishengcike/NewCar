@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.smartamd.mapper.PosterMapper" >
+  <resultMap id="BaseResultMap" type="com.smartamd.model.Poster" >
+    <id column="posterId" property="posterid" jdbcType="INTEGER" />
+    <result column="postUser" property="postuser" jdbcType="VARCHAR" />
+    <result column="postTime" property="posttime" jdbcType="TIMESTAMP" />
+    <result column="postAddress" property="postaddress" jdbcType="VARCHAR" />
+    <result column="postContent" property="postcontent" jdbcType="VARCHAR" />
+    <result column="postTel" property="posttel" jdbcType="VARCHAR" />
+    <result column="Extra1" property="extra1" jdbcType="VARCHAR" />
+    <result column="Extra2" property="extra2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    posterId, postUser, postTime, postAddress, postContent, postTel, Extra1, Extra2
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from poster
+    where posterId = #{posterid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from poster
+    where posterId = #{posterid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.smartamd.model.Poster" >
+    insert into poster (posterId, postUser, postTime, 
+      postAddress, postContent, postTel, 
+      Extra1, Extra2)
+    values (#{posterid,jdbcType=INTEGER}, #{postuser,jdbcType=VARCHAR}, #{posttime,jdbcType=TIMESTAMP}, 
+      #{postaddress,jdbcType=VARCHAR}, #{postcontent,jdbcType=VARCHAR}, #{posttel,jdbcType=VARCHAR}, 
+      #{extra1,jdbcType=VARCHAR}, #{extra2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.smartamd.model.Poster" >
+    insert into poster
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="posterid != null" >
+        posterId,
+      </if>
+      <if test="postuser != null" >
+        postUser,
+      </if>
+      <if test="posttime != null" >
+        postTime,
+      </if>
+      <if test="postaddress != null" >
+        postAddress,
+      </if>
+      <if test="postcontent != null" >
+        postContent,
+      </if>
+      <if test="posttel != null" >
+        postTel,
+      </if>
+      <if test="extra1 != null" >
+        Extra1,
+      </if>
+      <if test="extra2 != null" >
+        Extra2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="posterid != null" >
+        #{posterid,jdbcType=INTEGER},
+      </if>
+      <if test="postuser != null" >
+        #{postuser,jdbcType=VARCHAR},
+      </if>
+      <if test="posttime != null" >
+        #{posttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="postaddress != null" >
+        #{postaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="postcontent != null" >
+        #{postcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="posttel != null" >
+        #{posttel,jdbcType=VARCHAR},
+      </if>
+      <if test="extra1 != null" >
+        #{extra1,jdbcType=VARCHAR},
+      </if>
+      <if test="extra2 != null" >
+        #{extra2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smartamd.model.Poster" >
+    update poster
+    <set >
+      <if test="postuser != null" >
+        postUser = #{postuser,jdbcType=VARCHAR},
+      </if>
+      <if test="posttime != null" >
+        postTime = #{posttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="postaddress != null" >
+        postAddress = #{postaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="postcontent != null" >
+        postContent = #{postcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="posttel != null" >
+        postTel = #{posttel,jdbcType=VARCHAR},
+      </if>
+      <if test="extra1 != null" >
+        Extra1 = #{extra1,jdbcType=VARCHAR},
+      </if>
+      <if test="extra2 != null" >
+        Extra2 = #{extra2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where posterId = #{posterid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smartamd.model.Poster" >
+    update poster
+    set postUser = #{postuser,jdbcType=VARCHAR},
+      postTime = #{posttime,jdbcType=TIMESTAMP},
+      postAddress = #{postaddress,jdbcType=VARCHAR},
+      postContent = #{postcontent,jdbcType=VARCHAR},
+      postTel = #{posttel,jdbcType=VARCHAR},
+      Extra1 = #{extra1,jdbcType=VARCHAR},
+      Extra2 = #{extra2,jdbcType=VARCHAR}
+    where posterId = #{posterid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.smartamd.mapper.TuserMapper" >
+  <resultMap id="BaseResultMap" type="com.smartamd.model.Tuser" >
+    <id column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="teamId" property="teamid" jdbcType="INTEGER" />
+    <result column="carId" property="carid" jdbcType="INTEGER" />
+    <result column="userType" property="usertype" jdbcType="INTEGER" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="lo" property="lo" jdbcType="DOUBLE" />
+    <result column="la" property="la" jdbcType="DOUBLE" />
+    <result column="loginTime" property="logintime" jdbcType="TIMESTAMP" />
+    <result column="longCount" property="longcount" jdbcType="INTEGER" />
+    <result column="Extra1" property="extra1" jdbcType="VARCHAR" />
+    <result column="Extra2" property="extra2" jdbcType="VARCHAR" />
+    <result column="Extra3" property="extra3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    userId, teamId, carId, userType, userName, password, email, tel, address, status, 
+    lo, la, loginTime, longCount, Extra1, Extra2, Extra3
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tuser
+    where userId = #{userid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tuser
+    where userId = #{userid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.smartamd.model.Tuser" >
+    insert into tuser (userId, teamId, carId, 
+      userType, userName, password, 
+      email, tel, address, 
+      status, lo, la, loginTime, 
+      longCount, Extra1, Extra2, 
+      Extra3)
+    values (#{userid,jdbcType=INTEGER}, #{teamid,jdbcType=INTEGER}, #{carid,jdbcType=INTEGER}, 
+      #{usertype,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{lo,jdbcType=DOUBLE}, #{la,jdbcType=DOUBLE}, #{logintime,jdbcType=TIMESTAMP}, 
+      #{longcount,jdbcType=INTEGER}, #{extra1,jdbcType=VARCHAR}, #{extra2,jdbcType=VARCHAR}, 
+      #{extra3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.smartamd.model.Tuser" >
+    insert into tuser
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="teamid != null" >
+        teamId,
+      </if>
+      <if test="carid != null" >
+        carId,
+      </if>
+      <if test="usertype != null" >
+        userType,
+      </if>
+      <if test="username != null" >
+        userName,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="lo != null" >
+        lo,
+      </if>
+      <if test="la != null" >
+        la,
+      </if>
+      <if test="logintime != null" >
+        loginTime,
+      </if>
+      <if test="longcount != null" >
+        longCount,
+      </if>
+      <if test="extra1 != null" >
+        Extra1,
+      </if>
+      <if test="extra2 != null" >
+        Extra2,
+      </if>
+      <if test="extra3 != null" >
+        Extra3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="teamid != null" >
+        #{teamid,jdbcType=INTEGER},
+      </if>
+      <if test="carid != null" >
+        #{carid,jdbcType=INTEGER},
+      </if>
+      <if test="usertype != null" >
+        #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="lo != null" >
+        #{lo,jdbcType=DOUBLE},
+      </if>
+      <if test="la != null" >
+        #{la,jdbcType=DOUBLE},
+      </if>
+      <if test="logintime != null" >
+        #{logintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="longcount != null" >
+        #{longcount,jdbcType=INTEGER},
+      </if>
+      <if test="extra1 != null" >
+        #{extra1,jdbcType=VARCHAR},
+      </if>
+      <if test="extra2 != null" >
+        #{extra2,jdbcType=VARCHAR},
+      </if>
+      <if test="extra3 != null" >
+        #{extra3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smartamd.model.Tuser" >
+    update tuser
+    <set >
+      <if test="teamid != null" >
+        teamId = #{teamid,jdbcType=INTEGER},
+      </if>
+      <if test="carid != null" >
+        carId = #{carid,jdbcType=INTEGER},
+      </if>
+      <if test="usertype != null" >
+        userType = #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="lo != null" >
+        lo = #{lo,jdbcType=DOUBLE},
+      </if>
+      <if test="la != null" >
+        la = #{la,jdbcType=DOUBLE},
+      </if>
+      <if test="logintime != null" >
+        loginTime = #{logintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="longcount != null" >
+        longCount = #{longcount,jdbcType=INTEGER},
+      </if>
+      <if test="extra1 != null" >
+        Extra1 = #{extra1,jdbcType=VARCHAR},
+      </if>
+      <if test="extra2 != null" >
+        Extra2 = #{extra2,jdbcType=VARCHAR},
+      </if>
+      <if test="extra3 != null" >
+        Extra3 = #{extra3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where userId = #{userid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smartamd.model.Tuser" >
+    update tuser
+    set teamId = #{teamid,jdbcType=INTEGER},
+      carId = #{carid,jdbcType=INTEGER},
+      userType = #{usertype,jdbcType=INTEGER},
+      userName = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      lo = #{lo,jdbcType=DOUBLE},
+      la = #{la,jdbcType=DOUBLE},
+      loginTime = #{logintime,jdbcType=TIMESTAMP},
+      longCount = #{longcount,jdbcType=INTEGER},
+      Extra1 = #{extra1,jdbcType=VARCHAR},
+      Extra2 = #{extra2,jdbcType=VARCHAR},
+      Extra3 = #{extra3,jdbcType=VARCHAR}
+    where userId = #{userid,jdbcType=INTEGER}
+  </update>
+</mapper>

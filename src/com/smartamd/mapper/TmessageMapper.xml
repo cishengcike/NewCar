@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.smartamd.mapper.TmessageMapper" >
+  <resultMap id="BaseResultMap" type="com.smartamd.model.Tmessage" >
+    <id column="messageId" property="messageid" jdbcType="INTEGER" />
+    <result column="messageUser" property="messageuser" jdbcType="VARCHAR" />
+    <result column="messageTime" property="messagetime" jdbcType="TIMESTAMP" />
+    <result column="messageAddress" property="messageaddress" jdbcType="VARCHAR" />
+    <result column="messageContent" property="messagecontent" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    messageId, messageUser, messageTime, messageAddress, messageContent
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tmessage
+    where messageId = #{messageid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tmessage
+    where messageId = #{messageid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.smartamd.model.Tmessage" >
+    insert into tmessage (messageId, messageUser, messageTime, 
+      messageAddress, messageContent)
+    values (#{messageid,jdbcType=INTEGER}, #{messageuser,jdbcType=VARCHAR}, #{messagetime,jdbcType=TIMESTAMP}, 
+      #{messageaddress,jdbcType=VARCHAR}, #{messagecontent,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.smartamd.model.Tmessage" >
+    insert into tmessage
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="messageid != null" >
+        messageId,
+      </if>
+      <if test="messageuser != null" >
+        messageUser,
+      </if>
+      <if test="messagetime != null" >
+        messageTime,
+      </if>
+      <if test="messageaddress != null" >
+        messageAddress,
+      </if>
+      <if test="messagecontent != null" >
+        messageContent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="messageid != null" >
+        #{messageid,jdbcType=INTEGER},
+      </if>
+      <if test="messageuser != null" >
+        #{messageuser,jdbcType=VARCHAR},
+      </if>
+      <if test="messagetime != null" >
+        #{messagetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messageaddress != null" >
+        #{messageaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="messagecontent != null" >
+        #{messagecontent,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smartamd.model.Tmessage" >
+    update tmessage
+    <set >
+      <if test="messageuser != null" >
+        messageUser = #{messageuser,jdbcType=VARCHAR},
+      </if>
+      <if test="messagetime != null" >
+        messageTime = #{messagetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messageaddress != null" >
+        messageAddress = #{messageaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="messagecontent != null" >
+        messageContent = #{messagecontent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where messageId = #{messageid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smartamd.model.Tmessage" >
+    update tmessage
+    set messageUser = #{messageuser,jdbcType=VARCHAR},
+      messageTime = #{messagetime,jdbcType=TIMESTAMP},
+      messageAddress = #{messageaddress,jdbcType=VARCHAR},
+      messageContent = #{messagecontent,jdbcType=VARCHAR}
+    where messageId = #{messageid,jdbcType=INTEGER}
+  </update>
+</mapper>

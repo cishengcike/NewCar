@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.smartamd.mapper.ServiceStationMapper" >
+  <resultMap id="BaseResultMap" type="com.smartamd.model.ServiceStation" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="stationName" property="stationname" jdbcType="VARCHAR" />
+    <result column="stationAddress" property="stationaddress" jdbcType="VARCHAR" />
+    <result column="stationTel" property="stationtel" jdbcType="VARCHAR" />
+    <result column="lo" property="lo" jdbcType="DOUBLE" />
+    <result column="la" property="la" jdbcType="DOUBLE" />
+    <result column="Extra1" property="extra1" jdbcType="VARCHAR" />
+    <result column="Extra2" property="extra2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, type, stationName, stationAddress, stationTel, lo, la, Extra1, Extra2
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from service-station
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from service-station
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.smartamd.model.ServiceStation" >
+    insert into service-station (id, type, stationName, 
+      stationAddress, stationTel, lo, 
+      la, Extra1, Extra2)
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{stationname,jdbcType=VARCHAR}, 
+      #{stationaddress,jdbcType=VARCHAR}, #{stationtel,jdbcType=VARCHAR}, #{lo,jdbcType=DOUBLE}, 
+      #{la,jdbcType=DOUBLE}, #{extra1,jdbcType=VARCHAR}, #{extra2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.smartamd.model.ServiceStation" >
+    insert into service-station
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="stationname != null" >
+        stationName,
+      </if>
+      <if test="stationaddress != null" >
+        stationAddress,
+      </if>
+      <if test="stationtel != null" >
+        stationTel,
+      </if>
+      <if test="lo != null" >
+        lo,
+      </if>
+      <if test="la != null" >
+        la,
+      </if>
+      <if test="extra1 != null" >
+        Extra1,
+      </if>
+      <if test="extra2 != null" >
+        Extra2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="stationname != null" >
+        #{stationname,jdbcType=VARCHAR},
+      </if>
+      <if test="stationaddress != null" >
+        #{stationaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="stationtel != null" >
+        #{stationtel,jdbcType=VARCHAR},
+      </if>
+      <if test="lo != null" >
+        #{lo,jdbcType=DOUBLE},
+      </if>
+      <if test="la != null" >
+        #{la,jdbcType=DOUBLE},
+      </if>
+      <if test="extra1 != null" >
+        #{extra1,jdbcType=VARCHAR},
+      </if>
+      <if test="extra2 != null" >
+        #{extra2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smartamd.model.ServiceStation" >
+    update service-station
+    <set >
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="stationname != null" >
+        stationName = #{stationname,jdbcType=VARCHAR},
+      </if>
+      <if test="stationaddress != null" >
+        stationAddress = #{stationaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="stationtel != null" >
+        stationTel = #{stationtel,jdbcType=VARCHAR},
+      </if>
+      <if test="lo != null" >
+        lo = #{lo,jdbcType=DOUBLE},
+      </if>
+      <if test="la != null" >
+        la = #{la,jdbcType=DOUBLE},
+      </if>
+      <if test="extra1 != null" >
+        Extra1 = #{extra1,jdbcType=VARCHAR},
+      </if>
+      <if test="extra2 != null" >
+        Extra2 = #{extra2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smartamd.model.ServiceStation" >
+    update service-station
+    set type = #{type,jdbcType=INTEGER},
+      stationName = #{stationname,jdbcType=VARCHAR},
+      stationAddress = #{stationaddress,jdbcType=VARCHAR},
+      stationTel = #{stationtel,jdbcType=VARCHAR},
+      lo = #{lo,jdbcType=DOUBLE},
+      la = #{la,jdbcType=DOUBLE},
+      Extra1 = #{extra1,jdbcType=VARCHAR},
+      Extra2 = #{extra2,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.smartamd.mapper.TpositionMapper" >
+  <resultMap id="BaseResultMap" type="com.smartamd.model.Tposition" >
+    <id column="positionId" property="positionid" jdbcType="INTEGER" />
+    <result column="carId" property="carid" jdbcType="INTEGER" />
+    <result column="gpsTime" property="gpstime" jdbcType="TIMESTAMP" />
+    <result column="lo" property="lo" jdbcType="DOUBLE" />
+    <result column="la" property="la" jdbcType="DOUBLE" />
+    <result column="speed" property="speed" jdbcType="DOUBLE" />
+    <result column="direction" property="direction" jdbcType="VARCHAR" />
+    <result column="Extra1" property="extra1" jdbcType="VARCHAR" />
+    <result column="Extra2" property="extra2" jdbcType="VARCHAR" />
+    <result column="Extra3" property="extra3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    positionId, carId, gpsTime, lo, la, speed, direction, Extra1, Extra2, Extra3
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tposition
+    where positionId = #{positionid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tposition
+    where positionId = #{positionid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.smartamd.model.Tposition" >
+    insert into tposition (positionId, carId, gpsTime, 
+      lo, la, speed, direction, 
+      Extra1, Extra2, Extra3
+      )
+    values (#{positionid,jdbcType=INTEGER}, #{carid,jdbcType=INTEGER}, #{gpstime,jdbcType=TIMESTAMP}, 
+      #{lo,jdbcType=DOUBLE}, #{la,jdbcType=DOUBLE}, #{speed,jdbcType=DOUBLE}, #{direction,jdbcType=VARCHAR}, 
+      #{extra1,jdbcType=VARCHAR}, #{extra2,jdbcType=VARCHAR}, #{extra3,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.smartamd.model.Tposition" >
+    insert into tposition
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="positionid != null" >
+        positionId,
+      </if>
+      <if test="carid != null" >
+        carId,
+      </if>
+      <if test="gpstime != null" >
+        gpsTime,
+      </if>
+      <if test="lo != null" >
+        lo,
+      </if>
+      <if test="la != null" >
+        la,
+      </if>
+      <if test="speed != null" >
+        speed,
+      </if>
+      <if test="direction != null" >
+        direction,
+      </if>
+      <if test="extra1 != null" >
+        Extra1,
+      </if>
+      <if test="extra2 != null" >
+        Extra2,
+      </if>
+      <if test="extra3 != null" >
+        Extra3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="positionid != null" >
+        #{positionid,jdbcType=INTEGER},
+      </if>
+      <if test="carid != null" >
+        #{carid,jdbcType=INTEGER},
+      </if>
+      <if test="gpstime != null" >
+        #{gpstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lo != null" >
+        #{lo,jdbcType=DOUBLE},
+      </if>
+      <if test="la != null" >
+        #{la,jdbcType=DOUBLE},
+      </if>
+      <if test="speed != null" >
+        #{speed,jdbcType=DOUBLE},
+      </if>
+      <if test="direction != null" >
+        #{direction,jdbcType=VARCHAR},
+      </if>
+      <if test="extra1 != null" >
+        #{extra1,jdbcType=VARCHAR},
+      </if>
+      <if test="extra2 != null" >
+        #{extra2,jdbcType=VARCHAR},
+      </if>
+      <if test="extra3 != null" >
+        #{extra3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smartamd.model.Tposition" >
+    update tposition
+    <set >
+      <if test="carid != null" >
+        carId = #{carid,jdbcType=INTEGER},
+      </if>
+      <if test="gpstime != null" >
+        gpsTime = #{gpstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lo != null" >
+        lo = #{lo,jdbcType=DOUBLE},
+      </if>
+      <if test="la != null" >
+        la = #{la,jdbcType=DOUBLE},
+      </if>
+      <if test="speed != null" >
+        speed = #{speed,jdbcType=DOUBLE},
+      </if>
+      <if test="direction != null" >
+        direction = #{direction,jdbcType=VARCHAR},
+      </if>
+      <if test="extra1 != null" >
+        Extra1 = #{extra1,jdbcType=VARCHAR},
+      </if>
+      <if test="extra2 != null" >
+        Extra2 = #{extra2,jdbcType=VARCHAR},
+      </if>
+      <if test="extra3 != null" >
+        Extra3 = #{extra3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where positionId = #{positionid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smartamd.model.Tposition" >
+    update tposition
+    set carId = #{carid,jdbcType=INTEGER},
+      gpsTime = #{gpstime,jdbcType=TIMESTAMP},
+      lo = #{lo,jdbcType=DOUBLE},
+      la = #{la,jdbcType=DOUBLE},
+      speed = #{speed,jdbcType=DOUBLE},
+      direction = #{direction,jdbcType=VARCHAR},
+      Extra1 = #{extra1,jdbcType=VARCHAR},
+      Extra2 = #{extra2,jdbcType=VARCHAR},
+      Extra3 = #{extra3,jdbcType=VARCHAR}
+    where positionId = #{positionid,jdbcType=INTEGER}
+  </update>
+</mapper>

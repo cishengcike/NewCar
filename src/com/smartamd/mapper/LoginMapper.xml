@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.smartamd.mapper.LoginMapper">
+
+    <select id="loginTrue" resultType="map">
+        select userName as
+        USERNAME,userid as USERID,password as PASSWORD,tel as TEL,
+        userType as TYPE,status as STATE, if(isnull(carid),'无',carid) as CARID
+        from tuser where
+        (userName =#{phone} or tel = #{phone} ) and
+        password
+        =#{pwd}
+    </select>
+
+
+    <select id="loginCommomPhone" resultType="map">
+        select userName as
+        USERNAME from tuser where
+        tel =#{phone}
+    </select>
+
+    <select id="loginCommomUser" resultType="map">
+        select userName as
+        USERNAME from tuser where
+        carid =#{carid}
+    </select>
+
+    <!-- 农户注册数量 -->
+    <select id="usersNumber" resultType="int">
+        select count(1) from tuser
+        where userType = 0
+    </select>
+
+
+    <!-- 农机手注册数 -->
+    <select id="usersTwoNumber" resultType="int">
+        select count(1) from
+        tuser where userType = 1
+    </select>
+
+
+
+
+    <!-- 车队注册数 -->
+    <select id="CarNumber" resultType="int">
+        select count(1) from tuser
+        where userType = 2
+    </select>
+
+
+
+
+    <!-- 工作农机数 -->
+    <!-- <select id="workUserNumber" resultType="int"> select count(1) from
+        tuser where type = 1 </select> -->
+
+    <!-- 闲置农机数 -->
+    <!-- <select id="freeUserNumber" resultType="int"> select userName as USERNAME
+        from tuser where (userName =#{phone} or tel = #{phone} ) and password =#{pwd}
+        </select> -->
+    <!-- 故障农机数 -->
+    <!-- <select id="bugUserNumber" resultType="int"> select userName as USERNAME
+        from tuser where (userName =#{phone} or tel = #{phone} ) and password =#{pwd}
+        </select> -->
+
+
+    <!-- 农机手信息 -->
+    <!-- todo:修改where语句 注意同步修改接口-->
+    <select id="queryLogsUsers" resultType="map">
+        SELECT userid as USER
+        ,username as USERNAMME,tel as TEL, if(isnull(carid),'无',carid) as CARID, status as STATE
+        FROM tuser WHERE userid IN ( SELECT
+        nid FROM tusers WHERE uid =#{userid} )
+    </select>
+
+    <!-- 农机手信息 -->
+    <!-- todo:修改where语句-->
+    <select id="queryAllLogUser" resultType="map">
+        SELECT userid as
+        USERID,username as USERNAME FROM tuser WHERE userid IN (
+        SELECT nid
+        FROM tusers WHERE uid=-1)
+    </select>
+
+
+    <!-- 查询用户id -->
+    <select id="queryUserId" resultType="int">
+        select max(userid ) as
+        USERID from tuser
+    </select>
+
+    <!--&lt;!&ndash; 查询用户uid &ndash;&gt;-->
+    <!--<select id="queryUsersId" resultType="int">-->
+        <!--select id as USERID from-->
+        <!--tusers where nid = #{nid}-->
+    <!--</select>-->
+
+    <!--&lt;!&ndash; 查询心跳数量 &ndash;&gt;-->
+    <!--<select id="queryNumbers" resultType="map">-->
+        <!--select max(numbersa) as-->
+        <!--NUMBERSA,max(lo) as LO ,max(la) as LA from numbersa-->
+    <!--</select>-->
+
+
+    <!-- 查询地图某个范围的地址 -->
+    <select id="queryMap" resultType="map">
+        SELECT  if(isnull(tu.carid),'无',tu.carid)  as
+        CARID,tu.lo as LO ,tu.la as LA,
+        tu.username as USERNAME,tu.tel as PHONE,
+        tu.status as STATE,tu.userType as TYPE,tu.userid as USERID,if(isnull(tu.remark),'无',tu.remark) as REMARK
+        FROM
+        tuser as tu    where
+        ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
+        (tu.lo*PI()/180-#{loo}*PI()/180)/2),2)
+        +COS(tu.lo*PI()/180)*COS(#{loo}*PI()/180)*
+        POW(SIN(
+        (tu.la*PI()/180-#{lao}*PI()/180)/2),2)))*1000) &lt;=#{kmnumber}  and
+        tu.type =#{typeid}
+        <if test="state!=-1">and tu.status =#{state}</if> order by status
+        LIMIT #{yeshu},#{yeNumber}
+
+
+    </select>
+
+    <!-- 查询用户的最新位置 -->
+    <select id="queryMapUser" resultType="map">
+        select lo as LO,la as LA from  tuser where userid =#{userid}
+    </select>
+
+
+
+    <!-- 查询地图某个范围的地址(输入了用户名和车牌号码的） -->
+    <!-- 和上一个相比if中多了username phone carid等字段-->
+    <select id="queryMapUserName" resultType="map">
+        SELECT   if(isnull(tu.carid),'无',tu.carid)  as
+        CARID, tu.lo as LO ,tu.la as LA,
+        tu.username as USERNAME,tu.tel as PHONE,
+        tu.status as STATE,tu.userType as TYPE,tu.userid as USERID,if(isnull(tu.remark),'无',tu.remark) as REMARK
+        FROM
+        tuser as  tu  WHERE
+        ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
+        (tu.lo*PI()/180-#{loo}*PI()/180)/2),2)
+        +COS(tu.lo*PI()/180)*COS(#{loo}*PI()/180)*
+        POW(SIN(
+        (tu.la*PI()/180-#{lao}*PI()/180)/2),2)))*1000) &lt;=#{kmnumber}  and
+        tu.type =#{typeid}
+        <if test="username!=null  and username!=''">and tu.username=#{username}
+        </if> <if test="phone!=null and  phone!=''">and tu.tel=#{phone}</if>
+        <!--<if test="carid!=-1 and carid!=null and  carid!='' ">and tu.userid in (SELECT uid FROM usertype WHERE tid=#{carid} ) </if>-->
+        <if test="state!=-1">and tu.status =#{state}</if>   order by status
+        LIMIT    #{yeshu},#{yeNumber}
+
+
+    </select>
+
+    <!-- 查询地图某个范围的地址(输入了用户名和车牌号码的） -->
+    <!-- 和上一个相比这里是手机端查询-->
+    <select id="queryMapUserNamea" resultType="map">
+        SELECT   if(isnull(tu.carid),'无',tu.carid)  as
+        CARID, tu.lo as LO ,tu.la as LA,
+        tu.username  USERNAME,
+        tu.tel as PHONE,tu.status as STATE,tu.userType as TYPE,tu.userid as USERID,if(isnull(tu.remark),'无',tu.remark) as REMARK
+        FROM
+        tuser as  tu   WHERE
+        ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
+        (tu.lo*PI()/180-#{loo}*PI()/180)/2),2)
+        +COS(tu.lo*PI()/180)*COS(#{loo}*PI()/180)*
+        POW(SIN(
+        (tu.la*PI()/180-#{lao}*PI()/180)/2),2)))*1000) &lt;=#{kmnumber}  and
+        tu.type =#{typeid}
+        <if test="username!=null  and username!=''">and tu.username=#{username}
+        </if> <if test="phone!=null and  phone!=''">and tu.tel=#{phone}</if>
+        <!--<if test="carid!=-1 and carid!=null and  carid!=''">and tu.userid in (SELECT uid FROM usertype WHERE tid=#{carid} ) </if>-->
+        <if test="state!=-1">and tu.status =#{state}</if>   order by status
+
+    </select>
+
+    <!-- 查询地图某个范围的地址 -->
+    <!-- 这里也是手机端查询，相比上个少了if语句-->
+    <select id="queryMapa" resultType="map">
+        SELECT   if(isnull(tu.carid),'无',tu.carid) as
+        CARID, tu.lo as LO ,tu.la as LA,
+        (SELECT username FROM tuser  WHERE userid =tu.userid) as USERNAME,
+        tu.tel as PHONE,tu.status as STATE,tu.userType as TYPE,tu.userid as USERID,if(isnull(tu.remark),'无',tu.remark) as REMARK
+        FROM
+        tuser as tu    WHERE
+        ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
+        (tu.lo*PI()/180-#{loo}*PI()/180)/2),2)
+        +COS(tu.lo*PI()/180)*COS(#{loo}*PI()/180)*
+        POW(SIN(
+        (tu.la*PI()/180-#{lao}*PI()/180)/2),2)))*1000) &lt;=#{kmnumber}  and
+        (select userType from tuser where userid =tu.userid) =#{typeid}
+        <if test="state!=-1">and tu.status =#{state}</if> order by status
+    </select>
+
+
+
+    <!-- 查询地图某个范围的地址 -->
+    <!-- 以上查询均是查询tuser表，这里是查询tcar和tuser表-->
+    <select id="queryMapaCar" resultType="map">
+        SELECT  tu.carid AS CARID,tu.carno AS CARNAME,tu.type as CARSTATE,
+        tu.la AS CLA,tu.lo AS CLO,tu.driverTel as CARPHONE,t.username as USERNAME FROM
+        tcar AS tu,tuser As t    WHERE t.tel=tu.drivertel and
+        ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
+        (tu.lo*PI()/180-#{loo}*PI()/180)/2),2)
+        +COS(tu.lo*PI()/180)*COS(#{loo}*PI()/180)*
+        POW(SIN(
+        (tu.la*PI()/180-#{lao}*PI()/180)/2),2)))*1000) &lt;=#{kmnumber}
+        <if test="carid!=-1 and carid!=null and  carid!=''">and tu.type =#{carid}  </if>
+        <if test="phone!=null and  phone!=''"> and  tu.drivertel = #{phone}</if>   LIMIT    #{yeshu},#{yeNumber}
+    </select>
+
+
+
+    <!-- 查询地图某个范围的地址 -->
+    <select id="queryMapCarPhoneNumber" resultType="map">
+        SELECT  tu.carid as CARID,tu.carno as CARNAME,tu.type as CARSTATE,
+        tu.la as CLA,tu.lo as CLO ,tu.drivertel as CARPHONE,t.username as USERNAME FROM
+        tcar as tu ,tuser as t    WHERE t.tel=tu.drivertel and
+        ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
+        (tu.lo*PI()/180-#{loo}*PI()/180)/2),2)
+        +COS(tu.lo*PI()/180)*COS(#{loo}*PI()/180)*
+        POW(SIN(
+        (tu.la*PI()/180-#{lao}*PI()/180)/2),2)))*1000) &lt;=#{kmnumber}
+        <if test="carid!=-1 and carid!=null and  carid!=''">and tu.type =#{carid}  </if>
+        <if test="phone!=null and  phone!=''">and  tu.drivertel = #{phone}  </if>
+    </select>
+
+
+
+
+    <!-- 查询车辆信息 -->
+    <select id="queryCarInfo" resultType="map">
+        SELECT carid AS CARID,type AS TYPE,
+        carno AS POS,jointime AS TIME,simno as
+        CARNO,machineno as MACHINENO FROM tcar
+
+    </select>
+
+    <!-- 查询车辆信息 -->
+    <select id="queryCarTypeInfoid" resultType="map">
+        SELECT carid AS CARID ,type AS TYPE,
+        positionid AS POS,jointime AS TIME,simno as
+        CARNO,machineno as MACHINENO FROM tcar  where carid =#{id}
+
+    </select>
+
+
+    <!-- 没有tusertype表，此条语句删除-->
+    <!--&lt;!&ndash; 查询农户类型 &ndash;&gt;-->
+    <!--<select id="queryNongHuType" resultType="map">-->
+        <!--SELECT typeid AS TYPEID,typename AS TYPENAME FROM tusertype-->
+    <!--</select>-->
+
+    <!-- 没有tusertype表，此条语句删除-->
+    <!--&lt;!&ndash; 查询农户类型 &ndash;&gt;-->
+    <!--<select id="queryNongHuTypea" resultType="map">-->
+        <!--SELECT typeid AS TYPEID,typename AS TYPENAME,(SELECT uid FROM usertype WHERE uid =#{id} AND typeid =tid ) as IDD FROM tusertype-->
+
+    <!--</select>-->
+
+    <!--&lt;!&ndash; 查询车辆类型信息 &ndash;&gt;-->
+    <!--<select id="queryCarTypeInfo" resultType="map">-->
+        <!--select id as ID,name as TYPENAME from tcarbrand-->
+    <!--</select>-->
+
+
+
+    <!-- 查询车辆类型信息 -->
+    <select id="queryMaxUserid" resultType="int">
+        select max(userid) from tuser
+    </select>
+
+
+    <!--&lt;!&ndash; 根据农户用户编号查询农户的农地信息 &ndash;&gt;-->
+    <!--<select id="queryUserTypeInfo" resultType="map">-->
+        <!--SELECT tut.typeid as TYPEID,tut.typename as TYPENAME FROM usertype ut,tusertype tut WHERE ut.tid=tut.typeid AND uid =#{userid}-->
+    <!--</select>-->
+
+    <!--&lt;!&ndash; 查询车辆类型信息 &ndash;&gt;-->
+    <!--<select id="queryUserTypeID" resultType="map">-->
+        <!--select  id  as ID from usertype where uid = #{usertypeid}-->
+    <!--</select>-->
+
+
+    <!--&lt;!&ndash; 根据农户用户编号查询农户的农地信息 &ndash;&gt;-->
+    <!--<select id="queryUserTypeInfoA" resultType="map">-->
+        <!--SELECT tut.id as TYPEID,tut.name as TYPENAME FROM usertype ut,tcarbrand  tut WHERE ut.tid=tut.id AND uid =#{userid}-->
+    <!--</select>-->
+
+
+
+    <!--&lt;!&ndash; 根据用户id查询车辆 &ndash;&gt;-->
+    <!--<select id="queryCaridForId" resultType="map">-->
+        <!--SELECT id AS ID FROM  usertype  WHERE uid = #{id}-->
+    <!--</select>-->
+
+
+
+
+    <select id="queryUpdatePwdAA" resultType="int">
+        SELECT userid as USERID  FROM  tuser  WHERE tel = #{phone}
+    </select>
+
+    <!--<update id="updateCarType" parameterType="java.lang.String">-->
+        <!--UPDATE tcar SET-->
+    <!--</update>-->
+
+
+</mapper>

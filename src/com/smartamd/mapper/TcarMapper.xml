@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.smartamd.mapper.TcarMapper" >
+  <resultMap id="BaseResultMap" type="com.smartamd.model.Tcar" >
+    <id column="carId" property="carid" jdbcType="INTEGER" />
+    <result column="teamId" property="teamid" jdbcType="INTEGER" />
+    <result column="positionId" property="positionid" jdbcType="INTEGER" />
+    <result column="carNo" property="carno" jdbcType="VARCHAR" />
+    <result column="simNo" property="simno" jdbcType="VARCHAR" />
+    <result column="machineNo" property="machineno" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="joinTime" property="jointime" jdbcType="TIMESTAMP" />
+    <result column="driverName" property="drivername" jdbcType="VARCHAR" />
+    <result column="driverTel" property="drivertel" jdbcType="VARCHAR" />
+    <result column="driverAddress" property="driveraddress" jdbcType="VARCHAR" />
+    <result column="lo" property="lo" jdbcType="DOUBLE" />
+    <result column="la" property="la" jdbcType="DOUBLE" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="Extra1" property="extra1" jdbcType="VARCHAR" />
+    <result column="Extra2" property="extra2" jdbcType="VARCHAR" />
+    <result column="Extra3" property="extra3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    carId, teamId, positionId, carNo, simNo, machineNo, type, joinTime, driverName, driverTel, 
+    driverAddress, lo, la, status, remark, Extra1, Extra2, Extra3
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcar
+    where carId = #{carid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tcar
+    where carId = #{carid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.smartamd.model.Tcar" >
+    insert into tcar (carId, teamId, positionId, 
+      carNo, simNo, machineNo, 
+      type, joinTime, driverName, 
+      driverTel, driverAddress, lo, 
+      la, status, remark, 
+      Extra1, Extra2, Extra3
+      )
+    values (#{carid,jdbcType=INTEGER}, #{teamid,jdbcType=INTEGER}, #{positionid,jdbcType=INTEGER}, 
+      #{carno,jdbcType=VARCHAR}, #{simno,jdbcType=VARCHAR}, #{machineno,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{jointime,jdbcType=TIMESTAMP}, #{drivername,jdbcType=VARCHAR}, 
+      #{drivertel,jdbcType=VARCHAR}, #{driveraddress,jdbcType=VARCHAR}, #{lo,jdbcType=DOUBLE}, 
+      #{la,jdbcType=DOUBLE}, #{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{extra1,jdbcType=VARCHAR}, #{extra2,jdbcType=VARCHAR}, #{extra3,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.smartamd.model.Tcar" >
+    insert into tcar
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="carid != null" >
+        carId,
+      </if>
+      <if test="teamid != null" >
+        teamId,
+      </if>
+      <if test="positionid != null" >
+        positionId,
+      </if>
+      <if test="carno != null" >
+        carNo,
+      </if>
+      <if test="simno != null" >
+        simNo,
+      </if>
+      <if test="machineno != null" >
+        machineNo,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="jointime != null" >
+        joinTime,
+      </if>
+      <if test="drivername != null" >
+        driverName,
+      </if>
+      <if test="drivertel != null" >
+        driverTel,
+      </if>
+      <if test="driveraddress != null" >
+        driverAddress,
+      </if>
+      <if test="lo != null" >
+        lo,
+      </if>
+      <if test="la != null" >
+        la,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="extra1 != null" >
+        Extra1,
+      </if>
+      <if test="extra2 != null" >
+        Extra2,
+      </if>
+      <if test="extra3 != null" >
+        Extra3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="carid != null" >
+        #{carid,jdbcType=INTEGER},
+      </if>
+      <if test="teamid != null" >
+        #{teamid,jdbcType=INTEGER},
+      </if>
+      <if test="positionid != null" >
+        #{positionid,jdbcType=INTEGER},
+      </if>
+      <if test="carno != null" >
+        #{carno,jdbcType=VARCHAR},
+      </if>
+      <if test="simno != null" >
+        #{simno,jdbcType=VARCHAR},
+      </if>
+      <if test="machineno != null" >
+        #{machineno,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="jointime != null" >
+        #{jointime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="drivername != null" >
+        #{drivername,jdbcType=VARCHAR},
+      </if>
+      <if test="drivertel != null" >
+        #{drivertel,jdbcType=VARCHAR},
+      </if>
+      <if test="driveraddress != null" >
+        #{driveraddress,jdbcType=VARCHAR},
+      </if>
+      <if test="lo != null" >
+        #{lo,jdbcType=DOUBLE},
+      </if>
+      <if test="la != null" >
+        #{la,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="extra1 != null" >
+        #{extra1,jdbcType=VARCHAR},
+      </if>
+      <if test="extra2 != null" >
+        #{extra2,jdbcType=VARCHAR},
+      </if>
+      <if test="extra3 != null" >
+        #{extra3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smartamd.model.Tcar" >
+    update tcar
+    <set >
+      <if test="teamid != null" >
+        teamId = #{teamid,jdbcType=INTEGER},
+      </if>
+      <if test="positionid != null" >
+        positionId = #{positionid,jdbcType=INTEGER},
+      </if>
+      <if test="carno != null" >
+        carNo = #{carno,jdbcType=VARCHAR},
+      </if>
+      <if test="simno != null" >
+        simNo = #{simno,jdbcType=VARCHAR},
+      </if>
+      <if test="machineno != null" >
+        machineNo = #{machineno,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="jointime != null" >
+        joinTime = #{jointime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="drivername != null" >
+        driverName = #{drivername,jdbcType=VARCHAR},
+      </if>
+      <if test="drivertel != null" >
+        driverTel = #{drivertel,jdbcType=VARCHAR},
+      </if>
+      <if test="driveraddress != null" >
+        driverAddress = #{driveraddress,jdbcType=VARCHAR},
+      </if>
+      <if test="lo != null" >
+        lo = #{lo,jdbcType=DOUBLE},
+      </if>
+      <if test="la != null" >
+        la = #{la,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="extra1 != null" >
+        Extra1 = #{extra1,jdbcType=VARCHAR},
+      </if>
+      <if test="extra2 != null" >
+        Extra2 = #{extra2,jdbcType=VARCHAR},
+      </if>
+      <if test="extra3 != null" >
+        Extra3 = #{extra3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where carId = #{carid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smartamd.model.Tcar" >
+    update tcar
+    set teamId = #{teamid,jdbcType=INTEGER},
+      positionId = #{positionid,jdbcType=INTEGER},
+      carNo = #{carno,jdbcType=VARCHAR},
+      simNo = #{simno,jdbcType=VARCHAR},
+      machineNo = #{machineno,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      joinTime = #{jointime,jdbcType=TIMESTAMP},
+      driverName = #{drivername,jdbcType=VARCHAR},
+      driverTel = #{drivertel,jdbcType=VARCHAR},
+      driverAddress = #{driveraddress,jdbcType=VARCHAR},
+      lo = #{lo,jdbcType=DOUBLE},
+      la = #{la,jdbcType=DOUBLE},
+      status = #{status,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      Extra1 = #{extra1,jdbcType=VARCHAR},
+      Extra2 = #{extra2,jdbcType=VARCHAR},
+      Extra3 = #{extra3,jdbcType=VARCHAR}
+    where carId = #{carid,jdbcType=INTEGER}
+  </update>
+</mapper>
