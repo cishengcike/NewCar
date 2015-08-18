@@ -244,7 +244,7 @@
   <!-- htt  queryMap -->
   <select id="queryMapFarmer"
           resultType="map">
-    SELECT userID as USERID,lo as LO,la as LA,tel as PHONE,userName as USERNAME,
+    SELECT userID as USERID,lo as LO,la as LA,tel as PHONE,userName as USERNAME,tu.userType AS userType,
 
     ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
     (tu.lo*PI()/180-#{lo}*PI()/180)/2),2)
@@ -264,7 +264,7 @@
 
   <select id="queryMapDriver"
           resultType="map">
-    SELECT tu.userId as USERID,tu.lo as LO,tu.la as LA,tu.tel as PHONE,tu.userName as USERNAME,tc.type AS carType,
+    SELECT tu.userId as USERID,tu.lo as LO,tu.la as LA,tu.tel as PHONE,tu.userName as USERNAME,tu.userType AS userType, tc.type AS carType,
 
     ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
     (tu.lo*PI()/180-#{lo}*PI()/180)/2),2)

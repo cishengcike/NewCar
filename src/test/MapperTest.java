@@ -77,25 +77,25 @@ public class MapperTest {
     @Test
     public void queryMapTest() {
         List<Map<String,Object>> list = null;
-        list = tuserMapper.queryMapFarmer("121.56095123291016", "31.30206871032715", "500");
-//        System.out.println(list.get(0));
-//        System.out.println(list.get(1));
-//        System.out.println(list.get(2));
-//        System.out.println(list.get(3));
-//        System.out.println(list.get(4));
+        list = tuserMapper.queryMapDriver("121.56095123291016", "31.30206871032715", "500");
+        System.out.println(list.get(0));
+        System.out.println(list.get(1));
+        System.out.println(list.get(2));
+        System.out.println(list.get(3));
+        System.out.println(list.get(4));
 
-        System.out.println("全部数据为："+list);
-
-        JSONArray jsonArray = JSONArray.fromObject(list);
-        System.out.println("json数组为"+ jsonArray);
-        JSONObject jsonObject = jsonArray.getJSONObject(0);
-        System.out.println("jsonobject为" + jsonObject);
-        jsonArray.clear();
-        jsonArray.add(0, "this is a test");
-        jsonObject.element("test", jsonArray);
-        System.out.println("新jsonovject为" + jsonObject);
-        JSONArray test = jsonObject.getJSONArray("test");
-        System.out.println("test为"+test);
+//        System.out.println("全部数据为："+list);
+//
+//        JSONArray jsonArray = JSONArray.fromObject(list);
+//        System.out.println("json数组为"+ jsonArray);
+//        JSONObject jsonObject = jsonArray.getJSONObject(0);
+//        System.out.println("jsonobject为" + jsonObject);
+//        jsonArray.clear();
+//        jsonArray.add(0, "this is a test");
+//        jsonObject.element("test", jsonArray);
+//        System.out.println("新jsonovject为" + jsonObject);
+//        JSONArray test = jsonObject.getJSONArray("test");
+//        System.out.println("test为"+test);
 
     }
 
