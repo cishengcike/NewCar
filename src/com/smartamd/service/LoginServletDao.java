@@ -13,7 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("loginServletDao")
 @Transactional
@@ -29,7 +31,7 @@ public class LoginServletDao {
 
 
     //注册时，使用
-    public int addUser( String userName,String pwd, String phone, int userType,String carType){
+    public int addUser( String userName,String pwd, String phone, String userType,String carType){
         int res=0;
         int temp1=0,temp2=0;
         try {
@@ -40,26 +42,32 @@ public class LoginServletDao {
             tuser.setPassword(pwd);
             temp1= tuserMapper.insertSelective(tuser);//新用户已经插入Tuser表
 
-            if(userType==0)
+            if("0".equals(userType))
             {
                 res=temp1;
             }
-            else if(userType==1)//农机手，增加处理步骤
+            else if ("1".equals(userType))//农机手，增加处理步骤
             {
-                //temp2=loginMapper.updateCarType(phone);
-                if(temp1==1 && temp2==1)
-                {
-                    res=1;
+
+                Map<String, String> map = new HashMap<>();
+                map.put("phone", phone);
+                map.put("carType", (loginMapper.queryCarType(carType)).toString());
+                temp2 = loginMapper.updateCarType(phone,carType);
+                System.out.println("temp2=" + temp2);
+                if (temp1 == 1 && temp2 == 1) {
+                    res = 1;
                 }
             }
-
         }
         catch (Exception e) {
+            System.out.println("exception");
             return res;
         }
         return res;
     }
-    public int alterUserInformationphone(int userId ,int userType ,String address){
+
+    //完善用户信息
+    public int alterUserInformationPhone(int userId ,String userType ,String address){
         int res=0;
         try {
             Tuser tus=tuserMapper.selectByPrimaryKey(userId);
@@ -71,6 +79,7 @@ public class LoginServletDao {
         }
         return res ;
     }
+
     //修改用户密码和用户名
     public int updateUserPwd(int userID ,String new_password ){
         int res=0;

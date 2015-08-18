@@ -9,7 +9,7 @@ public class Tuser {
 
     private Integer carid;
 
-    private Integer usertype;
+    private String usertype;
 
     private String username;
 
@@ -61,11 +61,11 @@ public class Tuser {
         this.carid = carid;
     }
 
-    public Integer getUsertype() {
+    public String getUsertype() {
         return usertype;
     }
 
-    public void setUsertype(Integer usertype) {
+    public void setUsertype(String usertype) {
         this.usertype = usertype;
     }
 
@@ -171,5 +171,11 @@ public class Tuser {
 
     public void setExtra3(String extra3) {
         this.extra3 = extra3 == null ? null : extra3.trim();
+
+    }
+
+    @Override
+    public String toString(){
+        return ("userid="+userid+"  username"+username+"  tel"+tel+"\n");
     }
 }

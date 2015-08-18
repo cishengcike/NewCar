@@ -2,6 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.smartamd.mapper.LoginMapper">
 
+
+
     <select id="loginTrue" resultType="map">
         select userName as
         USERNAME,userid as USERID,password as PASSWORD,tel as TEL,
@@ -302,9 +304,20 @@
         SELECT userid as USERID  FROM  tuser  WHERE tel = #{phone}
     </select>
 
-    <!--<update id="updateCarType" parameterType="java.lang.String">-->
-        <!--UPDATE tcar SET-->
+    <!--<update id="updateCarType" parameterType="map">-->
+        <!--UPDATE tcar SET type=#{carType} WHERE driverTel=#{phone}-->
     <!--</update>-->
 
+    <update id="updateCarType">
+        UPDATE tcar SET type=#{carType} WHERE driverTel=#{phone}
+    </update>
+
+    <select id="queryCarType" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT typeId FROM tcarType where typeName=#{carType}
+    </select>
+
+    <insert id="insertTuser" parameterType="java.lang.String">
+        INSERT INTO tuser (userName) VALUE (#{username})
+    </insert>
 
 </mapper>

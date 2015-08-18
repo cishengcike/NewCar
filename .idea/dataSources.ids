@@ -51,7 +51,7 @@
       <column name="Extra3" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="carId"/>
     </table>
-    <table name="tcar-type" schema="" catalog="newcar" type="TABLE">
+    <table name="tcarType" schema="" catalog="newcar" type="TABLE">
       <column name="typeId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
       <column name="typeName" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
       <column name="Extra1" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>

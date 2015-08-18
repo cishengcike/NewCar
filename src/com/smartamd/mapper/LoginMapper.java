@@ -177,6 +177,13 @@ public interface LoginMapper {
 
     int queryUpdatePwdAA(@Param("phone") String id);
 
-    void updateCarType(String phone);
+    //int updateCarType(Map<String,String> map);
+    int updateCarType(@Param("phone") String phone,@Param("carType") String carType);
+
+    //根传来的车辆名称查询数据库得到其对应的类型ID
+    Integer queryCarType(String carType);
+
+    //测试ubantu下插入数据库汉字能否正常显示
+    void insertTuser(String username);
 
 }

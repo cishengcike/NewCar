@@ -231,4 +231,54 @@
       Extra3 = #{extra3,jdbcType=VARCHAR}
     where userId = #{userid,jdbcType=INTEGER}
   </update>
+
+  <!-- htt  updateUserLoLa -->
+  <update id="updateUserLoLa">
+    update tuser
+    set
+    lo = #{lo},
+    la = #{la}
+    where userId = #{userID}
+
+  </update>
+  <!-- htt  queryMap -->
+  <select id="queryMapFarmer"
+          resultType="map">
+    SELECT userID as USERID,lo as LO,la as LA,tel as PHONE,userName as USERNAME,
+
+    ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
+    (tu.lo*PI()/180-#{lo}*PI()/180)/2),2)
+    +COS(tu.lo*PI()/180)*COS(#{lo}*PI()/180)*
+    POW(SIN(
+    (tu.la*PI()/180-#{la}*PI()/180)/2),2)))*1000) as DISTANCE
+
+    FROM tuser as tu
+    where
+    ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
+    (tu.lo*PI()/180-#{lo}*PI()/180)/2),2)
+    +COS(tu.lo*PI()/180)*COS(#{lo}*PI()/180)*
+    POW(SIN(
+    (tu.la*PI()/180-#{la}*PI()/180)/2),2)))*1000) &lt;=#{kmNumber} AND tu.userType=0
+
+  </select>
+
+  <select id="queryMapDriver"
+          resultType="map">
+    SELECT tu.userId as USERID,tu.lo as LO,tu.la as LA,tu.tel as PHONE,tu.userName as USERNAME,tc.type AS carType,
+
+    ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
+    (tu.lo*PI()/180-#{lo}*PI()/180)/2),2)
+    +COS(tu.lo*PI()/180)*COS(#{lo}*PI()/180)*
+    POW(SIN(
+    (tu.la*PI()/180-#{la}*PI()/180)/2),2)))*1000) as DISTANCE
+
+    FROM  tuser as tu  inner  join  tcar as tc   on   tu.tel=tc.driverTel
+    where
+    ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
+    (tu.lo*PI()/180-#{lo}*PI()/180)/2),2)
+    +COS(tu.lo*PI()/180)*COS(#{lo}*PI()/180)*
+    POW(SIN(
+    (tu.la*PI()/180-#{la}*PI()/180)/2),2)))*1000) &lt;=#{kmNumber}  AND  tu.userType=1
+
+  </select>
 </mapper>
