@@ -1,14 +1,8 @@
 package com.smartamd.controller;
 
-import java.util.List;
-import java.util.Map;
-
-import com.google.gson.JsonArray;
 import com.smartamd.mapper.LoginMapper;
 import com.smartamd.mapper.TuserMapper;
-import com.smartamd.model.Tuser;
 import com.smartamd.service.LoginServletDao;
-import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+import java.util.Map;
 
 
 //用户登录

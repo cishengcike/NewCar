@@ -2,17 +2,16 @@ package test;
 
 import com.smartamd.mapper.LoginMapper;
 import com.smartamd.mapper.TuserMapper;
-import com.smartamd.model.Tuser;
 import com.smartamd.service.LoginServletDao;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by aaron on 15-8-13.
