@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,7 +77,7 @@ public class MapperTest {
     @Test
     public void queryMapTest() {
         List<Map<String,Object>> list = null;
-        list = tuserMapper.queryMapDriver("121.56095123291016", "31.30206871032715", "500");
+        list = tuserMapper.queryMapDriver("121.56095123291016", "31.30206871032715", "500000");
         System.out.println(list.get(0));
         System.out.println(list.get(1));
         System.out.println(list.get(2));
@@ -99,8 +100,16 @@ public class MapperTest {
     }
 
     @Test
-    public void updateUserLoLaTest(){
-        tuserMapper.updateUserLoLa(17,"121.56095123291016","31.30206871032715");
+    public void queryMapByPhoneTest(){
+        List<Map<String,Object>> list1=null;
+        List<Map<String,Object>> list2=new ArrayList<>();
+        Map<String, Object> x = tuserMapper.queryMapFarmerByPhone("121.56425476074219", "31.29883575439453", "123456789");
+        System.out.println(x);
+    }
+
+    @Test
+    public void distanceTest(){
+
     }
 
 

@@ -27,4 +27,14 @@ public interface TuserMapper {
     List<Map<String,Object>> queryMapDriver(@Param("lo") String lo_param,@Param("la") String la_param,@Param("kmNumber") String kmNumber_param);
     //查询农户
     List<Map<String,Object>> queryMapFarmer(@Param("lo") String lo_param,@Param("la") String la_param,@Param("kmNumber") String kmNumber_param);
+    //通过对应的类型查农机手
+    List<Map<String,Object>> queryMapDriverByType(@Param("lo") String lo_param,@Param("la") String la_param,@Param("kmNumber") String kmNumber_param,@Param("carType")int carType);
+
+    //通过手机号查找农机手
+    Map<String,Object> queryMapDriverByPhone(@Param("lo") String lo_param,@Param("la") String la_param,@Param("phone") String phone);
+
+    //通过手机号查找农机手
+    Map<String,Object> queryMapFarmerByPhone(@Param("lo") String lo_param,@Param("la") String la_param,@Param("phone") String phone);
+
+
 }

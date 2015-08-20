@@ -4,18 +4,10 @@ import com.smartamd.mapper.LoginMapper;
 import com.smartamd.mapper.TcarMapper;
 import com.smartamd.mapper.TpositionMapper;
 import com.smartamd.mapper.TuserMapper;
-import com.smartamd.model.Tcar;
-import com.smartamd.model.Tposition;
 import com.smartamd.model.Tuser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Service("loginServletDao")
 @Transactional
@@ -49,10 +41,7 @@ public class LoginServletDao {
             else if ("1".equals(userType))//农机手，增加处理步骤
             {
 
-                Map<String, String> map = new HashMap<>();
-                map.put("phone", phone);
-                map.put("carType", (loginMapper.queryCarType(carType)).toString());
-                temp2 = loginMapper.updateCarType(phone,carType);
+                temp2 = loginMapper.updateCarType(phone,(loginMapper.queryCarType(carType)).toString());
                 System.out.println("temp2=" + temp2);
                 if (temp1 == 1 && temp2 == 1) {
                     res = 1;

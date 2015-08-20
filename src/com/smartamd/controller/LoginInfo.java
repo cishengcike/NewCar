@@ -105,8 +105,9 @@ public class LoginInfo {
     @RequestMapping("queryMapNoddessUserPhone.do")
     public void  queryMapNoddessUserPhone(HttpServletRequest request,HttpServletResponse response,
                                           String userID,String userType,String kmNumber,String phone,String carType,String lo,String la,String flag)throws Exception {//flag--0:查询农机手，1：查询农户，2：查询全部，
-        System.out.printf("userID=%s,userType=%s,kmNumber=%s,phone=%s,lo=%s,la=%s", userID, userType, kmNumber, phone, lo, la);
+        System.out.printf("userID=%s,userType=%s,kmNumber=%s,phone=%s,lo=%s,la=%s,carType=%s,flag=%s\n", userID, userType, kmNumber, phone, lo, la,carType,flag);
         //先区别是否为guest用户ut
+        if("".equals(phone)) phone=null;
         if (!userType.isEmpty()) {
             int userType_int = Integer.parseInt(userType);
             switch (userType_int) {
@@ -127,22 +128,55 @@ public class LoginInfo {
         int flag_int = Integer.parseInt(flag);
         if (flag_int == 0)//查询农机手
         {
-            data = tuserMapper.queryMapDriver(lo, la, kmNumber);//查询userType=1农机手
-            response.getWriter().print("{'driver':" + data + "}");
-            System.out.println("农户为="+data);
-        } else if (flag_int == 1)//查询农户
-        {
-            data = tuserMapper.queryMapFarmer(lo, la, kmNumber);//查询userType=0农户
-            response.getWriter().print("{'farmer':" + data + "}");
-            System.out.println("农机手为=" + data);
+            if(phone==null) {
+                if (carType == null) {
+                    data = tuserMapper.queryMapDriver(lo, la, kmNumber);
+                    response.getWriter().print("{'driver':" + data + "}");
+                } else {
+                    int type = loginMapper.queryCarType(carType);
+                    data = tuserMapper.queryMapDriverByType(lo, la, kmNumber, type);
+                    response.getWriter().print("{'driver':" + data + "}");
+                }
+            }
+            else {
+                Map<String,Object> map=tuserMapper.queryMapDriverByPhone(lo,la,phone);
+                if((int)map.get("USERTYPE")==1)
+                    response.getWriter().print("{'driver':[" + map + "]}");
 
-        } else if (flag_int == 2)//查询全部--农户+农机手
+            }
+        }
+        else if (flag_int == 1)//查询农户
         {
-            data1 = tuserMapper.queryMapFarmer(lo, la, kmNumber);//查询userType=-1--全部农户+农机手//查询userType=0农户
-            data2 = tuserMapper.queryMapDriver(lo, la, kmNumber);//查询userType=-1--全部农户+农机手//查询userType=1农机手
-            response.getWriter().print("{'farmer':" + data1 +",'driver':"+data2 +"}");
-            System.out.println("农户为：" + data1);
-            System.out.println("农机手为：" + data2);
+            if(phone==null) {
+
+                data = tuserMapper.queryMapFarmer(lo, la, kmNumber);//查询userType=0农户
+                response.getWriter().print("{'farmer':" + data + "}");
+            }
+            else {
+                Map<String,Object> map=tuserMapper.queryMapFarmerByPhone(lo,la,phone);
+                if((int)map.get("USERTYPE")==0)
+                    response.getWriter().print("{'farmer':[" + map + "]}");
+            }
+
+
+        }
+        else if (flag_int == 2)//查询全部--农户+农机手
+        {
+            System.out.println("查询农户和农机手");
+            if(phone==null) {
+                data1 = tuserMapper.queryMapFarmer(lo, la, kmNumber);//查询userType=-1--全部农户+农机手//查询userType=0农户
+                data2 = tuserMapper.queryMapDriver(lo, la, kmNumber);//查询userType=-1--全部农户+农机手//查询userType=1农机手
+                response.getWriter().print("{'farmer':" + data1 + ",'driver':" + data2 + "}");
+            }
+            else {
+                System.out.println("phone不为空");
+                Map<String,Object> map1=tuserMapper.queryMapFarmerByPhone(lo,la,phone);
+                Map<String,Object> map2=tuserMapper.queryMapDriverByPhone(lo,la,phone);
+                if (map1 != null&&map2==null)
+                    response.getWriter().print("{'farmer':[" + map1  + "],"+"'driver':[{"+"}]}");
+                if(map1==null&&map2!=null)
+                    response.getWriter().print("{'driver':[" + map2  + "],"+"'farmer':[{"+"}]}");
+            }
 
         }
     }
