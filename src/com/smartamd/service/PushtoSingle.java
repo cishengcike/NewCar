@@ -24,8 +24,8 @@ public class PushtoSingle {
         template.setAppId(appId);
         template.setAppkey(appkey);
         // 设置通知栏标题与内容
-        template.setTitle("this is a test");
-        template.setText("马琳");
+        template.setTitle("马琳是");
+        template.setText("逗逼");
         // 配置通知栏图标
         template.setLogo("icon.png");
         // 配置通知栏网络图标，填写图标URL地址
