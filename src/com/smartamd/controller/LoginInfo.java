@@ -105,6 +105,7 @@ public class LoginInfo {
     @RequestMapping("queryMapNoddessUserPhone.do")
     public void  queryMapNoddessUserPhone(HttpServletRequest request,HttpServletResponse response,
                                           String userID,String userType,String kmNumber,String phone,String carType,String lo,String la,String flag)throws Exception {//flag--0:查询农机手，1：查询农户，2：查询全部，
+        System.out.println("url:queryMapNoddessUserPhone.do");
         System.out.printf("userID=%s,userType=%s,kmNumber=%s,phone=%s,lo=%s,la=%s,carType=%s,flag=%s\n", userID, userType, kmNumber, phone, lo, la,carType,flag);
         //先区别是否为guest用户ut
         if("".equals(phone)) phone=null;
@@ -129,13 +130,17 @@ public class LoginInfo {
         if (flag_int == 0)//查询农机手
         {
             if(phone==null) {
-                if (carType == null) {
+                if (carType == null||"-1".equals(carType)) {
                     data = tuserMapper.queryMapDriver(lo, la, kmNumber);
                     response.getWriter().print("{'driver':" + data + "}");
+                    System.out.println("catType=null");
+                    System.out.println(data);
                 } else {
                     int type = loginMapper.queryCarType(carType);
                     data = tuserMapper.queryMapDriverByType(lo, la, kmNumber, type);
                     response.getWriter().print("{'driver':" + data + "}");
+                    System.out.println("carType!=null");
+                    System.out.println(data);
                 }
             }
             else {

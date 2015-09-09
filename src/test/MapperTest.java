@@ -108,9 +108,31 @@ public class MapperTest {
     }
 
     @Test
-    public void distanceTest(){
+    public void sqrtTest(){
+//        double a=1.23456789d;
+//        double b = (double)(Math.round(a * 1000))/1000;
+//        float c=1234f;
+//        float d=c/1000;
+//        float e=1;
+//        System.out.printf("%.3f;",a);
+//
+        int a=9;
+        System.out.println(Math.sqrt((int)a));
 
     }
 
+    @Test
+    public void queryMapDriverByTypeTest(){
+        List<Map<String,Object>> list=new ArrayList<>();
+        list=tuserMapper.queryMapDriverByType("121.560924939438","31.3019659047683","15",2);
+        System.out.println("test");
+        System.out.println(list);
+    }
+
+    @Test
+    public void stringTest(){
+        String a="-1";
+        System.out.println("-1".equals(a));
+    }
 
 }
