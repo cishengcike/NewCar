@@ -27,6 +27,8 @@ public class Tuser {
 
     private Double la;
 
+    private String CID;
+
     private String logintime;
 
     private Integer longcount;
@@ -131,6 +133,14 @@ public class Tuser {
 
     public void setLa(Double la) {
         this.la = la;
+    }
+
+    public String getCID() {
+        return CID;
+    }
+
+    public void setCID(String CID) {
+        this.CID = CID;
     }
 
     public String getLogintime() {
