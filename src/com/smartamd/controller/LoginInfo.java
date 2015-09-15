@@ -2,7 +2,9 @@ package com.smartamd.controller;
 
 import com.smartamd.mapper.LoginMapper;
 import com.smartamd.mapper.TuserMapper;
+import com.smartamd.service.CIDResolver;
 import com.smartamd.service.LoginServletDao;
+import com.smartamd.service.PushToList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -37,11 +40,13 @@ public class LoginInfo {
     //手机端登录
     @RequestMapping("loginInfoPhone.do")//手机端的登陆servlet
     public void loginInfoPhone(HttpServletRequest request,
-                               HttpServletResponse response, String phone, String pwd)
+                               HttpServletResponse response, String phone, String pwd,String CID)
             throws Exception {
+        System.out.println("loginInfoPhone.do");
+        System.out.println(CID);
+        tuserMapper.updateUserCID(phone, CID);
         List<Map<String, Object>> data = loginMapper.loginTrue(phone, pwd);//取出指定电话和密码的用户信息
-        if (data.size() > 0)
-        {
+        if (data.size() > 0) {
             request.getSession().setAttribute("user", data.get(0));//用户的信息放入到id=user
             response.getWriter().print(
                     "{'success':" + data.size() +
@@ -51,20 +56,18 @@ public class LoginInfo {
                             ",'mobile':" + data.get(0).get("TEL") +
                             ",'password':" + data.get(0).get("PASSWORD") +
                             "}");
-        }
-        else
-        {
+        } else {
             response.getWriter().print("{'success':" + data.size() + "}");//登录用户失败则size（）=0
         }
     }
 
     //手机端注册
-    @RequestMapping(value = "addUserPhone.do",method = RequestMethod.POST)
+    @RequestMapping(value = "addUserPhone.do", method = RequestMethod.POST)
     public void addUserPhone(HttpServletRequest request,
                              HttpServletResponse response, String phone, String pwd,
-                             String userName, String userType,String carType)
+                             String userName, String userType, String carType)
             throws Exception {
-        System.out.println(userType+"  "+phone+" "+pwd+" "+userName+" "+carType);
+        System.out.println(userType + "  " + phone + " " + pwd + " " + userName + " " + carType);
 
         List<Map<String, Object>> dataa = loginMapper.loginCommomPhone(phone);
         //System.out.println(userType+phone+pwd+userName);
@@ -74,7 +77,7 @@ public class LoginInfo {
             return;
         }
         int cou = loginServletDao.addUser(userName, pwd, phone, userType, carType);
-        System.out.println("cou="+cou);
+        System.out.println("cou=" + cou);
         if (cou > 0) {
             response.getWriter().print("{'success':1}");
             return;
@@ -83,15 +86,17 @@ public class LoginInfo {
             return;
         }
     }
+
     //手机端修改密码
     @RequestMapping("alterPasswordPhone.do")//updateUserPwdPhone.do修改为alterPassword.do
     public void updateUserPwdPhone(HttpServletRequest request,
                                    HttpServletResponse response, String userID, String new_password)
             throws Exception {
-        System.out.printf("%s  %S",userID,new_password);
+        System.out.printf("%s  %S", userID, new_password);
         int res = loginServletDao.updateUserPwd(Integer.parseInt(userID), new_password);
         response.getWriter().print("{'success':" + res + "}");
     }
+
     //手机端完善用户信息
     @RequestMapping(value = "alterUserInformationPhone.do")
     public void alterUserInformationphone(HttpServletRequest request,
@@ -103,12 +108,12 @@ public class LoginInfo {
 
 
     @RequestMapping("queryMapNoddessUserPhone.do")
-    public void  queryMapNoddessUserPhone(HttpServletRequest request,HttpServletResponse response,
-                                          String userID,String userType,String kmNumber,String phone,String carType,String lo,String la,String flag)throws Exception {//flag--0:查询农机手，1：查询农户，2：查询全部，
+    public void queryMapNoddessUserPhone(HttpServletRequest request, HttpServletResponse response,
+                                         String userID, String userType, String kmNumber, String phone, String carType, String lo, String la, String flag) throws Exception {//flag--0:查询农机手，1：查询农户，2：查询全部，
         System.out.println("url:queryMapNoddessUserPhone.do");
-        System.out.printf("userID=%s,userType=%s,kmNumber=%s,phone=%s,lo=%s,la=%s,carType=%s,flag=%s\n", userID, userType, kmNumber, phone, lo, la,carType,flag);
+        System.out.printf("userID=%s,userType=%s,kmNumber=%s,phone=%s,lo=%s,la=%s,carType=%s,flag=%s\n", userID, userType, kmNumber, phone, lo, la, carType, flag);
         //先区别是否为guest用户ut
-        if("".equals(phone)) phone=null;
+        if ("".equals(phone)) phone = null;
         if (!userType.isEmpty()) {
             int userType_int = Integer.parseInt(userType);
             switch (userType_int) {
@@ -129,8 +134,8 @@ public class LoginInfo {
         int flag_int = Integer.parseInt(flag);
         if (flag_int == 0)//查询农机手
         {
-            if(phone==null) {
-                if (carType == null||"-1".equals(carType)) {
+            if (phone == null) {
+                if (carType == null || "-1".equals(carType)) {
                     data = tuserMapper.queryMapDriver(lo, la, kmNumber);
                     response.getWriter().print("{'driver':" + data + "}");
                     System.out.println("catType=null");
@@ -142,48 +147,131 @@ public class LoginInfo {
                     System.out.println("carType!=null");
                     System.out.println(data);
                 }
-            }
-            else {
-                Map<String,Object> map=tuserMapper.queryMapDriverByPhone(lo,la,phone);
-                if((int)map.get("USERTYPE")==1)
+            } else {
+                Map<String, Object> map = tuserMapper.queryMapDriverByPhone(lo, la, phone);
+                if ((int) map.get("USERTYPE") == 1)
                     response.getWriter().print("{'driver':[" + map + "]}");
 
             }
-        }
-        else if (flag_int == 1)//查询农户
+        } else if (flag_int == 1)//查询农户
         {
-            if(phone==null) {
+            if (phone == null) {
 
                 data = tuserMapper.queryMapFarmer(lo, la, kmNumber);//查询userType=0农户
                 response.getWriter().print("{'farmer':" + data + "}");
-            }
-            else {
-                Map<String,Object> map=tuserMapper.queryMapFarmerByPhone(lo,la,phone);
-                if((int)map.get("USERTYPE")==0)
+            } else {
+                Map<String, Object> map = tuserMapper.queryMapFarmerByPhone(lo, la, phone);
+                if ((int) map.get("USERTYPE") == 0)
                     response.getWriter().print("{'farmer':[" + map + "]}");
             }
 
 
-        }
-        else if (flag_int == 2)//查询全部--农户+农机手
+        } else if (flag_int == 2)//查询全部--农户+农机手
         {
             System.out.println("查询农户和农机手");
-            if(phone==null) {
+            if (phone == null) {
                 data1 = tuserMapper.queryMapFarmer(lo, la, kmNumber);//查询userType=-1--全部农户+农机手//查询userType=0农户
                 data2 = tuserMapper.queryMapDriver(lo, la, kmNumber);//查询userType=-1--全部农户+农机手//查询userType=1农机手
                 response.getWriter().print("{'farmer':" + data1 + ",'driver':" + data2 + "}");
-            }
-            else {
+            } else {
                 System.out.println("phone不为空");
-                Map<String,Object> map1=tuserMapper.queryMapFarmerByPhone(lo,la,phone);
-                Map<String,Object> map2=tuserMapper.queryMapDriverByPhone(lo,la,phone);
-                if (map1 != null&&map2==null)
-                    response.getWriter().print("{'farmer':[" + map1  + "],"+"'driver':[{"+"}]}");
-                if(map1==null&&map2!=null)
-                    response.getWriter().print("{'driver':[" + map2  + "],"+"'farmer':[{"+"}]}");
+                Map<String, Object> map1 = tuserMapper.queryMapFarmerByPhone(lo, la, phone);
+                Map<String, Object> map2 = tuserMapper.queryMapDriverByPhone(lo, la, phone);
+                if (map1 != null && map2 == null)
+                    response.getWriter().print("{'farmer':[" + map1 + "]," + "'driver':[{" + "}]}");
+                if (map1 == null && map2 != null)
+                    response.getWriter().print("{'driver':[" + map2 + "]," + "'farmer':[{" + "}]}");
             }
 
         }
     }
 
+    @RequestMapping("push.do")
+    public void push(String userID,String username,String phone,String kmNumber,String lo,String la,String carType,String flag,String userType,String content){
+        System.out.println("url:push.do");
+        System.out.printf("userID=%s,username=%s,userType=%s,phone=%s,kmNumber=%s,lo=%s,la=%s,flag=%s,content=%s\n", userID, username, userType, phone, kmNumber, la, la, flag, content);
+
+        List<Map<String, Object>> data = null;
+        List<Map<String, Object>> data1 = null;
+        List<Map<String, Object>> data2 = null;
+        List<String> cid_list=null;
+        int flag_int = Integer.parseInt(flag);
+        if (flag_int == 0)//查询农机手
+        {
+            if (phone == null) {
+                if (carType == null || "-1".equals(carType)) {
+                    data = tuserMapper.queryMapDriver(lo, la, kmNumber);
+//                    response.getWriter().print("{'driver':" + data + "}");
+                    System.out.println("catType=null");
+                    System.out.println(data);
+                } else {
+                    int type = loginMapper.queryCarType(carType);
+                    data = tuserMapper.queryMapDriverByType(lo, la, kmNumber, type);
+//                    response.getWriter().print("{'driver':" + data + "}");
+                    System.out.println("carType!=null");
+                    System.out.println(data);
+                }
+
+                cid_list=CIDResolver.getCIDList(data);
+                System.out.println("cid_list="+cid_list);
+                PushToList.PushToPhone(username,userType,content,cid_list);
+            } else {
+                Map<String, Object> map = tuserMapper.queryMapDriverByPhone(lo, la, phone);
+//                if ((int) map.get("USERTYPE") == 1)
+//                    response.getWriter().print("{'driver':[" + map + "]}");
+
+                cid_list=CIDResolver.getCIDList(map);
+                System.out.println("cid_list="+cid_list);
+                PushToList.PushToPhone(username, userType, content, cid_list);
+
+
+            }
+        } else if (flag_int == 1)//查询农户
+        {
+            if (phone == null) {
+
+                data = tuserMapper.queryMapFarmer(lo, la, kmNumber);//查询userType=0农户
+//                response.getWriter().print("{'farmer':" + data + "}");
+                cid_list=CIDResolver.getCIDList(data);
+                System.out.println("cid_list="+cid_list);
+                PushToList.PushToPhone(username, userType, content, cid_list);
+
+            } else {
+                Map<String, Object> map = tuserMapper.queryMapFarmerByPhone(lo, la, phone);
+                cid_list=CIDResolver.getCIDList(map);
+                System.out.println("cid_list="+cid_list);
+                PushToList.PushToPhone(username, userType, content, cid_list);
+
+//                if ((int) map.get("USERTYPE") == 0)
+//                    response.getWriter().print("{'farmer':[" + map + "]}");
+            }
+
+
+        } else if (flag_int == 2)//查询全部--农户+农机手
+        {
+            System.out.println("查询农户和农机手");
+            if (phone == null) {
+                data = tuserMapper.queryMapAll(lo, la, kmNumber);//查询userType=-1--全部农户+农机手//查询userType=0农户
+//                response.getWriter().print("{'farmer':" + data1 + ",'driver':" + data2 + "}");
+                cid_list=CIDResolver.getCIDList(data);
+                System.out.println("cid_list="+cid_list);
+                PushToList.PushToPhone(username, userType, content, cid_list);
+
+            } else {
+                System.out.println("phone不为空");
+                Map<String, Object> map = tuserMapper.queryMapAllByPhone(lo, la, phone);
+                cid_list=CIDResolver.getCIDList(map);
+                System.out.println("cid_list="+cid_list);
+                PushToList.PushToPhone(username, userType, content, cid_list);
+
+//                if (map1 != null && map2 == null)
+////                    response.getWriter().print("{'farmer':[" + map1 + "]," + "'driver':[{" + "}]}");
+//                if (map1 == null && map2 != null)
+////                    response.getWriter().print("{'driver':[" + map2 + "]," + "'farmer':[{" + "}]}");
+            }
+
+        }
+
+    }
 }
+

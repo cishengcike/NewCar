@@ -33,8 +33,13 @@ public interface TuserMapper {
     //通过手机号查找农机手
     Map<String,Object> queryMapDriverByPhone(@Param("lo") String lo_param,@Param("la") String la_param,@Param("phone") String phone);
 
-    //通过手机号查找农机手
+    //通过手机号查找农户
     Map<String,Object> queryMapFarmerByPhone(@Param("lo") String lo_param,@Param("la") String la_param,@Param("phone") String phone);
 
+    List<Map<String,Object>> queryMapAll(@Param("lo") String lo_param,@Param("la") String la_param,@Param("kmNumber") String kmNumber_param);
 
+    Map<String,Object> queryMapAllByPhone(@Param("lo") String lo_param,@Param("la") String la_param,@Param("phone") String phone);
+
+
+    int updateUserCID(@Param("phone") String phone,@Param("CID") String CID);
 }

@@ -14,6 +14,7 @@
     <result column="status" property="status" jdbcType="VARCHAR" />
     <result column="lo" property="lo" jdbcType="DOUBLE" />
     <result column="la" property="la" jdbcType="DOUBLE" />
+    <result column="CID" property="CID" jdbcType="VARCHAR" />
     <result column="loginTime" property="logintime" jdbcType="TIMESTAMP" />
     <result column="longCount" property="longcount" jdbcType="INTEGER" />
     <result column="Extra1" property="extra1" jdbcType="VARCHAR" />
@@ -22,7 +23,7 @@
   </resultMap>
   <sql id="Base_Column_List" >
     userId, teamId, carId, userType, userName, password, email, tel, address, status, 
-    lo, la, loginTime, longCount, Extra1, Extra2, Extra3
+    lo, la, CID, loginTime, longCount, Extra1, Extra2, Extra3
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -244,7 +245,7 @@
   <!-- htt  queryMap -->
   <select id="queryMapFarmer"
           resultType="map">
-    SELECT userID as USERID,lo as LO,la as LA,tel as PHONE,userName as USERNAME,tu.userType AS USERTYPE,
+    SELECT userID as USERID,lo as LO,la as LA,tel as PHONE,userName as USERNAME,tu.userType AS USERTYPE,tu.CID as CID,
 
     ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
     (tu.lo*PI()/180-#{lo}*PI()/180)/2),2)
@@ -264,7 +265,7 @@
 
   <select id="queryMapDriver"
           resultType="map">
-    SELECT tu.userId as USERID,tu.lo as LO,tu.la as LA,tu.tel as PHONE,tu.userName as USERNAME,tu.userType AS USERTYPE, tc.type AS CARTYPE,
+    SELECT tu.userId as USERID,tu.lo as LO,tu.la as LA,tu.tel as PHONE,tu.userName as USERNAME,tu.userType AS USERTYPE,tu.CID as CID,tc.type AS CARTYPE,
 
     ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
     (tu.lo*PI()/180-#{lo}*PI()/180)/2),2)
@@ -284,7 +285,7 @@
 
   <select id="queryMapDriverByType"
           resultType="map">
-    SELECT tu.userId as USERID,tu.lo as LO,tu.la as LA,tu.tel as PHONE,tu.userName as USERNAME,tu.userType AS USERTYPE, tc.type AS CARTYPE,
+    SELECT tu.userId as USERID,tu.lo as LO,tu.la as LA,tu.tel as PHONE,tu.userName as USERNAME,tu.userType AS USERTYPE,tu.CID as CID, tc.type AS CARTYPE,
 
     ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
     (tu.lo*PI()/180-#{lo}*PI()/180)/2),2)
@@ -303,7 +304,7 @@
   </select>
 
   <select id="queryMapDriverByPhone"  resultType="map">
-    SELECT tu.userid as USERID,tu.lo as LO,tu.la as LA,tu.tel as PHONE,tu.userName as USERNAME,tu.userType AS USERTYPE, tc.type AS CARTYPE,
+    SELECT tu.userid as USERID,tu.lo as LO,tu.la as LA,tu.tel as PHONE,tu.userName as USERNAME,tu.userType AS USERTYPE,tu.CID as CID, tc.type AS CARTYPE,
 
     (ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
     (tu.lo*PI()/180-#{lo}*PI()/180)/2),2)
@@ -315,7 +316,7 @@
   </select>
 
   <select id="queryMapFarmerByPhone"  resultType="map">
-    SELECT userID as USERID,lo as LO,la as LA,tel as PHONE,userName as USERNAME,tu.userType AS USERTYPE,
+    SELECT userID as USERID,lo as LO,la as LA,tel as PHONE,userName as USERNAME,tu.userType AS USERTYPE,tu.CID as CID,
 
     (ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
     (tu.lo*PI()/180-#{lo}*PI()/180)/2),2)
@@ -324,5 +325,39 @@
     (tu.la*PI()/180-#{la}*PI()/180)/2),2)))*1000))/1000 as DISTANCE
 
     FROM tuser as tu where tel=#{phone} AND tu.userType=0;
+  </select>
+
+  <update id="updateUserCID" >
+    update tuser set CID=#{CID} WHERE tel=#{phone}
+  </update>
+
+  <select id="queryMapAll" resultType="map">
+    SELECT userID as USERID,lo as LO,la as LA,tel as PHONE,userName as USERNAME,tu.userType AS USERTYPE,tu.CID as CID,
+
+    ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
+    (tu.lo*PI()/180-#{lo}*PI()/180)/2),2)
+    +COS(tu.lo*PI()/180)*COS(#{lo}*PI()/180)*
+    POW(SIN(
+    (tu.la*PI()/180-#{la}*PI()/180)/2),2)))*1000)/1000 as DISTANCE
+
+    FROM tuser as tu
+    where
+    ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
+    (tu.lo*PI()/180-#{lo}*PI()/180)/2),2)
+    +COS(tu.lo*PI()/180)*COS(#{lo}*PI()/180)*
+    POW(SIN(
+    (tu.la*PI()/180-#{la}*PI()/180)/2),2)))*1000)/1000 &lt;=#{kmNumber};
+  </select>
+
+  <select id="queryMapAllByPhone" resultType="map">
+    SELECT userID as USERID,lo as LO,la as LA,tel as PHONE,userName as USERNAME,tu.userType AS USERTYPE,tu.CID as CID,
+
+    (ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
+    (tu.lo*PI()/180-#{lo}*PI()/180)/2),2)
+    +COS(tu.lo*PI()/180)*COS(#{lo}*PI()/180)*
+    POW(SIN(
+    (tu.la*PI()/180-#{la}*PI()/180)/2),2)))*1000))/1000 as DISTANCE
+
+    FROM tuser as tu where tel=#{phone};
   </select>
 </mapper>
