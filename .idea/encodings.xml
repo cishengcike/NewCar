@@ -1,7 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
-    <file url="file://$PROJECT_DIR$/src/test/MapperTest.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/controller/LoginInfo.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/mapper/LoginMapper.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/mapper/LoginMapper.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/mapper/PosterMapper.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/mapper/PosterMapper.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/mapper/ServiceStationMapper.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/mapper/ServiceStationMapper.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/mapper/TcarMapper.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/mapper/TcarMapper.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/mapper/TcarTypeMapper.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/mapper/TcarTypeMapper.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/mapper/TmessageMapper.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/mapper/TmessageMapper.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/mapper/TpositionMapper.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/mapper/TpositionMapper.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/mapper/TremarkMapper.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/mapper/TremarkMapper.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/mapper/TteamMapper.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/mapper/TteamMapper.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/mapper/TuserMapper.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/mapper/TuserMapper.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/model/Poster.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/model/ServiceStation.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/model/Tcar.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/model/TcarType.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/model/Tmessage.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/model/Tposition.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/model/Tremark.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/model/Tteam.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/service/Distance.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/service/LoginServletDao.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/utils/JsonUtil.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/test/MapperTest.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/web/003.jpg" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/web/META-INF" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/web/NongJi.apk" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/web/admin-all.css" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/web/base.css" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/web/bootstrap.min.css" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/web/car.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/web/chur.min.js" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/web/help20140929.docx" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/web/history.jsp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/web/historyPage.jsp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/web/img" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/web/index.jsp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/web/indexPhone.jsp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/web/jquery-easyui-1.3.3" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/web/jquery.js" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/web/jquery.min.js" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/web/jquery.spritely-0.6.js" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/web/js" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/web/login.css" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/web/main.css" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/web/mapList.jsp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/web/register.jsp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/web/style.css" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/web/user.png" charset="GBK" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

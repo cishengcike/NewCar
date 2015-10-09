@@ -11,58 +11,58 @@ import java.util.Map;
 public interface LoginMapper {
     List<Map<String, Object>> loginTrue(@Param("phone") String start, @Param("pwd") String end);
 
-    // ç®¡ç†å‘˜æ·»åŠ ç”¨æˆ·æ“ä½œ
+    // ¹ÜÀíÔ±Ìí¼ÓÓÃ»§²Ù×÷
     void addUser(@Param("phone") String start, @Param("pwd") String end, @Param("uName") String userName, @Param("uType") String uType);
 
-    // åˆ¤æ–­æ˜¯å¦æ‰‹æœºé‡å¤
+    // ÅĞ¶ÏÊÇ·ñÊÖ»úÖØ¸´
     List<Map<String, Object>> loginCommomPhone(@Param("phone") String start);
 
-    // ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½
+    // ?§Ø????
     List<Map<String, Object>> loginCommomUser(@Param("carid") String start);
 
-    // æ˜¾ç¤ºè½¦é˜Ÿä¸‹å±ä¸‹çš„æ‰€æœ‰å‘˜å·¥
+    // ÏÔÊ¾³µ¶ÓÏÂÊôÏÂµÄËùÓĞÔ±¹¤
     List<Map<String, Object>> queryLogsUsers(@Param("userid") int userid);
 
-    // æ˜¾ç¤ºè½¦æ‰€æœ‰nonjiojmå‘˜å·¥
+    // ÏÔÊ¾³µËùÓĞnonjiojmÔ±¹¤
     List<Map<String, Object>> queryLogsAllUsers(@Param("userid") int userid);
 
-    // æ˜¾ç¤ºæ‰€æœ‰çš„ç”¨æˆ·
+    // ÏÔÊ¾ËùÓĞµÄÓÃ»§
     List<Map<String, Object>> queryAllLogUser();
 
-    // å†œæˆ·æ³¨å†Œæ•°
+    // Å©»§×¢²áÊı
     int usersNumber();
 
-    // å†œæœºæ‰‹æ³¨å†Œæ•°
+    // Å©»úÊÖ×¢²áÊı
     int usersTwoNumber();
 
-    // å·¥ä½œå†œæœºæ•°
+    // ¹¤×÷Å©»úÊı
     int workUserNumber();
 
-    // é—²ç½®å†œæœºæ•°
+    // ÏĞÖÃÅ©»úÊı
     int freeUserNumber();
 
-    // æ•…éšœå†œæœºæ•°
+    // ¹ÊÕÏÅ©»úÊı
     int bugUserNumber();
 
-    // è½¦é˜Ÿæ³¨å†Œæ•°
+    // ³µ¶Ó×¢²áÊı
     int CarNumber();
 
     /**
-     * æŸ¥è¯¢ç”¨æˆ·id
+     * ²éÑ¯ÓÃ»§id
      *
      * @return
      */
     int queryUserId();
 
 //    /**
-//     * æŸ¥è¯¢uid
+//     * ²éÑ¯uid
 //     *
 //     * @return
 //     */
 //    int queryNumbers(@Param("nid") int userid);
 
     /**
-     * æŸ¥è¯¢å¿ƒè·³æ•°é‡ï¼Œé»˜è®¤ä¸­å¿ƒç‚¹ç»çº¬åº¦
+     * ²éÑ¯ĞÄÌøÊıÁ¿£¬Ä¬ÈÏÖĞĞÄµã¾­Î³¶È
      *
      * @return
      */
@@ -75,19 +75,19 @@ public interface LoginMapper {
                                        @Param("yeNumber") int yeNumber, @Param("state") int state);
 
     /**
-     * æŸ¥è¯¢ä¸€ä¸ªç”¨æˆ·çš„æœ€æ–°ä½ç½®
+     * ²éÑ¯Ò»¸öÓÃ»§µÄ×îĞÂÎ»ÖÃ
      *
-     * @useridç”¨æˆ·çš„id
+     * @useridÓÃ»§µÄid
      * @return
      */
     List<Map<String, Object>> queryMapUser(@Param("userid") String userid);
 
     /**
-     æŸ¥è¯¢ç”¨æˆ·æ˜¾ç¤ºåˆ°åœ°å›¾ä¸Šé¢ï¼ˆè¾“å…¥äº†ç”¨æˆ·åå’Œè½¦ç‰Œå·ç çš„ï¼‰
-     * @param username ç”¨æˆ·å
-     * @param phone ç”µè¯å·ç 
-     * @param carid è½¦ç‰Œå·ç 
-     * @param kmnumber è·ç¦»èŒƒå›´
+     ²éÑ¯ÓÃ»§ÏÔÊ¾µ½µØÍ¼ÉÏÃæ£¨ÊäÈëÁËÓÃ»§ÃûºÍ³µÅÆºÅÂëµÄ£©
+     * @param username ÓÃ»§Ãû
+     * @param phone µç»°ºÅÂë
+     * @param carid ³µÅÆºÅÂë
+     * @param kmnumber ¾àÀë·¶Î§
      * @return
      */
     List<Map<String, Object>> queryMapUserName(@Param("loo") String loo,
@@ -95,16 +95,16 @@ public interface LoginMapper {
                                                @Param("username") String username, @Param("phone") String phone,
                                                //@Param("carid") String carid,
                                                @Param("kmnumber") String kmnumber, @Param("typeid") String typeid
-                                               ,
+            ,
                                                @Param("yeshu") int yeshu,
                                                @Param("yeNumber") int yeNumber, @Param("state") int state);
 
     /**
-     * æŸ¥è¯¢ç”¨æˆ·æ˜¾ç¤ºåˆ°åœ°å›¾ä¸Šé¢ï¼ˆè¾“å…¥äº†ç”¨æˆ·åå’Œè½¦ç‰Œå·ç çš„ï¼‰
-     * @param username ç”¨æˆ·å
-     * @param phone ç”µè¯å·ç 
-     * @param carid è½¦ç‰Œå·ç 
-     * @param kmnumber è·ç¦»èŒƒå›´
+     * ²éÑ¯ÓÃ»§ÏÔÊ¾µ½µØÍ¼ÉÏÃæ£¨ÊäÈëÁËÓÃ»§ÃûºÍ³µÅÆºÅÂëµÄ£©
+     * @param username ÓÃ»§Ãû
+     * @param phone µç»°ºÅÂë
+     * @param carid ³µÅÆºÅÂë
+     * @param kmnumber ¾àÀë·¶Î§
      * @return
      */
     List<Map<String, Object>> queryMapUserNamea(@Param("loo") String loo,
@@ -112,7 +112,7 @@ public interface LoginMapper {
                                                 @Param("username") String username, @Param("phone") String phone,
                                                 //@Param("carid") String carid,
                                                 @Param("kmnumber") String kmnumber, @Param("typeid") String typeid
-                                                , @Param("state") int state);
+            , @Param("state") int state);
 
 
     List<Map<String, Object>> queryMapa(@Param("loo") String loo,
@@ -141,14 +141,14 @@ public interface LoginMapper {
     List<Map<String, Object>> queryCarTypeInfoid(@Param("id") String carid);
 
 //    /**
-//     * æŸ¥è¯¢å†œæˆ·ç±»å‹ï¼Œæ–°æ•°æ®åº“æ²¡æœ‰å¯¹åº”è¡¨ï¼Œåˆ é™¤
+//     * ²éÑ¯Å©»§ÀàĞÍ£¬ĞÂÊı¾İ¿âÃ»ÓĞ¶ÔÓ¦±í£¬É¾³ı
 //     * @param carid
 //     * @return
 //     */
 //    List<Map<String, Object>> queryNongHuType();
 
 //    /**
-//     * æŸ¥è¯¢å†œæˆ·ç±»å‹ï¼Œæ–°æ•°æ®åº“æ²¡æœ‰å¯¹åº”è¡¨ï¼Œåˆ é™¤
+//     * ²éÑ¯Å©»§ÀàĞÍ£¬ĞÂÊı¾İ¿âÃ»ÓĞ¶ÔÓ¦±í£¬É¾³ı
 //     * @param carid
 //     * @return
 //     */
@@ -157,14 +157,14 @@ public interface LoginMapper {
     int queryMaxUserid();
 
 //    /**
-//     * æŸ¥è¯¢å†œæˆ·ç±»å‹
+//     * ²éÑ¯Å©»§ÀàĞÍ
 //     * @param carid
 //     * @return
 //     */
 //    List<Map<String, Object>> queryUserTypeInfo(@Param("userid") String carid);
 
 //    /**
-//     * æŸ¥è¯¢å†œæˆ·ç±»å‹
+//     * ²éÑ¯Å©»§ÀàĞÍ
 //     * @param carid
 //     * @return
 //     */
@@ -178,12 +178,12 @@ public interface LoginMapper {
     int queryUpdatePwdAA(@Param("phone") String id);
 
     //int updateCarType(Map<String,String> map);
-    int updateCarType(@Param("phone") String phone,@Param("carType") String carType);
+    int updateCarType(@Param("phone") String phone, @Param("carType") String carType);
 
-    //æ ¹ä¼ æ¥çš„è½¦è¾†åç§°æŸ¥è¯¢æ•°æ®åº“å¾—åˆ°å…¶å¯¹åº”çš„ç±»å‹ID
+    //¸ù´«À´µÄ³µÁ¾Ãû³Æ²éÑ¯Êı¾İ¿âµÃµ½Æä¶ÔÓ¦µÄÀàĞÍID
     Integer queryCarType(String carType);
 
-    //æµ‹è¯•ubantuä¸‹æ’å…¥æ•°æ®åº“æ±‰å­—èƒ½å¦æ­£å¸¸æ˜¾ç¤º
+    //²âÊÔubantuÏÂ²åÈëÊı¾İ¿âºº×ÖÄÜ·ñÕı³£ÏÔÊ¾
     void insertTuser(String username);
 
 }

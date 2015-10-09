@@ -12,10 +12,10 @@ import com.gexin.rp.sdk.template.LinkTemplate;
  * Created by aaron on 15-8-18.
  */
 public class PushtoSingle {
-    static String appId = "3Q9mBnLdGx6W9zj8i4ymx2";
-    static String appkey = "wdhFLEkDRi6Y4tERTES6X5";
-    static String master = "WPeczW6JJk8BQxPQuNYCo5";
-    static String CID = "a21b3560716bde569479af26255643e8";
+    static String appId = "6wNywD0gXwAiz1HpybrJh8";
+    static String appkey = "ajsQQ3T2On6o4CdInr84M";
+    static String master = "PZfj2DVPHL9EkaNKZCfl44";
+    static String CID = "64d247c0496fe1e9a60c6dbe1653b973";
     static String host = "http://sdk.open.api.igexin.com/apiex.htm";
 
     public static LinkTemplate linkTemplateDemo() {
@@ -24,8 +24,8 @@ public class PushtoSingle {
         template.setAppId(appId);
         template.setAppkey(appkey);
         // 设置通知栏标题与内容
-        template.setTitle("马琳是");
-        template.setText("逗逼");
+        template.setTitle("this is a test");
+        template.setText("Hello World!");
         // 配置通知栏图标
         template.setLogo("icon.png");
         // 配置通知栏网络图标，填写图标URL地址
@@ -69,4 +69,5 @@ public class PushtoSingle {
             System.out.println("服务器响应异常");
         }
     }
+
 }

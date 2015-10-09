@@ -7,7 +7,7 @@
     <select id="loginTrue" resultType="map">
         select userName as
         USERNAME,userid as USERID,password as PASSWORD,tel as TEL,
-        userType as TYPE,status as STATE, if(isnull(carid),'无',carid) as CARID
+        userType as TYPE,status as STATE,lo as LO,la as LA,if(isnull(carid),'无',carid) as CARID
         from tuser where
         (userName =#{phone} or tel = #{phone} ) and
         password
@@ -319,5 +319,11 @@
     <insert id="insertTuser" parameterType="java.lang.String">
         INSERT INTO tuser (userName) VALUE (#{username})
     </insert>
+    <!--htt queryCarTypeInfo -->
+    <select id="queryCarTypeInfo" resultType="map">
+        select typeId as ID,typeName as TYPENAME from tcartype
+   </select>
+
+
 
 </mapper>

@@ -1,0 +1,778 @@
+@charset "UTF-8";
+/* CSS Document */
+body{margin:0 auto;padding:0;background:#FFF;color:#333; margin:0; font:12px/1.5 \5b8b\4f53,Arial,sans-serif; font-family:"Microsoft YaHei",微软雅黑,"Microsoft JhengHei",华文细黑,STHeiti,MingLiu;}
+ div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,blockquote,p{padding:0; margin:0;}
+ table,td,tr,th{font-size:12px;}
+input{ padding:0; margin:0px;}
+ ol,ul {list-style:none;}
+ li{list-style-type:none;}
+ h1,h2,h3,h4,h5,h6{font-size:1px;font-weight:normal;}
+ address,cite,code,em,th,i{font-weight:normal; font-style:normal;}
+ table {border-collapse:collapse;border-spacing:0;}
+ .hx a,.hx em,.fB{font-weight:bold;}
+ .clearfix{*zoom:1;}
+ .clearfix:after{display:block; overflow:hidden; clear:both; height:0; visibility:hidden; content:".";}
+ .clearfix { display:inline-block; } /* Hide from IE Mac */ 
+ .clearfix {display:block;} /* End hide from IE Mac */ 
+ .hackbox{ display:table; }/*将对象作为块元素级的表格显示*/
+ fieldset{ border:none;}
+.cl{ clear:both;}
+img{ border:0; }
+.fl{ float:left;}
+.fr{ float:right;}
+a { blr:expression(this.onFocus=this.blur()) } /* IE*/
+a { outline:none; } /**/
+ a {color:#666666; text-decoration:none;}
+ a:visited {text-decoration:none;}
+ a:hover {color:#f25a5a;text-decoration:underline;}
+ a:active {color:#f25a5a;} 
+ outline{ outline:none;} 
+a, a img {
+    outline: medium none;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;}
+ol, ul, li {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;}
+a {color: #005cb0;cursor: pointer;text-decoration: none;}
+a:link {
+}
+img {
+    border: 0 none;
+}
+input, select {font-family: Tahoma,Arial;}
+a {
+    color: #07f;
+}
+a, a:active, a:visited {
+    color: #607890;
+}
+
+.clear {clear: both;}
+
+/*btn*/
+.btn-secondary-cta {
+background:#eeeeee;
+background: -webkit-gradient(linear, 0% 50%, 50% 100%, from(#ffffff), to(#eeeeee));  
+background: -webkit-linear-gradient(top, #ffffff 0%, #ffffff 50%, #eeeeee 50%, #eeeeee 100%);  
+background: -moz-linear-gradient(top, #ffffff 0%, #ffffff 50%, #eeeeee 50%, #eeeeee 100%);
+background: -o-linear-gradient(top, #ffffff 0%, #ffffff 50%, #eeeeee 50%, #eeeeee 100%); 
+background: -ms-linear-gradient(top, #ffffff 0%, #ffffff 50%, #eeeeee 50%, #eeeeee 100%); 
+FILTER: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#ffffff, endColorStr=#eeeeee);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #005cb0;
+    display: inline-block;
+    font-family: "museo-sans-1","museo-sans-2",Tahoma,Arial;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 14px;
+    padding: 9px 10px;
+    position: relative;
+    text-decoration: none;}
+.btn-main-cta { 
+background:#ff9600; 
+background: -webkit-gradient(linear, 0% 50%, 50% 100%, from(#ff9600), to(#ff6804));  /* Webkit: Safari 4-5, Chrome 1-9 */
+background: -webkit-linear-gradient(top, #ff9600 0px, #ff9600 50%,  #ff6804 50% #ff6804 100%);   /* Webkit: Safari 5.1+, Chrome 10+ */
+background: -moz-linear-gradient(center top , #ff9600 0px, #ff9600 50%, #ff6804 50%, #ff6804 100%);  /* Firefox 3.6+ */
+background: -o-linear-gradient(top, #ff9600 0px, #ff9600 50%,  #ff6804 50% #ff6804 100%);  /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #ff9600 0px, #ff9600 50%,  #ff6804 50% #ff6804 100%);  /* IE 10 */
+FILTER: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#ff9600, endColorStr=#ff6804);      /* IE < 10 */      /* 注意：这一行必须写在最后 */
+-ms-filter:progid:DXImageTransform.Microsoft.gradient(startcolorstr=#ff9600,endcolorstr=white, gradientType=0 ); /*IE8*/ 
+	border: 1px solid #fe7405;
+    border-radius: 4px;
+    color: #fff !important;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "museo-sans-1","museo-sans-2",Tahoma,Arial;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 14px;
+    padding: 9px 16px;
+    position: relative;
+    text-decoration: none;
+}
+.btn {
+    -moz-user-select: none;
+    background-color: #fa9109;
+	background:#f47410;
+background: -webkit-gradient(linear, 0% 50%, 50% 100%, from(#f47410), to(#ffad01));  
+background: -webkit-linear-gradient(top, #f47410 0%, #f47410 50%, #ffad01 50%, #ffad01 100%);  
+background: -moz-linear-gradient(top, #f47410 0%, #f47410 50%, #ffad01 50%, #ffad01 100%);
+background: -o-linear-gradient(top, #f47410 0%, #f47410 50%, #ffad01 50%, #ffad01 100%); 
+background: -ms-linear-gradient(top, #f47410 0%, #f47410 50%, #ffad01 50%, #ffad01 100%); 
+FILTER: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#f47410, endColorStr=#ffad01);
+    border-color: #ddd;
+    border-style: solid;
+    border-width: 1px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    overflow: hidden;
+    /*padding:2px 15px;*/
+    text-align: center;
+    text-decoration: none !important;
+    white-space: nowrap;
+}
+.btn:hover {color: #fff;}
+.btn.btn-large {font-size: 20px; height: 52px;line-height: 52px;}
+button.btn.btn-large { height: 51px;line-height: 51px;}
+.btn.btn-medium { font-size: 14px; height: 36px;line-height: 36px;}
+button.btn.btn-medium {height: 38px;line-height: 38px; font-size:18px;}
+.btn.btn-small {btn-primary
+    font-size: 10px;
+    height: 17px;
+    line-height: 17px;}
+button.btn.btn-small {height: 19px;line-height: 19px;}
+.btn.btn-primary {
+background-color: #fa9109; 
+background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffad01), to(#f47410));  /* Webkit: Safari 4-5, Chrome 1-9 */
+background: -webkit-linear-gradient(top, #ffad01, #f47410);   /* Webkit: Safari 5.1+, Chrome 10+ */
+background: -moz-linear-gradient(top, #ffad01, #f47410);  /* Firefox 3.6+ */
+background: -o-linear-gradient(top, #ffad01, #f47410);  /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #ffad01, #f47410);  /* IE 10 */
+FILTER: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#ffad01, endColorStr=#f47410);      /* IE < 10 */      /* 注意：这一行必须写在最后 */
+border-color: #f47410;
+}
+	
+.btn.btn-primary:hover {
+    background-color: #fa9109;
+    background-image: linear-gradient(to bottom, #f47410, #ffad01);}
+	
+.btn.btn-secondary {
+    background-color: #eee;
+    background-image: linear-gradient(to bottom, #fff, #ddd);
+    border-color: #b4b4b4;
+    color: #3b7db8;
+}
+.btn.btn-secondary:hover {
+    background-color: #eee;
+    background-image: linear-gradient(to bottom, #ddd, #fff);}
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn {
+    cursor: not-allowed;
+    opacity: 0.65;
+    pointer-events: none;}
+.btn.button_social {
+    height: 36px;
+    line-height: 36px;
+    padding: 0 15px 0 0;
+}
+.btn.button_social span {
+    background-position: 3px 50%;
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px 0 46px;
+}
+.btn.button_social span.facebook {
+    background-image: url("../../../images/user/logo_facebook.png");
+}
+.btn.button_social span.google {
+    background-image: url("../../../images/user/logo_google.png");
+}
+.btn.button_social span.yahoo {
+    background-image: url("../../../images/user/logo_yahoo.png");
+}
+
+.uclFilters .greenSubmit {
+    height: 42px;
+    line-height: 42px;
+    margin: 5px 0 0;
+    padding: 0 20px;
+    width: 100%;
+}
+.greenSubmit {
+    background: none repeat scroll 0 0 #76b93f;
+    border: 1px solid #76b93f;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-family: "Roboto",Helvetica,Arial,sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    height: 38px;
+    padding: 0 10px;
+    vertical-align: baseline;
+}
+.greenSubmit {
+    cursor: pointer;
+}
+.greenSubmit:hover{ background:none repeat scroll 0 0 #6baa38;
+border-color:#6baa38;}
+button, html input[type="button"], input[type="reset"], input[type="submit"] {
+    -moz-appearance: none;
+    cursor: pointer;
+}
+/*-----------------------------------*/
+
+.container{ width:998px; position:relative; margin:10px auto;}
+
+#Content {margin: 15px 20px 0;}
+#Breadcrumbs {float: left;line-height: 25px; margin-bottom: 6px; margin-left: 25px;position: relative;width: 540px;}
+#Breadcrumbs ul {margin: 0 20px 0 0;width: 540px;}
+#Breadcrumbs ul li {float: left;margin-right: 5px;}
+/*---背景图片布局--*/
+.left-shadow {
+    background-image: url("../images/mod-gradiated-content-shadow-left.gif");
+    left: 20px;}
+.left-shadow, .right-shadow {
+    background-repeat: no-repeat;
+    display: block;
+    height: 642px;
+    position: absolute;
+    width: 19px;}
+.right-shadow {
+    background-image: url("http://file.kelleybluebookimages.com/kbb/images/modules/mod-gradiated-content-shadow-right.gif");right: 20px;}
+.mod-gradiated-content {
+    background-image: url("http://file.kelleybluebookimages.com/kbb/images/main-content-bg.gif");
+    background-repeat: repeat-x;
+    border-radius: 10px 10px 0 0;
+    margin: 0 auto;
+    min-height: 325px;
+    padding: 20px 20px 1px;
+    position: relative;
+    width: 880px;}
+.mod-gradiated-content .white {color: #fff;}
+.mod-gradiated-content .with-module .section-title, .mod-gradiated-content .with-module .section-subtitle {
+    display: inline;}
+.mod-gradiated-content .with-module .section-subtitle {
+    padding-left: 7px;}
+.mod-gradiated-content .wrapper {
+    padding: 0;}
+.mod-gradiated-content #Ymmt-intermediary-arrow .title {
+    padding-top: 10px;}
+
+.mod-head .mod-title {color: #333; font-size: 22px; letter-spacing: 0.1px;line-height: 24px;}
+.title, .section-title, .section-subtitle, .mod-title, .content-title { color: #000; display: block; font-family: "museo-sans-1","museo-sans-2",Tahoma,Arial; font-size: 32px;font-weight: 700; letter-spacing: -1px;line-height: 32px;}
+
+/*----内容左右结构------*/
+.leftside{ margin: 0 -20px 20px 0;width: 540px;}
+.leftside, rightside{float: left; margin-bottom: 30px;position: relative;}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display: block;}
+.rightside {background-color: #f4f4f4;border: 1px solid #e1e1e1;float: right;padding: 10px;width: 302px;z-index: 1 !important;}
+.leftside, .rightside{ margin-top: 20px;}
+
+#Slp-header {width: 880px;clear: both;display: block;} 
+#Slp-header .title, .mod-gradiated-content.trade-sell .title, .mod-gradiated-content.trade-sell .white, .mod-gradiated-content.trade-sell #Ymm-title.for-valuetype .title, .mod-gradiated-content.trade-sell #Ymm-title.for-valuetype .section-title {
+    display: inline;}
+#Slp-header .title {margin-bottom: 12px;}
+#Slp-header .title, #Slp-header .section-title {color: #fff;}
+h1.title sup { position: relative; top: 6px;}
+sup {font-size: 0.5em; line-height: 0.8em;vertical-align: text-top;}
+#Slp-header .price-next, #Slp-header .price-next, .mod-gradiated-content.trade-sell .price-next {color: #b6e0f9; display: inline; padding-left: 8px;}
+.content-title { color: #333; font-size: 26px;line-height: 26px;}
+
+/*---------表单内容开始----------*/
+
+#Ymm { display:inline-block; float: right; margin-right: 6px; text-align: right;}
+#Ymm .select-ymm {float: left;margin-top: 3px;}
+#Ymm .select-ymm.make, #Ymm .select-ymm.make select {width: 100px;}
+#Ymm .select-ymm.model, #Ymm .select-ymm.model select { width: 150px;}
+#Ymm .select-ymm.year, #Ymm .select-ymm.year select { width: 75px;}
+
+.select-ymm { display: inline-block;margin-right: 5px;position: relative;vertical-align: top;}
+.select-ymm.make, .select-ymm.model { overflow: hidden;}
+.select-ymm.year select, .select-ymm.make select, .select-ymm.model select, .select-ymm.mileage input, .select-ymm.trim select { border: 1px solid #999;}
+.select-ymm.year select, .select-ymm.make select, .select-ymm.model select, .select-ymm.mileage input, .select-ymm.trim select { border: 1px solid #999;}
+.select-ymm select {float: right !important;padding-left: 2px;}
+.select-ymm.year, .select-ymm.year select {width: 60px;}
+.select-ymm.make, .select-ymm.make select {width: 125px;}
+.select-ymm.make, .select-ymm.model {overflow: hidden;}
+
+#Slp-main-content {/*margin-top: 8px; */position: relative;}
+#Slp-main-content .select-ymm {float: left;margin-top: 3px; vertical-align:baseline;}
+#Slp-main-content input {font-size: 12px;font-style: normal;padding: 2px 0 3px 3px;}
+.mod-primary {
+background: #ffffff;  
+background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffffff), to(#eeeeee));  
+background: -webkit-linear-gradient(top, #ffffff, #eeeeee);  
+background: -moz-linear-gradient(top, #ffffff, #eeeeee);
+background: -o-linear-gradient(top, #ffffff, #eeeeee); 
+background: -ms-linear-gradient(top, #ffffff, #eeeeee); 
+FILTER: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#ffffff, endColorStr=#eeeeee);
+border: 1px solid #ccc; 
+margin-bottom: 30px;padding: 20px;}/*表单背景框底色*/
+.mod-primary .mod-head {margin-bottom: 15px;}
+#Sell-trade-module .mod-head a, #Sell-trade-module .mod-head a {float: right;}
+#sell-trade .validation-error, #buy-known-cpo-uc .validation-error, #buy-known-nc .validation-error, #Ymmt-values_alert .validation-error, #Thank-you-overlay .validation-error {
+	background-color: #e9b8ae;border-radius: 8px;color: #a34f00;font-size: 12px;font-weight: bold;padding: 10px 15px;width: 280px;}
+.validation-error {color: #f00;display: none;font-family: Tahoma,Arial;font-size: 11px;}
+p {margin: 0 0 12px;}
+
+#Slp-main-content .select-ymm.year, 
+#Slp-main-content .select-ymm.year select, 
+#Slp-main-content .select-ymm.year, 
+#Slp-main-content .select-ymm.year select { width: 75px;}
+
+#Slp-main-content form .select-ymm select, 
+#Slp-main-content form .select-ymm select {font-size: 18px;margin: 0;padding: 5px 3px;}
+#Slp-main-content form .select-ymm, #Slp-whats-my-car-worth #Slp-main-content form .select-ymm {top: 0;}
+#Slp-main-content form .select-ymm {top: 7px;}
+#Slp-main-content form .select-ymm .input-text-default, 
+#Slp-main-content form .select-ymm .input-text-default {
+ font-size: 18px;  height: 21px; line-height:21px;  margin: 0; padding: 7px 4px; *+padding: 3px 4px;width: 60px; overflow: visible;    }
+
+#Slp-main-content .licheng {width: 100px; line-height:32px;}
+
+#Slp-main-content .mileage {width: 60px;}
+#Slp-main-content .mileage input { width: 54px;}
+.select-ymm.mileage input {font-style: normal;padding-left: 2px;width: 60px;}
+.select-ymm.mileage { width: 70px;}
+
+.input-text-default-active {color: #999;font-style: italic;}
+#Slp-main-content .make-model-example,  
+#Slp-main-content .make-model-example { display: inline-block; margin-right: 5px;width: 163px;}
+#Slp-main-content .select-ymm.make, 
+#Slp-main-content .select-ymm.make select, 
+#Slp-sell-it-myself #Slp-main-content .select-ymm.model, 
+#Slp-main-content .select-ymm.model select,  
+#Slp-main-content .select-ymm.make,  
+#Slp-main-content .select-ymm.make select, 
+#Slp-main-content .select-ymm.model,  
+#Slp-main-content .select-ymm.model select { width: 163px;}
+#Slp-main-content form .select-ymm, #Slp-main-content form .select-ymm { top: 0;}
+#Slp-main-content form .select-ymm { top: 7px;}
+#Slp-main-content form .btn-main-cta {margin-left: 169px; margin-top:20px; padding: 9px 60px 9px 49px;}
+
+
+/*---右边的内容样式--	---*/
+.with-sub, .for-article {
+    margin-bottom: 6px;}
+#Slp-header .price-next, #Slp-sell-it-myself #Slp-header .price-next, .mod-gradiated-content.trade-sell .price-next {
+    color: #b6e0f9; display: inline; padding-left: 8px;}
+.mileage-hdr {  padding-top: 8px; width: 540px;}
+.left {float: left !important;}
+.mod-gradiated-content h3 { margin: 0 0 15px;}
+.mod-gradiated-content .white { color: #fff;}
+.mod-inv {  background: none repeat scroll 0 0 #fff; border: 1px solid #ccc; margin: 0 0 30px; padding: 0 0 20px;}
+.mod-inv .mod-head {background: -moz-linear-gradient(center top , #fff 0px, #fff 40%, #eee 100%) repeat scroll 0 0 #e9e9e9;margin: 0 0 20px;overflow: hidden; padding: 20px 10px;}
+.mod-inv .mod-content {padding: 0 10px;}
+#Buyers-sellers-carfax span {display: block;margin-bottom: 15px;}
+.btn-secondary-cta.small {font-size: 12px; height: 24px; line-height: 24px; padding: 0 8px;}
+
+
+/*==========条件列表页=======start=====*/
+.styles-list-container { background: none repeat scroll 0 0 #fff;border: 1px solid #ccc;padding: 10px;}
+.section-title {font-size: 18px;font-weight: 500; letter-spacing: normal;line-height: 18px;}
+.style-category-container.expand > .expanded-content {display: block;}
+.style-category-container .mod-content {border-bottom: 1px solid #ccc;}
+.mod-content.expanded-content { display: block;}
+.expanded-content {display: none;z-index: 1;}
+p.standard-compare { background: none repeat scroll 0 center rgba(0, 0, 0, 0); border: 0 none;padding: 0 0 10px 10px;}
+.standard-compare {
+    background: url("http://file.kelleybluebookimages.com/kbb/images/modules/styles-shadow-slice.png") repeat-x scroll 0 -3px rgba(0, 0, 0, 0);
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-top: 0 none;
+    height: 18px;
+    margin-bottom: 0;
+    padding: 10px 0 10px 10px;
+    position: relative;
+    text-align: left;}
+	
+/*手风琴列表页*/
+.vehicle-styles-container.first { border-top: 1px solid #ccc;}
+.vehicle-styles-container {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;border-color: #ccc #ccc -moz-use-text-color; border-image: none;border-style: solid solid none;border-width: 1px 1px 0;overflow: hidden;padding: 0; position: relative;}
+.row-white { background: none repeat scroll 0 0 #fff; border-top: 1px solid #ccc;}
+
+.vehicle-styles-head { display: block;overflow: hidden;}
+.expandable { cursor: pointer;}
+.accordion-sub { /*display: inline-block; */ margin: 0; padding: 8px 15px;}
+.expandable .btn-circle-plus-container { display: block;float: left;margin: 0 10px 0 0;}
+.vehicle-styles-head .style-name { float: left; padding: 9px 5px 0 10px;  width: 240px;}
+
+.btn-circle-plus-container.minus .btn-circle-plus {
+    display: none;
+}
+.btn-circle-plus-container .btn-circle-plus {
+    display: block;
+}
+.btn-circle-plus-container.minus .btn-circle-minus {
+    display: block;
+}
+.btn-circle-plus-container .btn-circle-minus {
+    display: none;
+}
+.sitewide-sprite, .btn-main-cta .with-kbb-logo, 
+#KBB-logo a, .btn-circle-arrow.up, 
+.btn-circle-arrow.down, 
+.btn-circle-plus, .btn-circle-minus, 
+ #Social-trigger .toggle-up,
+  #Social-toolbar .toggle-down, 
+ #Social-toolbar .left-wrapper, 
+ #Social-toolbar .right-wrapper,
+  #Social-trigger .right-wrapper, 
+  .btn-like-this-car, 
+  .btn-tweet-this-car,
+   .btn-follow-this-car, 
+   .ymm-intermediary-arrow,
+    .ymm-intermediary-arrow-med, 
+	#ColorChart .chartRow .checkmark, 
+	.exclamation-icon, .camera, 
+	.standard-overlay .standard-or-optional span,
+	#Ymmt-tco .icon-piechart, 
+	.vehicle-scorecard .prev, 
+	.vehicle-scorecard .next, 
+	.icon-styles, #Specs-groups .specs-group-equipment table.specs-groups tr.selected .check, 
+	#Specs-groups .specs-group-equipment table.specs-groups tr.typical .check, 
+	.gallery-tab-secondary #Gallery-tab-arrow, 
+	#Gallery-main-image .play-all-overlay, 
+	#Gallery-main-image .play-all-pause, 
+	#Gallery-photo-playback .controls .prev, 
+	.fs-prev, #Gallery-photo-playback .controls .play, 
+	#Gallery-photo-playback .controls .next, 
+	.fs-next, #Gallery-photo-playback .controls .pause, 
+	.fs-pause, #Gallery-photo-playback .controls .prev.disabled, .fs-prev.disabled, 
+	#Gallery-photo-playback .controls .play.disabled,
+	 #Gallery-photo-playback .controls .next.disabled, 
+	.fs-next.disabled,
+	 .btn-rewind, .btn-forward, 
+	.btn-rewind.disabled, 
+	.btn-forward.disabled,
+	 #Awards-and-accolades .trophy-resale, .icon-print, 
+	 .icon-info, section #Ymmt-intermediary.tabbed .values .selected .icon, 
+	.thermometer .therm-dialog, 
+	#Write-review-container .ui-slider-handle, #Condition-quiz-container .icon,
+	 #Write-review-container #Write-review .slider-graphic, 
+	 .btn-photo, .see-larger-img,
+	  .brva-ymm-icon, 
+	 #Ymmt-pricingoverview #Vehicle-rank .vehicle-rank-item .rank-head .icon.tco, 
+	 footer .follow .social-icon, footer .choices-logo, 
+	 #Search-box-container .magnifying-glass, 
+	 #tagline a, .lb-widget-nav a
+	 {
+    background-image: url("../images/sitewide-sprite114a.png");
+    background-repeat: no-repeat;
+}	
+.left { float: left !important;}
+.right {float: right !important;}
+.btn-circle-plus-container .btn-circle-plus {display: block;}
+.btn-circle-plus-container .btn-circle-minus {display: none;}
+.btn-circle-plus {background-position: -176px 0;margin-top: 3px;}
+.btn-circle-minus {background-position: -176px -30px;margin-top: 3px;}
+.btn-cir-left, .btn-cir-right, .btn-circle-arrow, .btn-cir-left-disabled, .btn-cir-right-disabled, .btn-circle-plus, .btn-circle-minus {
+ cursor: pointer; display: block; height: 28px; width: 28px;}
+.row-grey {
+    background: none repeat scroll 0 0 #f3f3f3;
+    border-top: 1px solid #ccc;}	
+	
+.vehicle-styles-body {
+    border-top: 1px solid #ccc; display: none;  font-size: 11px; overflow: hidden; padding: 10px 15px;position: relative;}
+.engines-and-drivetrains { float: left;  margin-bottom: 20px;}
+.style-category-container .expanded-content table {width: 250px;}
+.engines-and-drivetrains tbody { color: #000;}	
+.icons-container {float: right; margin-bottom: 20px;}
+.icons-container div { float: left;}
+.mpg-container { width: 110px;}
+.transmission-container, .mpg-container, .engine-container {float: left;  text-align: center; vertical-align: top;}
+.icon-styles.mpg {  background-position: 0 -115px;}
+.icon-info { background-position: -335px -456px;cursor: pointer;display: inline-block;height: 12px;width: 11px;}
+.icons-container div { float: left;}
+.engine-container {  width: 50px;}
+.transmission-container, .mpg-container, .engine-container { float: left;text-align: center;vertical-align: top;}
+.icon-styles.engine {background-position: -53px -115px; display: inline-block; height: 18px; width: 32px;}
+.engine { background-position: -34px -34px;}
+	
+/*手风琴列表---结束*/	
+/*==========条件列表页=======END=====*/
+
+
+#Slp-header .title, #Slp-sell-it-myself #Slp-header .title, .mod-gradiated-content.trade-sell .title, .mod-gradiated-content.trade-sell .white, .mod-gradiated-content.trade-sell #Ymm-title.for-valuetype .title, .mod-gradiated-content.trade-sell #Ymm-title.for-valuetype .section-title {
+    display: inline;}
+.mileage-hdr { padding-top: 8px; width: 540px;}
+.white {color: #fff;}
+.with-module { margin-bottom: 0px;}
+.section-subtitle { font-size: 14px; font-weight: 500;  letter-spacing: normal; line-height: 14px;}
+.mod-gradiated-content .price-next { color: #b6e0f9;  display: inline;  padding-left: 8px;}
+#Slp-header .title, #Slp-header .title, .mod-gradiated-content.trade-sell .title, .mod-gradiated-content.trade-sell .white, .mod-gradiated-content.trade-sell #Ymm-title.for-valuetype .title, .mod-gradiated-content.trade-sell #Ymm-title.for-valuetype .section-title { display: inline;}
+.vehicle-styles-head .btn-secondary-cta { float: right;}
+
+/*===配置参数页===*/
+.options-container { border-top: 1px solid #ccc;  padding: 10px;}
+.mod-single { background: none repeat scroll 0 0 #fff; border: 1px solid #ccc; margin-bottom: 30px;/*padding: 20px; */}
+.options-group-container { margin: 10px 0 0;}
+.options-container ul li {padding-bottom: 15px;}
+.options-group-container .section-title { background-color: #f4f4f4; font-size: 16px;  font-weight: 700; margin-bottom: 10px;  padding: 5px 10px;}
+.options-group-container .row {  clear: both;  padding: 3px 0 3px 15px;  position: relative;}
+.options-group-container .type {  display: inline-block;  vertical-align: top;}
+.options-group-container input[type="radio"] {top: 0;}
+.options-group-container .text { display: inline-block; width: 205px;}
+.options-group-container strong { font-weight: normal;}
+strong {font-weight: bold;}
+.options-group-container .left { margin-right: 15px;   padding: 10px 0; width: 250px;}
+.left {  float: left !important;}
+.options-group-container .right { padding: 10px 0; width: 250px;}
+.right { float: right !important;}
+.options-cta { border-top: 1px solid #ccc; cursor: pointer; overflow: hidden; padding: 20px 10px; position:relative;} /*此处最大的域*/
+.options-cta > div { color: #333; float: left; margin-top: 22px; width: 270px;}
+.options-cta .highlight {color: #df5500;}
+.mod-title { color: #333;  font-size: 22px; letter-spacing: 0.1px;line-height: 24px;}
+.options-cta .btn-main-cta {float: right;margin-top: 20px; }
+.with-kbb-logo, #KBB-logo a{  background-image: url("../images/blue_book.png"); background-repeat: no-repeat;}
+.with-kbb-logo { height: 60px;  left:6px; position: absolute;top:8px; width: 45px; z-index:100px;}
+#GetMyPrice{ z-index:1px;}
+.logoAndBtn{ z-index:2px;}
+
+
+/*========车况================*/
+.no-tabs #Ymmt-header .title { margin-left: 20px; margin-top: 15px;}
+.no-break { display: inline-block;}
+.with-module { margin-bottom: 15px;}
+.trade-in-ymmt-link { float: left; left: 15px; position: relative; top: 27px;}
+#Condition-select { background-color: #fff; padding: 30px 10px 10px;}
+#Condition-quiz .mod-head, #Condition-select .mod-head { margin-bottom: 20px; padding-left: 10px;}
+.with-sub, .for-article { margin-bottom: 6px;}
+#Pricetype-container { background-color: #f8f6f6;margin: 0 0 35px; padding: 10px 20px 5px;position: relative;}
+#Pricetype-container .pricetype-section {margin: 10px 0 15px;  position: relative;}
+#Pricetype-container .section-subtitle, #Pricetype-container .section-title {display: inline;}
+#Condition-container .mod-head {  margin-bottom: 20px;  padding-left: 10px;}
+#Condition-container .mod-secondary {margin-bottom: 0;padding: 10px 15px;}
+#Condition-container .mod-secondary a.btn-secondary-cta { float: right; padding: 9px 15px;}
+#Condition-container .excellent {border-top: 1px solid #ccc; margin-top: 10px;}
+.condition-container .sect-head { border-bottom: 1px solid #ccc; margin-top: 10px;padding: 10px 15px;}
+.condition-container a.btn-main-cta { margin-top: -8px;}
+.condition-container a { float: right; position: relative;}
+.condition-container .mod-title, .condition-container .section-title { color: #333; display: inline-block; margin-bottom: 10px; position: relative;}
+.color-g { color: #549400;}
+.condition-container .section-subtitle {color: #509100;float: left;margin-left: 0; position: relative;width: 100%;}
+.with-sub, .for-article {margin-bottom: 6px;}
+.with-module { margin-bottom: 15px;}
+.condition-container ul { margin-top: 5px;padding: 0 15px 0 18px;}
+.condition-container ul li { list-style-position: outside; list-style-type: disc;}
+#Condition-container .mod-secondary .section-title { float: left;}
+#Condition-container .poor label { margin-left: 0;}
+#Condition-container-poor.mod-secondary .section-subtitle { float: left; line-height: 16px; margin: 0 65px 0 170px;padding: 0; position: absolute;}
+.mod-secondary {background-color: #f4f4f4; border: 1px solid #ccc;margin-bottom: 30px;padding: 20px;}
+#Ymmt-pricingoverview { height: 160px; margin-bottom: 15px;}
+#Vehicle-info {display: block;position: relative; height:157px;}
+.trade-in-sell #Vehicle-info .pic { cursor: default;}
+#Vehicle-info .pic {cursor: default;display: inline-block;text-align: center; float: left;height: 100%;margin: 0 10px 0 0;text-align: left; width: 165px;}
+#Vehicle-info .veh-info-review { background: none repeat scroll 0 0 #fff;border: 1px solid #cdcdcd;
+  left: 0;padding: 8px 5px; position: absolute;text-align: center;top: 121px; font-size:12px; margin-top: 3px;}
+#Vehicle-info .pic a {cursor: pointer;}
+#Vehicle-info .veh-info-review .veh-info-separator {  border-left: medium none;  border-right: 1px solid #666;  display: inline-block; margin: 0 2px;}
+.veh-info-separator {border-left: 1px solid #ccc; display: inline-block;  height: 15px;margin: 0 7px;  vertical-align: bottom; width: 1px;}
+#Vehicle-info .text {display: inline-block;  height: 100%;vertical-align: top; width:345px; position:relative;}
+.mod-gradiated-content .wrapper { padding: 0;}
+#Vehicle-info .wrapper { margin-top: 0;width: auto !important;}
+#Vehicle-info .covehicle-info-linksntent-title{ color:#FFFFFF;}
+#Vehicle-info form {margin: 0;}
+#Vehicle-info form input { margin: -3px 0 0;width: 50px;}
+#Vehicle-info .vehicle-style-dd { margin-bottom: 2px;}
+.wrapper-title  h1{ color:#FFFFFF;}
+#Vehicle-info .wrapper-subtitle .txt { color: #fff;font: 700 12px "museo-sans-1","museo-sans-2",Tahoma,Arial;}
+#Vehicle-info .vehicle-info-links {
+    background: none repeat scroll 0 0 #fff; border: 1px solid #cdcdcd;
+   /* bottom: 0;*/ height: 20px;
+    padding: 9px 8px;position: absolute;
+    width: 345px;border-top: 1px solid #ccc;vertical-align: middle;white-space: nowrap; 
+	position:absolute; left:0; bottom:0;}
+#Vehicle-info .vehicle-info-links .btn-photo { border-right: 1px solid #cdcdcd; display: inline-block !important; padding-right: 10px; top: -1px;}
+#Vehicle-info .btn-photo {  cursor: pointer;  margin-right: 5px; position: relative; top: 7px;}
+.photos-modal { position: relative;}
+.btn-photo { background-position: -70px -1219px; display: inline-block; height: 22px; width: 32px;}
+#Vehicle-info .veh-info-subtitle { top: -9px;vertical-align: middle;}
+.veh-info-subtitle { display: inline-block; position: relative;}
+#Vehicle-info form {  margin: 0;}
+#Vehicle-info form input { margin: -3px 0 0; width: 50px;}
+#Vehicle-info .veh-info-subtitle span.txt {}
+#Vehicle-info .veh-info-subtitle span {color: #333; display: inline-block;margin-right: 2px;}
+#Vehicle-info #mileage, .no-tabs #Vehicle-info #mileage-confirm { display: inline-block !important;}
+#Vehicle-info form input {margin: -3px 0 0; width: 50px;}
+.hide {display: none;}
+#Vehicle-info #mileage, #Vehicle-info #mileage-confirm { display: inline-block !important;}
+.btn-secondary-cta.small {
+    font-size: 12px;
+    height: 24px;
+    line-height: 24px;
+    padding: 0 8px;}
+#FB-like { border: 0 none;display: inline-block !important;right: -30px !important; top: 2px;}
+#Facebook-vehicle-like, #FB-like {display: inline-block; position: relative;top: 4px;}
+.hide {display: none;}
+#FB-like .like-wrapper {
+    display: inline-block;
+    left: 0;
+    margin: 4px 0 4px 4px;
+    position: absolute;
+    top: 0;
+    width: 48px;}
+section.trade-in-sell #FB-like em {display: none;}
+#FB-like em {
+    background: none repeat scroll 0 0 #fff;   display: block; float: right;  font-size: 11px;font-style: normal;
+   padding: 3px 0 3px 6px;  position: absolute;  right: 4px;top: 2px;}
+	
+/**/
+.valuations-wrap { background: none repeat scroll 0 0 #fff;border: 1px solid #ccc; margin-bottom: 15px;}
+.dealer-tab-bar { 
+background: #f0eeef;  
+background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f0eeef), to(#d2d2d2));  
+background: -webkit-linear-gradient(top, #f0eeef, #d2d2d2);  
+background: -moz-linear-gradient(top, #f0eeef, #d2d2d2);
+background: -o-linear-gradient(top, #f0eeef, #d2d2d2); 
+background: -ms-linear-gradient(top, #f0eeef, #d2d2d2); 
+FILTER: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#f0eeef, endColorStr=#d2d2d2);
+box-shadow: 0 0 6px 0 #b9b9b9; height: 40px; margin-bottom: 30px;
+}
+.dealer-tab-bar > .tab-button.active:first-child {margin: 0;}
+.dealer-tab-bar > .tab-button.active {
+	background: #797979;  
+background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#797979), to(#4a4a4a));  
+background: -webkit-linear-gradient(top, #797979, #4a4a4a);  
+background: -moz-linear-gradient(top, #797979, #4a4a4a);
+background: -o-linear-gradient(top, #797979, #4a4a4a); 
+background: -ms-linear-gradient(top, #797979, #4a4a4a); 
+FILTER: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#797979, endColorStr=#4a4a4a);
+color: #fff; cursor: default; position: relative; width: 107px;
+	}
+.dealer-tab-bar > .tab-button {
+    color: #005cb0;
+    cursor: pointer;
+    display: block;
+    float: left;
+    height: 31px;
+    padding: 4px 0 5px;
+    text-align: center;
+    width: 106px;}
+.dealer-tab-bar > .tab-button.active .right-border {border: 0 none;}
+.tab-button .right-border { border-right: 1px solid #ccc;padding-right: 0;}
+.dealer-tab-bar > .tab-button.active .dealer-tab-arrow {
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-top: 10px solid #4a4a4a;
+    cursor: default;
+    height: 0;
+    left: 22px;
+    position: absolute;
+    top: 40px;
+    width: 0;
+}
+.dealer-tab-bar > .tab-button span {
+    display: block;
+    font-family: "museo-sans-1","museo-sans-2",Tahoma,Arial;
+    font-size: 13px;
+    font-weight: 700;
+    height: 28px;
+    letter-spacing: normal;
+    line-height: 15px;}
+.dealer-tab-bar > .tab-button { color: #005cb0; cursor: pointer; display: block; float: left; height: 31px; padding: 4px 0 5px; text-align: center;  width: 106px;}
+.tab-button .right-border { border-right: 1px solid #ccc; padding-right: 0;}
+.dealer-tab-bar > .tab-button span {
+    display: block;
+    font-family: "museo-sans-1","museo-sans-2",Tahoma,Arial;
+    font-size: 13px;
+    font-weight: 700;
+    height: 28px;
+    letter-spacing: normal;
+    line-height: 15px;}
+.icon-info { background-position: -335px -456px; cursor: pointer; display: inline-block; height: 12px; width: 11px;}
+.clickTip {
+    background-image: url("../images/sitewide-sprite114a.png");
+    background-repeat: no-repeat;}
+.dealer-tab-bar > .tab-button {
+    color: #005cb0;
+    cursor: pointer;
+    display: block;
+    float: left;
+    height: 31px;
+    padding: 4px 0 5px;
+    text-align: center;
+    width: 106px;}
+.tab-button .right-border {border-right: 1px solid #ccc;padding-right: 0;}
+.dealer-tab-bar > .tab-button span {
+    display: block;
+    font-family: "museo-sans-1","museo-sans-2",Tahoma,Arial;
+    font-size: 13px;
+    font-weight: 700;
+    height: 28px;
+    letter-spacing: normal;
+    line-height: 15px;}
+.dealer-tab-bar > .share-print {border: 0 none;margin: 9px 15px 0 0;}
+.share-print.header { float: right; position: relative; right: 3px;}
+.share-print {border-left: 1px solid #ccc; height: 20px;padding-left: 7px;}
+.print-link-txt {display: inline-block; margin: 2px 0 0 5px;}
+
+.condition-bar {
+background: #fffdfa;  
+background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fffdfa), to(#ebebeb));  
+background: -webkit-linear-gradient(top, #fffdfa, #ebebeb);  
+background: -moz-linear-gradient(top, #fffdfa, #ebebeb);
+background: -o-linear-gradient(top, #fffdfa, #ebebeb); 
+background: -ms-linear-gradient(top, #fffdfa, #ebebeb); 
+FILTER: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#fffdfa, endColorStr=#ebebeb);
+    border: 1px solid #ccc;
+    box-shadow: 0 6px 6px -6px black;
+    color: #303030;
+    font-family: "museo-sans-1","museo-sans-2",Tahoma,Arial;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 14px;
+    padding: 10px 5px;
+    text-align: center;
+    width: 272px;}
+.condition-bar .larrow,.condition-bar .rarrow{display:block;background:url("../images/ownersymmt-sprite003.png") no-repeat 0 0}
+.condition-bar .larrow,.condition-bar .rarrow{width:9px;height:12px;display:block;cursor:pointer}
+.condition-bar .larrow{background-position:-92px -111px}
+.condition-bar .rarrow{background-position:-102px -111px}		
+.with-sub, .for-article {margin-bottom: 6px;}
+.condition-area { display: none;}
+.condition-area .small, .static-page.small {ont-size: 11px;line-height: 11px;}
+
+#conditionDataVersionDate .condition-data-version-date-value {white-space: nowrap;}
+.condition-srp {padding-top: 20px;}
+#conditionSrp span, .condition-srp span {
+    display: block;
+    font-family: "museo-sans-1","museo-sans-2",Tahoma,Arial;
+    font-size: 13px;
+    font-weight: 700;
+    height: 28px;
+    letter-spacing: normal;line-height: 15px;}
+#conditionSrp span.large-price, .condition-srp span.large-price {font-size: 24px;font-weight: 700;}
+.mm-wrap .center p { color: #f00;}
+.no-margin {margin-bottom: 0;}
+.center {text-align: center;}
+.mm-wrap {float: left; padding: 0 20px; width: 284px;}
+.with-module { margin-bottom: 15px;}
+h3 span.orange { color: #ff8004;}
+h3 span.purple {color: #434aa2;}
+.with-sub, .for-article { margin-bottom: 6px;}
+#mmRightContainer { height: 364px;}
+.mm-rightrail-wrap .btn-main-cta { padding: 9px 10px; z-index: 0;}
+.mm-rightrail-wrap { border-left: 1px solid #ccc;float: left; margin-bottom: 15px; padding: 0 15px;width: 183px;}
+.mm-rightrail-wrap .bottom-border { border-bottom: 1px solid #ccc; margin-bottom: 15px;padding-bottom: 15px;text-align: center;}
+.mm-rightrail-wrap .bottom-border p{margin: 0 0 12px;}
+.mm-rightrail-wrap h3 { display: block !important;}
+.mm-rightrail-wrap h3 span {color: #333;}
+.with-sub, .for-article {margin-bottom: 6px;}
+.mm-rightrail-wrap .bottom-border h3,
+.mm-rightrail-wrap .bottom-border p,
+.mm-rightrail-wrap .bottom-border .left {text-align: left;}
+
+.picwrap{  
+   background:url(../images/car1980.jpg) no-repeat center center;
+   position:relative;
+   height:700px;
+ background-size: cover;
+  width: 100%;
+ -webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
+ background-size: cover;
+ max-width:1980px;
+   min-width:800px;
+   max-height:1080px;
+   min-height:700px;
+	}
+   
+ .fontsize{ font-size:100%; color:#ffffff; width:250px; height:200px; position:absolute; right:2%; bottom:160px;}
+.fontsize li{ line-height:28px; list-style:none;}
+
+

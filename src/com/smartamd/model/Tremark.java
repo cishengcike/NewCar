@@ -1,7 +1,5 @@
 package com.smartamd.model;
 
-import java.util.Date;
-
 public class Tremark {
     private Integer remarkid;
 
