@@ -1,0 +1,337 @@
+@charset "UTF-8";
+/* CSS Document */
+
+
+/*------header--------*/
+.in-top{ background:#0073c5; height:34px; height:58px;}
+.center-width{ width:1200px; height:58px; margin:0 auto;}
+.div-logo { background:url(../images/logo.png) no-repeat left center; width:121px; height:58px; float:left;}
+.div-logo a{width:121px; height:58px; display:block; cursor:pointer;}
+.div-inherit{ float:right; height:46px; padding:12px 0px 0px 0px; display:block;}
+.div-inherit li{ display:block; float:left; padding:0 15px; line-height:30px;}
+.div-inherit li a{ color:#FFFFFF; font-size:14px;}
+.div-inherit li a:hover{color:#1989e8; text-decoration:none;}
+/*-------------*/
+
+/*-----footer--------*/
+.footlinkbox{ background:#0073c5; height:34px; line-height:34px;}
+.footlink{ width:1200px; height:3px; margin:0 auto;}
+.footlink a{ text-align:center; padding:0 15px; color:#FFFFFF;}
+.footlink span{ color:#a4cae5;}
+.footlink p{ text-align:center;}
+#botton-msg-plaen{ 
+background: #0073c5;  
+background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#0073c5), to(#005cb4));  
+background: -webkit-linear-gradient(top, #0073c5, #005cb4);  
+background: -moz-linear-gradient(top, #0073c5, #005cb4);
+background: -o-linear-gradient(top, #0073c5, #005cb4); 
+background: -ms-linear-gradient(top, #0073c5, #005cb4); 
+FILTER: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#0073c5, endColorStr=#005cb4);
+ height:200px;
+ padding:15px 0px;}
+#bottom-msg {width:1200px; margin:0 auto; padding-bottom: 10px;padding-top: 10px;}
+.center-width {margin: 0 auto; width: 1100px;}
+#bottom-msg > ul {color: #f6f6f6;overflow: hidden;margin-left: 100px;}
+#bottom-msg > ul li { cursor: pointer; float: left;line-height: 2;margin-left: 12px; width: 120px; margin-right:35px;}
+#bottom-msg > ul li a { margin-left: 4px;}
+#bottom-msg li a { color: #f6f6f6; display: block;}
+.buttom-title{ font-size:16px; font-weight:bold; border-bottom:#99c5e7  1px solid; padding-bottom:2px; margin-bottom:6px;}
+.copyrightBox{ background:#005bb4; height:40px; line-height:40px;}
+.copyright{ width:1200px; margin:0 auto;}
+.copyright p{ text-align:center; color:#8bb4d1;}
+/*-----首页的定位----------*/
+ .VINsearchbox{ width:520px; height:80px; background:url(../images/white_bg.png) repeat; position:absolute; top:300px; left:340px;}
+ .VINsearchINPUT{ padding:15px 0px 0px 15px; height:50px;}
+ .VINsearchINPUT input{ width:300px; color:#666666; padding:5px 5px; font-size:18px; line-height:35px; vertical-align:middle;}
+ .VINsearchINPUT button{ width:160px;vertical-align:middle; margin-left:10px;}
+/*------子页面搜索框---------*/
+ .searchBox{ width:560px; height:80px; }
+ .searchINPUT{height:50px;}
+ .searchINPUT input{ width:300px; color:#666666;  font-size:16px; line-height:33px; vertical-align:middle;}
+ .searchINPUT button{ width:140px;vertical-align:middle; margin-left:10px;}
+/*------我的报告----------*/
+.myreport{ margin-bottom:20px;}
+.myreport table{}
+.myreport th{ line-height:28px; background:#daf0fc; color:#1c4083; text-align:left; padding:0px 5px; }
+.myreport td{ line-height:22px; color:#666666; padding:0px 5px;}
+.carphotoSmall{ width:90px; height:40px;}
+.carphotoSmall img{width:90px; height:40px;}
+.operationbtn{white-space:nowrap; width:80px;}
+.midline{ border-top:#d4e4ef 1px solid; line-height:2px;  font-size:2px; margin:5px 0px;}
+/*---------------*/
+.easyContainer{}
+/*VIN ENTER PAGE*/
+section.main {
+    background: none repeat scroll 0 0 #fafafa;
+    border-bottom: 1px solid #ccc;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+    padding-bottom: 10px;
+    position: relative;}
+#info { border-right: 1px solid #e6e6e6;   float: left; margin: 0 0 10px;    padding: 18px 0 10px 20px; width: 270px;}
+#info #sampleReport { display: block; margin: 10px 20px 10px 25px;text-decoration: none;}
+#info h2 { color: #111;  font-family: sans-serif; font-size: 1em;  margin-bottom: 5px;margin-top: 15px;}
+#info ul {color: #525252;   font-size: 13px;  line-height: 24px;  margin-left: 30px;}
+#info li { /*margin-left: 10px;*/ background:url(../images/listCheck_clear.gif) no-repeat left center; line-height:24px; text-indent:18px; }
+#info > div {margin-left: 10px;}
+#info h3 {color: #3c0;  font-size: 1.2em;  width: 180px;}
+#info h3, #info h4 {margin-top: 15px;}
+h1, h2, h3, h4, h5, h6 {font-weight: bold;}
+#info p { font-size: 1.2em; margin-top: 5px;   width: 180px;}
+#info h4 { font-size: 1.3em; width: 240px;}
+
+form.main, #details, #security {border-left: 0 none;}
+#security, #details, form.main {
+   /* border-left: 1px solid #e6e6e6;*/float: right; padding: 20px 90px 0 20px; width: 545px;}
+#details {}
+#details h1 {  font-size: 1.55em; padding-bottom: 18px;}
+#details h1 img { margin: 0 0 0 100px;}
+.rptFlexbox {   margin: 10px 0 15px;  position: relative;}
+#foxoverlook { position: absolute; right: 10px; top: -57px;  z-index: 0;}
+.fbox { background: none repeat scroll 0 0 #e6f4f7; border: 1px solid #09f;  border-radius: 5px;  float: left;  height: 120px; margin-right: 1px;overflow: hidden;  padding: 7px;  position: relative;  width: 24%;}
+.fbox h3 { color: #333; font-size: 15px;  font-weight: bold;}
+.fbox h4 { color: #444; font-size: 15px; font-weight: bold; line-height: 24px; margin-bottom: 5px;}
+.fbox p { color: #666; font-size: 12px;}
+.blueBtnWrap { border: 1px solid #276491; border-radius: 15px; cursor: pointer; display: inline-block;  height: 28px; overflow: hidden;}
+.blueBtnBody { background: none repeat scroll 0 0 #2a81c1; border-color: #77baec #4494d0 #2a81c1;  border-style: solid;border-width: 1px; color: #fff !important; display: inline-block; font-size: 14px;  font-weight: 700; line-height: 26px; padding: 0 12px; text-align: center;text-decoration: none;}
+.selectorWrap { bottom: 7px;  color: #7fac30; left: 7px; position: absolute;}
+.selectorWrap span {  display: none; font-size: 16px; font-weight: bold; line-height: 28px;}
+.selected{background: #e3f5c1 !important;border: 2px solid #7fac30 !important;height: 125px;}
+.selected .blueBtnWrap{display: none;}
+.selected span{display: block !important;}
+.fbox2 { background: none repeat scroll 0 0 #e6f4f7;  border: 1px solid #09f;  border-radius: 5px; float: left;  height: 120px;  margin-right: 1px;  overflow: hidden; padding: 7px; position: relative;
+ width: 25%;}
+.fbox2 h3 { color: #333; font-size: 15px; font-weight: bold;}
+.fbox2 h4 { color: #444;  font-size: 15px;  font-weight: bold; line-height: 24px; margin-bottom: 5px;}
+.fbox2 p { color: #666; font-size: 12px;}
+.selected { background: none repeat scroll 0 0 #e3f5c1 !important; border: 2px solid #7fac30 !important; height: 125px;}
+.fbox3 { background: none repeat scroll 0 0 #e6f4f7;  border: 1px solid #09f;  border-radius: 5px;  float: left; height: 120px;  margin-right: 1px;  overflow: hidden;  padding: 7px;position: relative; width: 41%;}
+.fbox3 h3 { color: #333; font-size: 15px; font-weight: bold;}
+.fbox3 h4 { color: #444;   font-size: 15px;font-weight: bold; line-height: 24px; margin-bottom: 5px;}
+.fbox3 p {color: #666; font-size: 12px;}
+
+.processingWrapper {
+    margin: 3px 0;
+}
+form.main label {
+    cursor: pointer;
+}
+.processingWrapper label {
+    display: block;
+    padding-left: 15px;
+    text-indent: -15px;
+}
+.processing {
+    padding: 15px 0 7px;
+}
+label, input[type="button"], input[type="submit"], input[type="image"], button {
+    cursor: pointer;
+}
+form.main input, form.main select {
+    color: #575757;
+}
+.processingWrapper input {
+    height: 13px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: -1px;
+    vertical-align: bottom;
+    width: 13px;
+}
+input:valid, textarea:valid {
+}
+input[type="checkbox"] {
+    vertical-align: bottom;
+}
+
+.checktext {
+    left: 20px;
+    position: absolute;
+    top: 12px;
+    width: 420px;
+}
+
+.rptFlexbox{position: relative;margin: 10px 0 15px 0;}
+#foxoverlook{position: absolute;z-index: 0;right: 10px; top: -57px;}
+
+
+/*-----注册---------*/
+.wrapper {width: 980px;margin: 0 auto;position: relative;}
+.fmodule {float: none;clear: both;margin-bottom: 30px;}
+.sampleV2{width:480px;float: left; padding: 0 0px; margin-right:20px; }
+.sampleV2 h3{font-size: 24px; font-weight:400;line-height: 1.1; margin-top: -10px;}
+.sampleV2 p{font-size: 14px;margin: 15px 0;}
+.sampleV2 .viewSample{ background: #3777bc; color: #fff;padding: 0 20px; font-weight: 700; font-size: 16px;line-height: 36px;text-decoration: none;	-webkit-border-radius: 4px;	-moz-border-radius: 4px;border-radius: 4px}
+.sampleV2 .viewSample:hover{background: #3777bc}
+
+.formRightFox{width:420px;float:right;position: relative;padding-top:15px; display:inline-block; margin-right:40px; margin-top:40px;}
+.carfax-rptSearch{width:310px; padding:20px 50px;background: #3777bc;color:#fff;-webkit-border-radius: 8px;-moz-border-radius: 8px;border-radius: 8px;float: right;}
+.carfax-rptSearch h2{font-weight: 300;color: #fff;font-size: 18px;}
+.carfax-rptSearch h2 strong{font-weight: 700;color: #fff;}
+.carfax-rptSearch p{font-size: 12px;}
+.carfax-rptSearch form{display: block; margin: 10px 0;}
+
+.carfax-rptSearch .novin a,.carfax-rptSearch .novin:visited{color: #fff; font-size: 12px;line-height: 24px;}
+.rs-state select{background-position: 77% 50% !important;}
+.carfax-rptSearch .vinput{width: 300px; margin:4px 0px;}
+.carfax-rptSearch input[type="checkbox"]{ vertical-align:middle;}
+
+fieldset{display:block; margin-top: 10px}
+fieldset > *{vertical-align: middle;}
+fieldset:after {
+	content: "";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	font-size: 0;
+	height: 0
+}
+.inputwrapper{height: 36px; background: #fff; color: #444444; display: inline-block;	zoom:1;	*display:inline;border: 1px solid #ccc;
+	-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px; overflow: hidden;position: relative;}
+.inputwrapper > *{font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;font-size: 18px; line-height:30px;}
+.inputwrapper input[type='text']{width: 100%;border: 0 none;margin:4px; color:#8A8D8F; }
+.inputwrapper input[type='password']{width: 100%;border: 0 none;margin:4px;} 
+.inputwrapper select{width: 120%;border: 0 !important;-webkit-appearance: none;margin:4px; cursor: pointer;}
+.inputwrapper .ddarrow{content: "url(http://media.carfax.com/img/cfx/tnt/ddarrow.png)"; position:absolute; top: 4px; right: 4px;pointer-events:none ; cursor: pointer;}
+.inputwrapper sup{color: #F00; font-weight: 700; font-size: 14px;position:absolute; top: 7px; right: 4px;}
+.inputwrapper input:focus, .inputwrapper select{outline-width: 0;outline:top;z-index: 2;}
+
+.greenSubmit{background: #76b93f;color: #fff;font-weight: 700;
+			font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;font-size: 18px;
+			display: inline-block;	zoom:1;	*display:inline;
+			height: 36px;
+			padding: 0 10px;
+			border: 1px solid #76b93f;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;cursor:pointer; 
+			vertical-align:middle;}
+
+.trustmarks{ width: 400px; position:absolute; top:-40px; right:-40px; width:196px; height:126px; }
+.trustmarks img{vertical-align: top;}
+
+
+/*gray*/
+.everyChecklist{background: #eee; border: 1px solid #d3d3d3;padding: 10px;-webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px;color: #444;width: 960px;margin: 0 auto 30px auto}
+.everyChecklist h3{color: #444;font-weight: 700;font-size: 24px;padding: 15px 15px 0 15px}
+.checklist{float: none;margin: 15px 0 0 0}
+.everyChecklist:after{content: "";display: block;clear: both;visibility: hidden;font-size: 0;height: 0}
+.checklist p{float: left; width: 30%;font-size: 14px;line-height: 21px;padding-left: 15px}
+.checklist ul{float: right;width: 300px;list-style-type: none;position: relative; height:150px;}
+.checklist li{float: left;
+	width:280px; display:inline-block;
+	background: url(../images/index.png) no-repeat top left;
+	padding-left: 23px;
+	line-height: 16px;
+	margin-bottom: 12px;
+}
+.checklist .tipsy{
+	position: absolute; top: 0; left:0;z-index: 2;
+	width: 250px;color: #fff; padding: 10px;background: #003366;line-height: 18px;font-size: 12px;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px; display:none;}
+.checklist li a{color: #444; font-size: 14px;cursor: help;}
+/*------登录--------*/
+.loginbox{ width:705px; margin:50px auto 30px auto; position:relative;}
+.loginsign{ width:318px; height:110px; position:absolute; top:-30px; right:-60px;}
+.loginsign img{width:318px; height:110px;} 
+.loginsignTitle{font-size:18px; line-height:36px; height:36px; font-weight:bold; color:#1c4083;}
+.logintop{ height:13px;background:url(signupbg_top.png) no-repeat;}
+.logincontent{background:url(signupbg_mid.png) repeat-y; height:auto; padding:10px 50px;}
+.logincontent td{ line-height:30px; padding:5px 0px; color:#333333;}
+.logincontent input[type=text]{ color:#808080; font-size:13px; line-height:18px; padding:2px 5px; width:95%;}
+.logincontent input[type=password]{color:#808080; font-size:13px; line-height:18px; padding:2px 5px; width:95%;}
+.logincontent input[type=checkbox]{ vertical-align:middle;}
+.loginbot{ height:22px; background:url(signupbg_bot.png) no-repeat;}
+
+/*----------- 在线客服 ----------*/
+.box_os .os_x, .box_os .osqq, .ico_os, .ico_gt, .ico_pp, .osqq .qq{ background:url(../images/kf.gif) no-repeat;}
+.box_os{ height:auto; overflow:hidden; width:118px; position:fixed; right:0; top:150px; _position:absolute; z-index:9999;display:none;}
+.box_os .os_x{ background-color:#f7f7f7; background-position:2px 2px; width:18px; height:20px; float:right; display:inline; cursor:pointer;}
+.box_os .osqq{ width:118px; border:1px solid #D1D1D1; background-color:#fff; background-position:0 -120px; clear:both; padding:37px 0 0px 0; text-align:center;}
+.box_os .osqq p{ height:auto; line-height:20px;width:118px; margin-top:8px;}
+.box_os .osqq p strong{ color:#666;}
+.box_os .osqq img{ padding:7px 0 3px 0;}
+.box_os .osqq p em{ color:#999; display:block;}
+.box_os .osqq p span{ color:#547816; display:block;}
+.box_os .osqq .qq{ background-position:-140px -120px; display:block; width:99px; height:26px; margin:0 auto; margin-top:8px; cursor:pointer;}
+.acbox{ width:130px; overflow:hidden;}
+.acbox .ico_gt{ background-position:-60px 0; border:1px solid #299ec0; border-top:0; cursor:pointer; width:60px; height:33px; float:right;}
+.acbox .ico_pp{ background-position:-60px -60px; border:1px solid #81b140; border-top:0; cursor:pointer; width:60px; height:33px; float:right; margin:0 2px;}
+.onlineService{ background:none; display:none; width:39px; *width:84px; height:178px; ;position:fixed; right:0; top:150px; _position:absolute;}
+.onlineService .ico_os{ background-position:-2px -20px; border:1px solid #c7c7c7; cursor:pointer; width:39px; height:98px; float:right;}
+.onlineService .ico_gt{ background-position:right 0; border:1px solid #299ec0; cursor:pointer; width:39px; height:37px; float:right; clear:both;}
+.onlineService .ico_pp{ background-position:right -60px; border:1px solid #81b140; cursor:pointer; width:39px; height:37px; float:right; margin:0 0 1px 0; clear:both;}
+.box_os .osqq p span a{color:#557917;}
+.box_os .codeicon{}
+.box_os .codeicon img{ width:100px; height:100px;}
+/*------二维码登录图标-------*/
+#code,#code_hover,#gotop{ width:36px; height:48px; background:url(../images/icon.png) no-repeat;  /*position:fixed; right:50px;*/ cursor:pointer;
+_position:absolute;_bottom:auto;_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));
+}
+#code{ background-position:-276px -258px; bottom:120px; _margin-bottom:120px;}
+#code_hover{ background-position:-316px -258px; bottom:120px; _margin-bottom:120px;}
+#gotop{ background-position:-276px -310px; bottom:67px; _margin-bottom:67px;} 
+#code_img{ width:270px; height:355px; background:url(../images/icon.png) -4px -3px no-repeat; position:absolute; left:70px; top:-40px;/* position:fixed; right:90px; bottom:67px;*/ cursor:pointer; display:none;
+_position:absolute;_bottom:auto;_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0))); _margin-bottom:67px;}
+
+/*-----车型对比表格------------*/
+.CARcompare{margin-bottom:20px;}
+.CARcompare table{ border-color:#0073c5 #cbd2e4 #cbd2e4 #cbd2e4; border-style: solid solid solid solid; border-width:3px 1px 1px 1px;}
+.CARcompare th{ border-right:#ccd3e5 1px dotted; padding:3px 8px; font-size:14px; background:#fafbfc; color:#1c4083;}
+.CARcompare td{ border-right:#ccd3e5 1px dotted;  padding:3px 8px;}
+.CARcompare .carpic{ width:120px; height:90px; margin:10px auto;}
+.CARcompare .carpic img{ width:120px; height:90px; }
+.CARcompare select{ font-size:13px; line-height:22px; border:#cbd2e4 1px solid; padding:2px 5px; outline:none; color:#666666; width:100%;}
+
+.CARparameter{margin-bottom:20px; }
+.CARparameter table{ border:#ccd3e5 1px solid;}
+.CARparameter th{border-right:#ccd3e5 1px solid; border-bottom:#ccd3e5 1px solid;padding:6px 8px;  background:#fafbfc; color:#1c4083; font-size:14px; }
+.CARparameter td{border-right:#ccd3e5 1px solid; border-bottom:#ccd3e5 1px solid;padding:6px 8px; color:#666666;}
+
+/*-----车型对比表格------------*/
+
+
+/*---------历史报告-----------*/
+.reportWrap{width:850px; margin:0 auto; color:#555555;}
+.reporttitle{ height:108px; background:url(../images/bg_logo.png) no-repeat; padding:10px 0px 0px 15px;-moz-border-radius-topleft: 5px;
+-moz-border-radius-topright:  5px;
+-webkit-border-top-left-radius:  5px;
+-webkit-border-top-right-radius: 5px;
+border-top-left-radius:  5px;
+border-top-right-radius:  5px;}
+.reporttitle h1{ font-size:20px; line-height:30px; color:#003366;}
+.reporttitle h6{ font-size:12px; color:#c5eafa;}
+.reportFloor1{border:#69a0d7 4px solid; margin:15px 0px; 
+-moz-border-radius-topleft: 10px;
+-moz-border-radius-topright:  10px;
+-webkit-border-top-left-radius:  10px;
+-webkit-border-top-right-radius: 10px;
+border-top-left-radius:  10px;
+border-top-right-radius:  10px;}
+.reportFloor1 .sideL{width:400px; float:left; }
+.reportFloor1 .sideL dl{ padding:0px 20px; margin-bottom:10px;}
+.reportFloor1 .sideL dt{ height:30px;font-size:18px; color:#2767cd; padding-bottom:6px;}
+.reportFloor1 .sideL dd{ line-height:22px;}
+
+.reportFloor1 .sideR{width:350px; float:right; display:inline; margin-right:20px;}
+.reportFloor1 .sideR table{ border:#e2d196 1px solid;}
+.reportFloor1 .sideR th{border-right:#e2d196 1px solid; color:#967408; line-height:36px; font-size:18px; background:#faf7ee; text-align:left; text-indent:10px;}
+.reportFloor1 .sideR td{border-right:#e2d196 1px solid; border-top:#e2d196 1px solid; line-height:48px; font-size:13px; padding:0px 10px;}
+.reportFloor1 .sideR .icon1{ background:url(../images/report_icon1.png) no-repeat center;}
+.reportFloor1 .sideR .icon2{background:url(../images/report_icon2.png) no-repeat center;}
+.reportFloor1 .sideR .icon3{background:url(../images/report_icon3.png) no-repeat center;}
+.reportFloor1 .sideR .icon4{background:url(../images/report_icon4.png) no-repeat center;}
+
+.reportFloor{border:#69a0d7 4px solid; margin:15px 0px; }
+.reportFloor table{}
+.reportFloortitle{height:50px; line-height:50px;  text-align:left; text-indent:20px; border-bottom:#85b6e6 2px solid; color:#fa9400; color:#003366; font-size:18px; font-weight:bold; background:url(../images/report_dog.png) no-repeat center right;}
+.reportFloor th{ font-size:14px; font-weight:bold;border-bottom:#c8def4 1px solid; border-right:#c8def4 1px solid; line-height:30px; text-align:left; text-indent:20px;}
+.reportFloor td{ border-bottom:#c8def4 1px solid; border-right:#c8def4 1px solid; line-height:30px; padding:0px 20px;}
+.reportFloor td li{border-bottom:#c8def4 1px solid; text-indent:15px;}
+.reportFloor table .bgcolor{ background:#f8fbfe;}
+
+
+
+
+
+

@@ -35,6 +35,7 @@
     delete from tuser
     where userId = #{userid,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.smartamd.model.Tuser" >
     insert into tuser (userId, teamId, carId, 
       userType, userName, password, 
@@ -242,7 +243,7 @@
     where userId = #{userID}
 
   </update>
-  <!-- htt  queryMap -->
+  <!-- htt  queryMapFarmer -->
   <select id="queryMapFarmer"
           resultType="map">
     SELECT userID as USERID,lo as LO,la as LA,tel as PHONE,userName as USERNAME,tu.userType AS USERTYPE,tu.CID as CID,
@@ -262,7 +263,7 @@
     (tu.la*PI()/180-#{la}*PI()/180)/2),2)))*1000)/1000 &lt;=#{kmNumber} AND tu.userType=0
 
   </select>
-
+  <!-- htt  queryMapDriver -->
   <select id="queryMapDriver"
           resultType="map">
     SELECT tu.userId as USERID,tu.lo as LO,tu.la as LA,tu.tel as PHONE,tu.userName as USERNAME,tu.userType AS USERTYPE,tu.CID as CID,tc.type AS CARTYPE,
@@ -282,7 +283,25 @@
     (tu.la*PI()/180-#{la}*PI()/180)/2),2)))*1000)/1000 &lt;=#{kmNumber}  AND  tu.userType=1
 
   </select>
+  <select id="queryUserByTel" resultType="map">
+    select  userID as USERID,lo as LO,la as LA,tel as PHONE,userName as USERNAME
+    from tuser
+    where tel= #{userTel}
+  </select>
+ <!--htt updatePassword-->
+  <update id="updatePassword" parameterType="java.lang.Integer">
+    update tuser
+    set password = #{new_password}
+    where userId = #{userID}
+  </update>
+  <!--htt deleteByTel-->
+  <delete id="deleteByTel" parameterType="java.lang.String" >
+    delete from tuser
+    where tel = #{tel}
+  </delete>
 
+
+  <!-- SteinbockA-->
   <select id="queryMapDriverByType"
           resultType="map">
     SELECT tu.userId as USERID,tu.lo as LO,tu.la as LA,tu.tel as PHONE,tu.userName as USERNAME,tu.userType AS USERTYPE,tu.CID as CID, tc.type AS CARTYPE,
@@ -315,6 +334,7 @@
     FROM tuser as tu INNER JOIN tcar as tc on tu.tel=tc.driverTel where tel=#{phone} AND tu.userType=1;
   </select>
 
+
   <select id="queryMapFarmerByPhone"  resultType="map">
     SELECT userID as USERID,lo as LO,la as LA,tel as PHONE,userName as USERNAME,tu.userType AS USERTYPE,tu.CID as CID,
 
@@ -326,10 +346,6 @@
 
     FROM tuser as tu where tel=#{phone} AND tu.userType=0;
   </select>
-
-  <update id="updateUserCID" >
-    update tuser set CID=#{CID} WHERE tel=#{phone}
-  </update>
 
   <select id="queryMapAll" resultType="map">
     SELECT userID as USERID,lo as LO,la as LA,tel as PHONE,userName as USERNAME,tu.userType AS USERTYPE,tu.CID as CID,
@@ -359,5 +375,32 @@
     (tu.la*PI()/180-#{la}*PI()/180)/2),2)))*1000))/1000 as DISTANCE
 
     FROM tuser as tu where tel=#{phone};
+  </select>
+
+  <update id="updateUser" >
+    update tuser set CID=#{CID} ,lo=#{lo},la=#{la} WHERE tel=#{phone}
+  </update>
+
+  <select id="selectUserByPhone"  resultType="map">
+    SELECT lo AS LO,la AS LA,tel as PHONE,username AS USERNAME,usertype AS USERTYPE,
+    ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
+    (tu.lo*PI()/180-#{lo}*PI()/180)/2),2)
+    +COS(tu.lo*PI()/180)*COS(#{lo}*PI()/180)*
+    POW(SIN(
+    (tu.la*PI()/180-#{la}*PI()/180)/2),2)))*1000)/1000 as DISTANCE
+
+    FROM tuser AS tu WHERE tel=#{opphone}
+  </select>
+
+  <select id="selectUserTelByUserID" parameterType="java.lang.String" resultType="java.lang.String">
+    SELECT tel FROM tuser where userid=#{userID}
+  </select>
+
+  <update id="updateCarType" >
+    UPDATE tcar SET type=#{type} where driverTel=#{phone}
+  </update>
+
+  <select id="selectPhoneByUserID" parameterType="java.lang.Integer" resultType="java.lang.String">
+    SELECT tel from tuser where userid=#{userID}
   </select>
 </mapper>

@@ -3,6 +3,7 @@ package test;
 import com.gexin.rp.sdk.base.impl.Target;
 import com.smartamd.mapper.LoginMapper;
 import com.smartamd.mapper.TuserMapper;
+import com.smartamd.model.Tuser;
 import com.smartamd.service.CIDResolver;
 import com.smartamd.service.LoginServletDao;
 import com.smartamd.service.PushToList;
@@ -12,17 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by aaron on 15-8-13.
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "file:/home/aaron/IdeaProjects/NewCar/web/WEB-INF/dispatcher-servlet.xml")
+@ContextConfiguration(locations = "file:/home/aaron/IdeaProjects/WEB/NewCar_IDEA/web/WEB-INF/dispatcher-servlet.xml")
 public class MapperTest {
 
     @Autowired
@@ -38,33 +36,25 @@ public class MapperTest {
 
     @Test
     public void addUserTest() {
-        loginServletDao.addUser("黄师姐", "123", "10000000001", "1", "水稻插秧");
+        loginServletDao.addUser("黄师�?", "123", "10000000001", "1", "水稻插秧");
 
 
     }
 
-    @Test
-    public void updateCarTypeTest() {
-        Map<String, String> map = new HashMap<String, String>();
 
-        int i = loginMapper.updateCarType("10000000001", "9");
-        System.out.println(i);
-    }
 
     @Test
     public void queryCarTypeTest() {
+
         System.out.println(loginMapper.queryCarType("轮麦收割"));
     }
 
     @Test
     public void insertTuserTest() {
-        loginMapper.insertTuser("段亦逍");
+        loginMapper.insertTuser("�úú�");
     }
 
-    @Test
-    public void alterUserInformationPhoneTest() {
-        loginServletDao.alterUserInformationPhone(470, "1", "上海市");
-    }
+
 
     @Test
     public void interParseTest() {
@@ -95,15 +85,15 @@ public class MapperTest {
 //        System.out.println("全部数据为："+list);
 //
 //        JSONArray jsonArray = JSONArray.fromObject(list);
-//        System.out.println("json数组为"+ jsonArray);
+//        System.out.println("json数组�?"+ jsonArray);
 //        JSONObject jsonObject = jsonArray.getJSONObject(0);
-//        System.out.println("jsonobject为" + jsonObject);
+//        System.out.println("jsonobject�?" + jsonObject);
 //        jsonArray.clear();
 //        jsonArray.add(0, "this is a test");
 //        jsonObject.element("test", jsonArray);
-//        System.out.println("新jsonovject为" + jsonObject);
+//        System.out.println("新jsonovject�?" + jsonObject);
 //        JSONArray test = jsonObject.getJSONArray("test");
-//        System.out.println("test为"+test);
+//        System.out.println("test�?"+test);
 
     }
 
@@ -118,23 +108,23 @@ public class MapperTest {
 
 
 
+//    @Test
+//    public void queryMapDriverByTypeTest() {
+//        List<Map<String, Object>> list = new ArrayList<>();
+//        List<String> cid_list = new ArrayList<>();
+//        list = tuserMapper.queryMapDriverByType("121.560924939438", "31.3019659047683", "15", 1);
+//        //cidResolver
+//        cid_list=CIDResolver.getCIDList(list);
+//
+//        int i=0;
+//        for(String cid : cid_list)
+//            System.out.println(i++ +":" + cid);
+//
+//    }
+
     @Test
-    public void queryMapDriverByTypeTest() {
-        List<Map<String, Object>> list = new ArrayList<>();
-        List<String> cid_list = new ArrayList<>();
-        list = tuserMapper.queryMapDriverByType("121.560924939438", "31.3019659047683", "15", 1);
-        //cidResolver
-        cid_list=CIDResolver.getCIDList(list);
-
-        int i=0;
-        for(String cid : cid_list)
-            System.out.println(i++ +":" + cid);
-
-    }
-
-    @Test
-    public void updateTuserCIDTest() {
-        tuserMapper.updateUserCID("12000000002", "12345");
+    public void updateTuserTest() {
+        tuserMapper.updateUser("13655204924", "12345", "123", "12345");
     }
 
     @Test
@@ -162,14 +152,69 @@ public class MapperTest {
         System.out.println(targets.get(1).getClientId());
     }
 
-    @Test
-    public void pushToPhoneTest() {
-        List<String> list = new ArrayList<>();
-        list.add("b6eab2e9c0ea0466fe1505725bfceee7");
 
-        pushToList.PushToPhone("黄师姐", "农机手", "你个逗，你要的payload", list);
+
+
+
+    @Test
+    public void queryMapAllTest() {
+        List<Map<String,Object>> list=null;
+        list=tuserMapper.queryMapAll("121.56128", "31.301811", "15");
+        System.out.println(list.size());
+        for(Map<String,Object> map:list){
+            System.out.println(map);
+        }
+        System.out.println("删除�?�?");
+        Iterator<Map<String,Object>> iterator=list.iterator();
+        while (iterator.hasNext()){
+            Map<String,Object> map=iterator.next();
+            if((int)map.get("USERID")==12)
+                iterator.remove();
+        }
+
+        for(Map<String,Object> map:list){
+            System.out.println(map);
+        }
+        System.out.println(list.size());
 
     }
 
+    @Test
+    public void getCIDListTest(){
+        List<Map<String,Object>> list=tuserMapper.queryMapAll("121.56128", "31.301811", "15");
+        System.out.println(list.size());
+
+        List<String> cid_list = new ArrayList<>();
+        for(Map<String,Object> map:list) {
+
+            if(map.get("CID")!=null)
+
+                cid_list.add(map.get("CID").toString());
+
+        }
+        System.out.println(cid_list.size());
+
+    }
+
+    @Test
+    public void selectUserByPhoneTest(){
+        Map<String,Object> map=tuserMapper.selectUserByPhone("13655204924", "121.56123", "31.30184");
+        System.out.println(map);
+    }
+
+    @Test
+    public void selectUserTelByUserIDTest(){
+        System.out.println(tuserMapper.selectUserTelByUserID("12"));
+    }
+
+    @Test
+    public void updateCarTypeTest(){
+        int car_type=loginMapper.queryCarType("������");
+        System.out.println(car_type);
+        String phone = tuserMapper.selectPhoneByUserID(34);
+        System.out.println(phone);
+        int res= tuserMapper.updateCarType(car_type,phone);
+        System.out.println(res);
+    }
 
 }

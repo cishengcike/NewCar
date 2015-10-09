@@ -1,7 +1,5 @@
 package com.smartamd.model;
 
-import java.util.Date;
-
 public class Tuser {
     private Integer userid;
 

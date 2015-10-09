@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smartamd.mapper.QueryLoLaMapper">
+
+
+
+    <select id="queryLoLa" parameterType="java.lang.Integer" resultType="com.smartamd.model.QueryLoLa">
+        SELECT lo,la FROM tposition where carId=#{carID}
+    </select>
+
+    <select id="queryCarID" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT  carId FROM tcar where driverTel=#{tel}
+    </select>
+
+
+
+
+</mapper>

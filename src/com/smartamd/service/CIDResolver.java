@@ -1,6 +1,7 @@
 package com.smartamd.service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -9,17 +10,26 @@ import java.util.Map;
  */
 public class CIDResolver {
 
-    public static List<String> getCIDList(List<Map<String,Object>> list){
+    public static List<String> getCIDList(List<Map<String,Object>> list,String userID){
         List<String> cid_list = new ArrayList<>();
-        for(Map<String,Object> map:list)
-            cid_list.add(map.get("CID").toString());
+        Iterator<Map<String,Object>> iterator=list.iterator();
+        while(iterator.hasNext()){
+            Map<String,Object> map=iterator.next();
+            if(Integer.parseInt(userID)==(int)map.get("USERID"))
+                iterator.remove();
+        }
+        for(Map<String,Object> map:list) {
+            if(map.get("CID")!=null)
+                cid_list.add(map.get("CID").toString());
+        }
         return cid_list;
 
     }
 
     public static List<String> getCIDList(Map<String,Object> map){
         List<String> cid_list=new ArrayList<>();
-        cid_list.add(map.get("CID").toString());
+        if(map.get("CID")!=null)
+            cid_list.add(map.get("CID").toString());
         return cid_list;
     }
 }

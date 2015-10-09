@@ -13,16 +13,20 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class LoginServletDao {
 
-    @Autowired  TuserMapper  tuserMapper;
+    @Autowired
+    TuserMapper tuserMapper;
     //@Autowired  TusersMapper  tusersMapper;
-    @Autowired  LoginMapper loginMapper;
-    @Autowired  TpositionMapper tpositionMapper;
+    @Autowired
+    LoginMapper loginMapper;
+    @Autowired
+    TpositionMapper tpositionMapper;
     // @Autowired  HislolaMapper hislolaMapper;
-    @Autowired  TcarMapper tcar;
+    @Autowired
+    TcarMapper tcar;
     //@Autowired  UsertypeMapper ut;
 
 
-    //æ³¨å†Œæ—¶ï¼Œä½¿ç”¨
+    //×¢²áÊ±£¬Ê¹ÓÃ
     public int addUser( String userName,String pwd, String phone, String userType,String carType){
         int res=0;
         int temp1=0,temp2=0;
@@ -32,15 +36,14 @@ public class LoginServletDao {
             tuser.setTel(phone);
             tuser.setUsertype(userType);
             tuser.setPassword(pwd);
-            temp1= tuserMapper.insertSelective(tuser);//æ–°ç”¨æˆ·å·²ç»æ’å…¥Tuserè¡¨
+            temp1= tuserMapper.insertSelective(tuser);//ĞÂÓÃ»§ÒÑ¾­²åÈëTuser±í
 
             if("0".equals(userType))
             {
                 res=temp1;
             }
-            else if ("1".equals(userType))//å†œæœºæ‰‹ï¼Œå¢åŠ å¤„ç†æ­¥éª¤
+            else if ("1".equals(userType))//Å©»úÊÖ£¬Ôö¼Ó´¦Àí²½Öè
             {
-
                 temp2 = loginMapper.updateCarType(phone,(loginMapper.queryCarType(carType)).toString());
                 System.out.println("temp2=" + temp2);
                 if (temp1 == 1 && temp2 == 1) {
@@ -55,11 +58,18 @@ public class LoginServletDao {
         return res;
     }
 
-    //å®Œå–„ç”¨æˆ·ä¿¡æ¯
-    public int alterUserInformationPhone(int userId ,String userType ,String address){
-        int res=0;
+    //ÍêÉÆÓÃ»§ĞÅÏ¢
+    public int alterUserInformationPhone(int userId ,String userType ,String address,String carType){
+        int res=0,res2;
         try {
             Tuser tus=tuserMapper.selectByPrimaryKey(userId);
+            if(carType!=null){
+                int car_type=loginMapper.queryCarType(carType);
+                String phone = tuserMapper.selectPhoneByUserID(userId);
+                res2 = tuserMapper.updateCarType(car_type,phone);
+            }
+
+
             tus.setUsertype(userType);
             tus.setAddress(address);
             res=tuserMapper.updateByPrimaryKey(tus);
@@ -69,16 +79,34 @@ public class LoginServletDao {
         return res ;
     }
 
-    //ä¿®æ”¹ç”¨æˆ·å¯†ç å’Œç”¨æˆ·å
+    //ĞŞ¸ÄÓÃ»§ÃÜÂëºÍÓÃ»§Ãû
     public int updateUserPwd(int userID ,String new_password ){
         int res=0;
         try {
-            Tuser tus=tuserMapper.selectByPrimaryKey(userID);//æ ¹æ®idæŸ¥æ‰¾å‡ºç™»å½•ç”¨æˆ·
+            Tuser tus=tuserMapper.selectByPrimaryKey(userID);//¸ù¾İid²éÕÒ³öµÇÂ¼ÓÃ»§
             tus.setPassword(new_password);
             res=tuserMapper.updateByPrimaryKey(tus);
         } catch (Exception e) {
             return res;
         }
         return res ;
+    }
+
+
+    public int  updateUserType(int userID, int userType)
+    {
+        int res=0;
+        try
+        {
+            if (userType==0)//Å©»§
+            {
+                Tuser tuser=tuserMapper.selectByPrimaryKey(userID);
+            }
+        }
+        catch (Exception e)
+        {
+            return  res;
+        }
+        return res;
     }
 }

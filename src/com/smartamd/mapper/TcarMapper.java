@@ -6,7 +6,7 @@ public interface TcarMapper {
     int deleteByPrimaryKey(Integer carid);
 
     int insert(Tcar record);
-
+//todo
     int insertSelective(Tcar record);
 
     Tcar selectByPrimaryKey(Integer carid);
@@ -14,4 +14,6 @@ public interface TcarMapper {
     int updateByPrimaryKeySelective(Tcar record);
 
     int updateByPrimaryKey(Tcar record);
+//htt
+
 }

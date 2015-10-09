@@ -18,28 +18,43 @@ public interface TuserMapper {
     int updateByPrimaryKeySelective(Tuser record);
 
     int updateByPrimaryKey(Tuser record);
-
+//---------------------------httĞŞ¸Ä---------------------------
     //htt updateUserLoLa
     int updateUserLoLa(@Param("userID") Integer userID_param,
-                       @Param("lo") String lo_param,@Param("la") String la_param);
+                       @Param("lo") String lo_param, @Param("la") String la_param);
     //htt queryMap
-    //æŸ¥è¯¢å†œæœºæ‰‹
-    List<Map<String,Object>> queryMapDriver(@Param("lo") String lo_param,@Param("la") String la_param,@Param("kmNumber") String kmNumber_param);
-    //æŸ¥è¯¢å†œæˆ·
-    List<Map<String,Object>> queryMapFarmer(@Param("lo") String lo_param,@Param("la") String la_param,@Param("kmNumber") String kmNumber_param);
-    //é€šè¿‡å¯¹åº”çš„ç±»å‹æŸ¥å†œæœºæ‰‹
-    List<Map<String,Object>> queryMapDriverByType(@Param("lo") String lo_param,@Param("la") String la_param,@Param("kmNumber") String kmNumber_param,@Param("carType")int carType);
+    //²éÑ¯Å©»úÊÖ
+    List<Map<String,Object>> queryMapDriver(@Param("lo") String lo_param, @Param("la") String la_param, @Param("kmNumber") String kmNumber_param);
+    //²éÑ¯Å©»§
+    List<Map<String,Object>> queryMapFarmer(@Param("lo") String lo_param, @Param("la") String la_param, @Param("kmNumber") String kmNumber_param);
 
-    //é€šè¿‡æ‰‹æœºå·æŸ¥æ‰¾å†œæœºæ‰‹
-    Map<String,Object> queryMapDriverByPhone(@Param("lo") String lo_param,@Param("la") String la_param,@Param("phone") String phone);
+    List<Map<String,Object>> queryUserByTel(@Param("userTel") String tel);
+    int updatePassword(@Param("userID") int userID, @Param("new_password") String new_password);
+    int deleteByTel(@Param("tel") String atel);
 
-    //é€šè¿‡æ‰‹æœºå·æŸ¥æ‰¾å†œæˆ·
-    Map<String,Object> queryMapFarmerByPhone(@Param("lo") String lo_param,@Param("la") String la_param,@Param("phone") String phone);
+//---------------------------SteinbockA--------------------------
+//Í¨¹ı¶ÔÓ¦µÄÀàĞÍ²éÅ©»úÊÖ
+List<Map<String,Object>> queryMapDriverByType(@Param("lo") String lo_param, @Param("la") String la_param, @Param("kmNumber") String kmNumber_param, @Param("carType") int carType);
 
-    List<Map<String,Object>> queryMapAll(@Param("lo") String lo_param,@Param("la") String la_param,@Param("kmNumber") String kmNumber_param);
+    //Í¨¹ıÊÖ»úºÅ²éÕÒÅ©»úÊÖ
+    Map<String,Object> queryMapDriverByPhone(@Param("lo") String lo_param, @Param("la") String la_param, @Param("phone") String phone);
 
-    Map<String,Object> queryMapAllByPhone(@Param("lo") String lo_param,@Param("la") String la_param,@Param("phone") String phone);
+    //Í¨¹ıÊÖ»úºÅ²éÕÒÅ©»§
+    Map<String,Object> queryMapFarmerByPhone(@Param("lo") String lo_param, @Param("la") String la_param, @Param("phone") String phone);
+
+    List<Map<String,Object>> queryMapAll(@Param("lo") String lo_param, @Param("la") String la_param, @Param("kmNumber") String kmNumber_param);
+
+    Map<String,Object> queryMapAllByPhone(@Param("lo") String lo_param, @Param("la") String la_param, @Param("phone") String phone);
 
 
-    int updateUserCID(@Param("phone") String phone,@Param("CID") String CID);
+    int updateUser(@Param("phone") String phone, @Param("CID") String CID, @Param("lo") String lo, @Param("la") String la);
+
+    Map<String,Object> selectUserByPhone(@Param("opphone") String opphone, @Param("lo") String lo, @Param("la") String la);
+
+    String selectUserTelByUserID(String userID);
+
+    int updateCarType(@Param("type")int type,@Param("phone")String phone);
+
+    String selectPhoneByUserID(Integer userID);
+
 }
