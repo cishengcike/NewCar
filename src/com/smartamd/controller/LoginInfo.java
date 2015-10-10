@@ -41,7 +41,7 @@ public class LoginInfo {
 
     private static Map<String, String> s_content = new HashMap<>();
 
-    private int MAX_DISTANCE=100;
+    private int MAX_DISTANCE=5000;
 
 //    @Autowired
 //    private UsertypeMapper usertypeMapper;
@@ -72,6 +72,7 @@ public class LoginInfo {
                             "}");
         } else {
             response.getWriter().print("{'success':" + data.size() + "}");//登录用户失败则size（）=0
+            response.getWriter().print("{'fail':" + "马琳" + "}");//登录用户失败则size（）=0
         }
     }
 
@@ -379,7 +380,7 @@ public class LoginInfo {
         System.out.println("url:loginInfo.do");
         System.out.printf("phone=%s,pwd=%s",phone,pwd);
         List<Map<String, Object>> data_phone=loginMapper.loginCommomPhone(phone);
-        System.out.println(data_phone.get(0));
+        //System.out.println(data_phone.get(0));
         if(data_phone==null || data_phone.size()<=0){//手机号不存在时
  			response.getWriter().print(-5);
  			return;
