@@ -120,7 +120,7 @@ public class LoginInfo {
             throws Exception {
         if("0".equals(userType)&&carType!=null)
             response.getWriter().print("{'success':" + 2 + "}");
-        if(!"2".equals(userType)) {
+        if(!"4".equals(userType)) {
             int res = loginServletDao.alterUserInformationPhone(Integer.parseInt(userID), userType, address, carType);
             response.getWriter().print("{'success':" + res + "}");}
     }
@@ -214,7 +214,6 @@ public class LoginInfo {
         System.out.println("url:push.do");
         System.out.printf("userID=%s,username=%s,userType=%s,phone=%s,kmNumber=%s,lo=%s,la=%s,flag=%s,content=%s\n", userID, userName, userType, phone, kmNumber, lo, la, flag, content);
 
-        s_content.put(phone, content);
         if ("".equals(phone)) phone = null;
         List<Map<String, Object>> data = null;
         List<Map<String, Object>> data1 = null;
@@ -222,6 +221,7 @@ public class LoginInfo {
         List<String> cid_list=null;
         int flag_int = Integer.parseInt(flag);
         String push_phone = tuserMapper.selectUserTelByUserID(userID);
+        s_content.put(push_phone, content);
         if (flag_int == 0)//查询农机手
         {
             if (phone == null) {

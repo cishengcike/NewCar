@@ -257,6 +257,7 @@
 				var infoWin=new Array();
 				var i;
 
+
 				if(!(userByPhoneMap===temp)) {
 					var userByPhone=eval(userByPhoneMap);
 					document.getElementById("queryMapUserPhone").value =userByPhone[0]['PHONE'];
@@ -286,8 +287,12 @@
 									"<td>" + farmerMap[i]['PHONE'] + "</td>" +
 									"</tr>";
 							contentQuery[i] += contenEnd;
+							var username=farmerMap[i]['USERNAME'];
 							markerQuery[i] = new BMap.Marker(pointQuery[i]);
 							map.addOverlay(markerQuery[i]);
+							var label = new BMap.Label(username,{offset:new BMap.Size(20,-10)});
+							markerQuery[i].setLabel(label);
+
 							infoWin[i] = new BMap.InfoWindow(contentQuery[i], opts);
 							markerQuery[i].addEventListener("click", (function (k) {
 								return function () {
@@ -307,8 +312,16 @@
 									"<td>" + driverMap[i]['PHONE'] + "</td>" +
 									"</tr>";
 							contentQuery[i] += contenEnd;
-							markerQuery[i] = new BMap.Marker(pointQuery[i]);
+							var username = driverMap[i]['USERNAME'];
+							var teamID=driverMap[i]['TEAMID'];
+							if(teamID==1)
+								var myIcon = new BMap.Icon("icon_xuzhuang.png",new BMap.Size(50,50));
+							else
+								var myIcon = new BMap.Icon("car.png", new BMap.Size(50,50));
+							markerQuery[i] = new BMap.Marker(pointQuery[i],{icon:myIcon});
 							map.addOverlay(markerQuery[i]);
+							var label = new BMap.Label(username,{offset:new BMap.Size(20,-10)});
+							markerQuery[i].setLabel(label);
 							infoWin[i] = new BMap.InfoWindow(contentQuery[i], opts);
 							markerQuery[i].addEventListener("click", (function (k) {
 								return function () {

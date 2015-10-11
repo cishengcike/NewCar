@@ -266,7 +266,7 @@
   <!-- htt  queryMapDriver -->
   <select id="queryMapDriver"
           resultType="map">
-    SELECT tu.userId as USERID,tu.lo as LO,tu.la as LA,tu.tel as PHONE,tu.userName as USERNAME,tu.userType AS USERTYPE,tu.CID as CID,tc.type AS CARTYPE,
+    SELECT tu.userId as USERID,tu.teamId as TEAMID, tu.lo as LO,tu.la as LA,tu.tel as PHONE,tu.userName as USERNAME,tu.userType AS USERTYPE,tu.CID as CID,tc.type AS CARTYPE,
 
     ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
     (tu.lo*PI()/180-#{lo}*PI()/180)/2),2)

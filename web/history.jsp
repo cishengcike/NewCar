@@ -50,7 +50,7 @@
   if(FIRST_LENGTH==1) alert("车辆没有移动");
   else if(FINAL_LENGTH==1)
   {
-    alert("车辆始终在1000米范围内移动，仅绘制起点和终点");
+    //alert("车辆始终在1000米范围内移动，仅绘制起点和终点");
     var START_LO = hisLoLa[0].lo;
     var START_LA = hisLoLa[0].la;
     var FINISH_LO = hisLoLa[FINAL_LENGTH-1].lo;
