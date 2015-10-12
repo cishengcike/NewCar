@@ -41,7 +41,7 @@ public class LoginInfo {
 
     private static Map<String, String> s_content = new HashMap<>();
 
-    private int MAX_DISTANCE=100;
+    private int MAX_DISTANCE=5000;
 
 //    @Autowired
 //    private UsertypeMapper usertypeMapper;
@@ -72,6 +72,7 @@ public class LoginInfo {
                             "}");
         } else {
             response.getWriter().print("{'success':" + data.size() + "}");//登录用户失败则size（）=0
+            response.getWriter().print("{'fail':" + "马琳" + "}");//登录用户失败则size（）=0
         }
     }
 
@@ -117,12 +118,30 @@ public class LoginInfo {
     public void alterUserInformationphone(HttpServletRequest request,
                                           HttpServletResponse response, String userID, String userType, String address, String carType)
             throws Exception {
-        if("0".equals(userType)&&carType!=null)
-            response.getWriter().print("{'success':" + 2 + "}");
-        if(!"2".equals(userType)) {
-            int res = loginServletDao.alterUserInformationPhone(Integer.parseInt(userID), userType, address, carType);
-            response.getWriter().print("{'success':" + res + "}");}
-    }
+        System.out.printf("userType=%s,carType=%s\n", userType, carType);
+//        if("0".equals(userType)&&carType!=null)
+//            response.getWriter().print("{'success':" + 2 + "}");
+        if ("4".equals(userType))
+            response.getWriter().print("{'success':" + 4 + "}");
+
+        else {
+            if ("错误".equals(carType)) {
+                int res = loginServletDao.alterUserInformationPhone(Integer.parseInt(userID), userType, address, carType);
+                response.getWriter().print("{'success':" + res + "}");
+            }
+            else {
+                if ("0".equals(userType))
+                    response.getWriter().print("{'success':" + 2 + "}");
+                else {
+                    int res = loginServletDao.alterUserInformationPhone(Integer.parseInt(userID), userType, address, carType);
+                    System.out.println("res="+res);
+                    response.getWriter().print("{'success':" + res + "}");
+                }
+            }
+        }
+
+        }
+
 
 //    @RequestMapping("queryMapNoddessUserPhone.do")
 //    public void queryMapNoddessUserPhone(String userID,String userType,String lo,String la,String kmNumber,String phone,String carType) {
@@ -213,7 +232,6 @@ public class LoginInfo {
         System.out.println("url:push.do");
         System.out.printf("userID=%s,username=%s,userType=%s,phone=%s,kmNumber=%s,lo=%s,la=%s,flag=%s,content=%s\n", userID, userName, userType, phone, kmNumber, lo, la, flag, content);
 
-        s_content.put(phone, content);
         if ("".equals(phone)) phone = null;
         List<Map<String, Object>> data = null;
         List<Map<String, Object>> data1 = null;
@@ -221,6 +239,7 @@ public class LoginInfo {
         List<String> cid_list=null;
         int flag_int = Integer.parseInt(flag);
         String push_phone = tuserMapper.selectUserTelByUserID(userID);
+        s_content.put(push_phone, content);
         if (flag_int == 0)//查询农机手
         {
             if (phone == null) {
@@ -379,7 +398,7 @@ public class LoginInfo {
         System.out.println("url:loginInfo.do");
         System.out.printf("phone=%s,pwd=%s",phone,pwd);
         List<Map<String, Object>> data_phone=loginMapper.loginCommomPhone(phone);
-        System.out.println(data_phone.get(0));
+        //System.out.println(data_phone.get(0));
         if(data_phone==null || data_phone.size()<=0){//手机号不存在时
  			response.getWriter().print(-5);
  			return;
@@ -406,7 +425,8 @@ public class LoginInfo {
             HttpServletResponse response, String phone, String pwd,
             String userName, String userType,String carType)throws Exception
     {
-    	List<Map<String,Object>> data=loginMapper.queryCarTypeInfo();
+        System.out.println("url=queryCarTypeInfo.do");
+        List<Map<String,Object>> data=loginMapper.queryCarTypeInfo();
     	request.getSession().setAttribute("CARTYPE", data);
         return "register";
     }
@@ -463,6 +483,7 @@ public class LoginInfo {
     public void updateUserPwd(HttpServletRequest request,
                                    HttpServletResponse response, String userID, String new_password)
             throws Exception {
+        System.out.println("url:updateUserPwd.do");
         System.out.println(userID);
         System.out.println("htt3"+new_password);
         int res = loginServletDao.updateUserPwd(Integer.parseInt(userID), new_password);

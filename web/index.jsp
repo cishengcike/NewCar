@@ -74,7 +74,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <div class="loginmain">
 	    </div>
     <div class="row-fluid">
-        <h1>农机定位调度平台 htt</h1>
+        <h1>农机定位调度平台</h1>
         <p>
             <label>帐&nbsp;&nbsp;&nbsp;号：<input type="text"   id="phone"  name="username" style="height:30px" /></label>
         </p>

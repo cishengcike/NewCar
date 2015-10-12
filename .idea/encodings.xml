@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+  <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/src/com/smartamd/controller/LoginInfo.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/smartamd/mapper/LoginMapper.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/smartamd/mapper/LoginMapper.xml" charset="GBK" />
@@ -32,11 +32,10 @@
     <file url="file://$PROJECT_DIR$/src/com/smartamd/model/Tteam.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/smartamd/service/Distance.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/smartamd/service/LoginServletDao.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/smartamd/service/PushToList.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/smartamd/utils/JsonUtil.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/test/MapperTest.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/web/003.jpg" charset="GBK" />
     <file url="file://$PROJECT_DIR$/web/META-INF" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/web/NongJi.apk" charset="GBK" />
     <file url="file://$PROJECT_DIR$/web/admin-all.css" charset="GBK" />
     <file url="file://$PROJECT_DIR$/web/base.css" charset="GBK" />
     <file url="file://$PROJECT_DIR$/web/bootstrap.min.css" charset="GBK" />
@@ -58,6 +57,7 @@
     <file url="file://$PROJECT_DIR$/web/mapList.jsp" charset="GBK" />
     <file url="file://$PROJECT_DIR$/web/register.jsp" charset="GBK" />
     <file url="file://$PROJECT_DIR$/web/style.css" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/web/update.txt" charset="GBK" />
     <file url="file://$PROJECT_DIR$/web/user.png" charset="GBK" />
     <file url="PROJECT" charset="UTF-8" />
   </component>

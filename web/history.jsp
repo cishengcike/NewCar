@@ -20,10 +20,9 @@
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript">
 
-  function drawRoute(slo,sla,flo,fla) {
+  function drawRoute(slo,sla,flo,fla,driving) {
     var myP1 = new BMap.Point(slo, sla);
     var myP2 = new BMap.Point(flo, fla);
-    var driving = new BMap.DrivingRoute(map, {renderOptions: {map: map, autoViewport: true}});    //驾车实例
     driving.search(myP1, myP2);    //显示一条公交线路
   }
 </script>
@@ -36,6 +35,8 @@
   var map = new BMap.Map("allmap");    // 创建Map实例
   var hisLoLa=${historyLoLa};
   var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});
+  var driving = new BMap.DrivingRoute(map, {renderOptions: {map: map, autoViewport: true}});    //驾车实例
+
   map.centerAndZoom(new BMap.Point(hisLoLa[0].lo, hisLoLa[0].la), 11);  // 初始化地图,设置中心点坐标和地图级别
   map.addControl(top_left_control);
   map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
@@ -49,12 +50,12 @@
   if(FIRST_LENGTH==1) alert("车辆没有移动");
   else if(FINAL_LENGTH==1)
   {
-    alert("车辆始终在100米范围内移动，仅绘制起点和终点");
+    //alert("车辆始终在1000米范围内移动，仅绘制起点和终点");
     var START_LO = hisLoLa[0].lo;
     var START_LA = hisLoLa[0].la;
     var FINISH_LO = hisLoLa[FINAL_LENGTH-1].lo;
     var FINISH_LA = hisLoLa[FINAL_LENGTH-1].la;
-    drawRoute(START_LO,START_LA,FINISH_LO,FINISH_LA);
+    drawRoute(START_LO,START_LA,FINISH_LO,FINISH_LA,driving);
   }
   else
   {
@@ -72,16 +73,9 @@
 //      });
 //      var marker = new BMap.Marker(pt, {icon: myIcon});  // 创建标注
 //      map.addOverlay(marker);              // 将标注添加到地图中
-      drawRoute(START_LO,START_LA,FINISH_LO,FINISH_LA);
-//      driving.setSearchCompleteCallback(function() {
-////得到路线上的所有point
-//       var pts = driving.getResults().getPlan(0).getRoute(0).getPath();
-////画面移动到起点和终点的中间
-//
-////连接所有点
-//       map.addOverlay(new BMap.Polyline(pts, {strokeColor: "black", strokeWeight: 5, strokeOpacity: 1}));
-//  })
-
+      drawRoute(START_LO,START_LA,FINISH_LO,FINISH_LA,driving);
     }
+
+
   }
 </script>

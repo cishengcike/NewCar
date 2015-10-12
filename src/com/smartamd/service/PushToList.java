@@ -27,45 +27,45 @@ public class PushToList {
 
     public static NotificationTemplate notificationTemplateDemo (String content, String username, String userType,String phone)  {
         NotificationTemplate template = new NotificationTemplate();
-        // è®¾ç½®APPIDä¸APPKEY
+        // ÉèÖÃAPPIDÓëAPPKEY
         template.setAppId(appId);
         template.setAppkey(appkey);
         if("0".equals(userType))
-            userType="å†œæˆ·";
-        else userType="å†œæœºæ‰‹";
-        // è®¾ç½®é€šçŸ¥æ æ ‡é¢˜ä¸å†…å®¹
-        template.setTitle(username + "(" + userType + ")" + "å‘æ‚¨å‘é€ä¸€æ¡æ¶ˆæ¯");
+            userType="Å©»§";
+        else userType="Å©»úÊÖ";
+        // ÉèÖÃÍ¨ÖªÀ¸±êÌâÓëÄÚÈİ
+        template.setTitle(username + "(" + userType + ")" + "ÏòÄú·¢ËÍÒ»ÌõÏûÏ¢");
         template.setText(content);
-        // é…ç½®é€šçŸ¥æ å›¾æ ‡
+        // ÅäÖÃÍ¨ÖªÀ¸Í¼±ê
         template.setLogo("icon.png");
-        // é…ç½®é€šçŸ¥æ ç½‘ç»œå›¾æ ‡
+        // ÅäÖÃÍ¨ÖªÀ¸ÍøÂçÍ¼±ê
         template.setLogoUrl("");
-        // è®¾ç½®é€šçŸ¥æ˜¯å¦å“é“ƒï¼Œéœ‡åŠ¨ï¼Œæˆ–è€…å¯æ¸…é™¤
+        // ÉèÖÃÍ¨ÖªÊÇ·ñÏìÁå£¬Õğ¶¯£¬»òÕß¿ÉÇå³ı
         template.setIsRing(true);
         template.setIsVibrate(true);
         template.setIsClearable(true);
-        // é€ä¼ æ¶ˆæ¯è®¾ç½®ï¼Œ1ä¸ºå¼ºåˆ¶å¯åŠ¨åº”ç”¨ï¼Œå®¢æˆ·ç«¯æ¥æ”¶åˆ°æ¶ˆæ¯åå°±ä¼šç«‹å³å¯åŠ¨åº”ç”¨ï¼›2ä¸ºç­‰å¾…åº”ç”¨å¯åŠ¨
+        // Í¸´«ÏûÏ¢ÉèÖÃ£¬1ÎªÇ¿ÖÆÆô¶¯Ó¦ÓÃ£¬¿Í»§¶Ë½ÓÊÕµ½ÏûÏ¢ºó¾Í»áÁ¢¼´Æô¶¯Ó¦ÓÃ£»2ÎªµÈ´ıÓ¦ÓÃÆô¶¯
         template.setTransmissionType(2);
         template.setTransmissionContent(phone);
-        System.out.println("é€ä¼ ï¼š"+phone);
+        System.out.println("Í¸´«"+phone);
 
         return template;
     }
 
-    //é€ä¼ æ¶ˆæ¯
+    //Í¸´«ÏûÏ¢
     public static TransmissionTemplate transmissionTemplateDemo() {
         TransmissionTemplate template = new TransmissionTemplate();
         template.setAppId(appId);
         template.setAppkey(appkey);
-        // é€ä¼ æ¶ˆæ¯è®¾ç½®ï¼Œ1ä¸ºå¼ºåˆ¶å¯åŠ¨åº”ç”¨ï¼Œå®¢æˆ·ç«¯æ¥æ”¶åˆ°æ¶ˆæ¯åå°±ä¼šç«‹å³å¯åŠ¨åº”ç”¨ï¼›2ä¸ºç­‰å¾…åº”ç”¨å¯åŠ¨
+        // Í¸´«ÏûÏ¢ÉèÖÃ£¬1ÎªÇ¿ÖÆÆô¶¯Ó¦ÓÃ£¬¿Í»§¶Ë½ÓÊÕµ½ÏûÏ¢ºó¾Í»áÁ¢¼´Æô¶¯Ó¦ÓÃ£»2ÎªµÈ´ıÓ¦ÓÃÆô¶¯
         template.setTransmissionType(2);
-        template.setTransmissionContent("æ”¾å¼ƒå§");
-        // è®¾ç½®å®šæ—¶å±•ç¤ºæ—¶é—´
+        template.setTransmissionContent("·ÅÆú°É");
+        // ÉèÖÃ¶¨Ê±Õ¹Ê¾Ê±¼ä
         // template.setDuration("2015-01-16 11:40:00", "2015-01-16 12:24:00");
         return template;
     }
 
-    //æ ¹æ®èŒƒå›´æŸ¥è¯¢å¾—åˆ°çš„ç»“æœé…ç½®æ¨é€ç›®æ ‡
+    //Íê³É¶ÔÊÖ»úµÄÍÆËÍ
     public static List<Target> getTarget(List<String> list) {
         List<Target> targets = new ArrayList<>();
         for (String clientID : list) {
@@ -79,29 +79,29 @@ public class PushToList {
         return targets;
     }
 
-    //å®Œæˆå¯¹æ‰‹æœºçš„æ¨é€
+    //Íê³É¶ÔÊÖ»úµÄÍÆËÍ
     public static void PushToPhone(String username, String userType, String content,String phone, List<String> list) {
         System.setProperty("gexin.rp.sdk.pushlist.needDetails", "true");
         IGtPush push = new IGtPush(host, appkey, master);
 
-        //é€šçŸ¥é€ä¼ æ¨¡æ¿
+        //Í¨ÖªÍ¸´«Ä£°å
         NotificationTemplate template = notificationTemplateDemo(content, username, userType,phone);
 //        TransmissionTemplate template = transmissionTemplateDemo();
         ListMessage message = new ListMessage();
         message.setData(template);
 
-        //è®¾ç½®æ¶ˆæ¯ç¦»çº¿ï¼Œå¹¶è®¾ç½®ç¦»çº¿æ—¶é—´
+        //ÉèÖÃÏûÏ¢ÀëÏß£¬²¢ÉèÖÃÀëÏßÊ±¼ä
         message.setOffline(true);
-        //ç¦»çº¿æœ‰æ•ˆæ—¶é—´ï¼Œå•ä½ä¸ºæ¯«ç§’ï¼Œå¯é€‰
+        //ÀëÏßÓĞĞ§Ê±¼ä£¬µ¥Î»ÎªºÁÃë£¬¿ÉÑ¡
         message.setOfflineExpireTime(24 * 1000 * 3600);
 
         List<Target> targets = new ArrayList<>();
         targets = getTarget(list);
-        //è·å–taskID
+        //»ñÈ¡taskID
         String taskId = push.getContentId(message);
-        //ä½¿ç”¨taskIDå¯¹ç›®æ ‡è¿›è¡Œæ¨é€
+        //Ê¹ÓÃtaskID¶ÔÄ¿±ê½øĞĞÍÆËÍ
         IPushResult ret = push.pushMessageToList(taskId, targets);
-        //æ‰“å°æœåŠ¡å™¨è¿”å›ä¿¡æ¯
+        //´òÓ¡·şÎñÆ÷·µ»ØĞÅÏ¢
         System.out.println(ret.getResponse().toString());
         System.out.println(message.getData().getPushInfo());
 

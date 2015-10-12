@@ -36,22 +36,18 @@ public class MapperTest {
 
     @Test
     public void addUserTest() {
-        loginServletDao.addUser("é»„å¸ˆå§?", "123", "10000000001", "1", "æ°´ç¨»æ’ç§§");
+        loginServletDao.addUser("?????", "123", "10000000001", "1", "???????");
 
 
     }
 
 
 
-    @Test
-    public void queryCarTypeTest() {
 
-        System.out.println(loginMapper.queryCarType("è½®éº¦æ”¶å‰²"));
-    }
 
     @Test
     public void insertTuserTest() {
-        loginMapper.insertTuser("ºÃºÃºÃ");
+        loginMapper.insertTuser("??????");
     }
 
 
@@ -82,18 +78,18 @@ public class MapperTest {
         System.out.println(list.get(3));
         System.out.println(list.get(4));
 
-//        System.out.println("å…¨éƒ¨æ•°æ®ä¸ºï¼š"+list);
+//        System.out.println("??????????"+list);
 //
 //        JSONArray jsonArray = JSONArray.fromObject(list);
-//        System.out.println("jsonæ•°ç»„ä¸?"+ jsonArray);
+//        System.out.println("json??????"+ jsonArray);
 //        JSONObject jsonObject = jsonArray.getJSONObject(0);
-//        System.out.println("jsonobjectä¸?" + jsonObject);
+//        System.out.println("jsonobject??" + jsonObject);
 //        jsonArray.clear();
 //        jsonArray.add(0, "this is a test");
 //        jsonObject.element("test", jsonArray);
-//        System.out.println("æ–°jsonovjectä¸?" + jsonObject);
+//        System.out.println("??jsonovject??" + jsonObject);
 //        JSONArray test = jsonObject.getJSONArray("test");
-//        System.out.println("testä¸?"+test);
+//        System.out.println("test??"+test);
 
     }
 
@@ -164,7 +160,7 @@ public class MapperTest {
         for(Map<String,Object> map:list){
             System.out.println(map);
         }
-        System.out.println("åˆ é™¤ä¸?ä¸?");
+        System.out.println("???????");
         Iterator<Map<String,Object>> iterator=list.iterator();
         while (iterator.hasNext()){
             Map<String,Object> map=iterator.next();
@@ -209,12 +205,23 @@ public class MapperTest {
 
     @Test
     public void updateCarTypeTest(){
-        int car_type=loginMapper.queryCarType("ÍÏÀ­»ú");
+        int car_type=loginMapper.queryCarType("??????");
         System.out.println(car_type);
         String phone = tuserMapper.selectPhoneByUserID(34);
         System.out.println(phone);
         int res= tuserMapper.updateCarType(car_type,phone);
         System.out.println(res);
+    }
+
+    @Test
+    public void selectUserFromTcarTest(){
+        System.out.println(loginMapper.queryCarType("ÂÖÂóÊÕ¸î "));
+
+    }
+
+    @Test
+    public void queryCarTypeTest() {
+        loginMapper.updateCarType("12345678907", loginMapper.queryCarType("ÂÖÂóÊÕ¸î"));
     }
 
 }
