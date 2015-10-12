@@ -1,1 +1,1 @@
-XXX&1.3&2.1 version&http://192.168.21.11:8080/shoujibaidu_16788236.apk
+XXX&2.1&2.1 version&http://192.168.1.112:8080/NongJi.apk

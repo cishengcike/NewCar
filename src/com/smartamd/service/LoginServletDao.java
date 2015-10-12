@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Map;
+
 @Service("loginServletDao")
 @Transactional
 public class LoginServletDao {
@@ -30,22 +32,32 @@ public class LoginServletDao {
     public int addUser( String userName,String pwd, String phone, String userType,String carType){
         int res=0;
         int temp1=0,temp2=0;
+        System.out.printf("注册时userType=%s,phone=%s,carType=%s\n", userType, phone, carType);
         try {
             Tuser tuser=new Tuser();
             tuser.setUsername(userName);
             tuser.setTel(phone);
             tuser.setUsertype(userType);
             tuser.setPassword(pwd);
-            temp1= tuserMapper.insertSelective(tuser);//新用户已经插入Tuser表
 
             if("0".equals(userType))
             {
+                temp1= tuserMapper.insertSelective(tuser);//新用户已经插入Tuser表
                 res=temp1;
             }
             else if ("1".equals(userType))//农机手，增加处理步骤
             {
-                temp2 = loginMapper.updateCarType(phone,(loginMapper.queryCarType(carType)).toString());
+                System.out.println("usertype==1");
+                Map<String,Object> driver=tuserMapper.selectUserFromTcar(phone);
+                System.out.println("driver="+driver);
+                if(driver.size()==1) {
+                    temp1 = tuserMapper.insertSelective(tuser);
+                    temp2 = loginMapper.updateCarType(phone, (loginMapper.queryCarType(carType)));
+                }
+                System.out.println("temp1=" + temp1);
                 System.out.println("temp2=" + temp2);
+
+
                 if (temp1 == 1 && temp2 == 1) {
                     res = 1;
                 }
@@ -63,7 +75,7 @@ public class LoginServletDao {
         int res=0,res2;
         try {
             Tuser tus=tuserMapper.selectByPrimaryKey(userId);
-            if(carType!=null){
+            if(!"错误".equals(carType)){
                 int car_type=loginMapper.queryCarType(carType);
                 String phone = tuserMapper.selectPhoneByUserID(userId);
                 res2 = tuserMapper.updateCarType(car_type,phone);

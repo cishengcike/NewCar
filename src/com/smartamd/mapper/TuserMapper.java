@@ -57,4 +57,7 @@ List<Map<String,Object>> queryMapDriverByType(@Param("lo") String lo_param, @Par
 
     String selectPhoneByUserID(Integer userID);
 
+    //注册时如果是农机手先查询tcar表是否有对应手机号
+    Map<String,Object> selectUserFromTcar(String phone);
+
 }

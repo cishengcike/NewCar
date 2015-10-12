@@ -403,4 +403,8 @@
   <select id="selectPhoneByUserID" parameterType="java.lang.Integer" resultType="java.lang.String">
     SELECT tel from tuser where userid=#{userID}
   </select>
+
+  <select id="selectUserFromTcar" parameterType="java.lang.String" resultType="map">
+    SELECT * FROM newcar.tcar WHERE driverTel=#{phone}
+  </select>
 </mapper>

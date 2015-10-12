@@ -118,12 +118,30 @@ public class LoginInfo {
     public void alterUserInformationphone(HttpServletRequest request,
                                           HttpServletResponse response, String userID, String userType, String address, String carType)
             throws Exception {
-        if("0".equals(userType)&&carType!=null)
-            response.getWriter().print("{'success':" + 2 + "}");
-        if(!"4".equals(userType)) {
-            int res = loginServletDao.alterUserInformationPhone(Integer.parseInt(userID), userType, address, carType);
-            response.getWriter().print("{'success':" + res + "}");}
-    }
+        System.out.printf("userType=%s,carType=%s\n", userType, carType);
+//        if("0".equals(userType)&&carType!=null)
+//            response.getWriter().print("{'success':" + 2 + "}");
+        if ("4".equals(userType))
+            response.getWriter().print("{'success':" + 4 + "}");
+
+        else {
+            if ("´íÎó".equals(carType)) {
+                int res = loginServletDao.alterUserInformationPhone(Integer.parseInt(userID), userType, address, carType);
+                response.getWriter().print("{'success':" + res + "}");
+            }
+            else {
+                if ("0".equals(userType))
+                    response.getWriter().print("{'success':" + 2 + "}");
+                else {
+                    int res = loginServletDao.alterUserInformationPhone(Integer.parseInt(userID), userType, address, carType);
+                    System.out.println("res="+res);
+                    response.getWriter().print("{'success':" + res + "}");
+                }
+            }
+        }
+
+        }
+
 
 //    @RequestMapping("queryMapNoddessUserPhone.do")
 //    public void queryMapNoddessUserPhone(String userID,String userType,String lo,String la,String kmNumber,String phone,String carType) {
@@ -407,7 +425,8 @@ public class LoginInfo {
             HttpServletResponse response, String phone, String pwd,
             String userName, String userType,String carType)throws Exception
     {
-    	List<Map<String,Object>> data=loginMapper.queryCarTypeInfo();
+        System.out.println("url=queryCarTypeInfo.do");
+        List<Map<String,Object>> data=loginMapper.queryCarTypeInfo();
     	request.getSession().setAttribute("CARTYPE", data);
         return "register";
     }
@@ -464,6 +483,7 @@ public class LoginInfo {
     public void updateUserPwd(HttpServletRequest request,
                                    HttpServletResponse response, String userID, String new_password)
             throws Exception {
+        System.out.println("url:updateUserPwd.do");
         System.out.println(userID);
         System.out.println("htt3"+new_password);
         int res = loginServletDao.updateUserPwd(Integer.parseInt(userID), new_password);
