@@ -50,7 +50,7 @@ public class LoginServletDao {
                 System.out.println("usertype==1");
                 Map<String,Object> driver=tuserMapper.selectUserFromTcar(phone);
                 System.out.println("driver="+driver);
-                if(driver.size()==1) {
+                if(driver.size()!=0) {
                     temp1 = tuserMapper.insertSelective(tuser);
                     temp2 = loginMapper.updateCarType(phone, (loginMapper.queryCarType(carType)));
                 }

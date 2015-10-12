@@ -36,7 +36,7 @@ public class MapperTest {
 
     @Test
     public void addUserTest() {
-        loginServletDao.addUser("黄师??", "123", "10000000001", "1", "水稻插秧");
+        loginServletDao.addUser("?????", "123", "10000000001", "1", "???????");
 
 
     }
@@ -47,7 +47,7 @@ public class MapperTest {
 
     @Test
     public void insertTuserTest() {
-        loginMapper.insertTuser("?úú?");
+        loginMapper.insertTuser("??????");
     }
 
 
@@ -78,16 +78,16 @@ public class MapperTest {
         System.out.println(list.get(3));
         System.out.println(list.get(4));
 
-//        System.out.println("全部数据为："+list);
+//        System.out.println("??????????"+list);
 //
 //        JSONArray jsonArray = JSONArray.fromObject(list);
-//        System.out.println("json数组??"+ jsonArray);
+//        System.out.println("json??????"+ jsonArray);
 //        JSONObject jsonObject = jsonArray.getJSONObject(0);
 //        System.out.println("jsonobject??" + jsonObject);
 //        jsonArray.clear();
 //        jsonArray.add(0, "this is a test");
 //        jsonObject.element("test", jsonArray);
-//        System.out.println("新jsonovject??" + jsonObject);
+//        System.out.println("??jsonovject??" + jsonObject);
 //        JSONArray test = jsonObject.getJSONArray("test");
 //        System.out.println("test??"+test);
 
@@ -160,7 +160,7 @@ public class MapperTest {
         for(Map<String,Object> map:list){
             System.out.println(map);
         }
-        System.out.println("删除????");
+        System.out.println("???????");
         Iterator<Map<String,Object>> iterator=list.iterator();
         while (iterator.hasNext()){
             Map<String,Object> map=iterator.next();
@@ -215,12 +215,13 @@ public class MapperTest {
 
     @Test
     public void selectUserFromTcarTest(){
-        System.out.println(loginMapper.queryCarType("玉米收割"));
+        System.out.println(loginMapper.queryCarType("轮麦收割 "));
+
     }
 
     @Test
     public void queryCarTypeTest() {
-        loginMapper.updateCarType("12345678907", loginMapper.queryCarType("玉米收割"));
+        loginMapper.updateCarType("12345678907", loginMapper.queryCarType("轮麦收割"));
     }
 
 }
