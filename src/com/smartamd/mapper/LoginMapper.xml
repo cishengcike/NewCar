@@ -7,7 +7,7 @@
     <select id="loginTrue" resultType="map">
         select userName as
         USERNAME,userid as USERID,password as PASSWORD,tel as TEL,
-        userType as TYPE,status as STATE,lo as LO,la as LA,if(isnull(carid),'无',carid) as CARID
+        userType as TYPE,status as STATE,lo as LO,la as LA,if(isnull(carid),'无',carid) as CARID,if(isnull(teamId),0,teamId) as TEAMID
         from tuser where
         (userName =#{phone} or tel = #{phone} ) and
         password

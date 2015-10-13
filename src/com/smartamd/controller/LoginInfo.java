@@ -10,11 +10,13 @@ import com.smartamd.service.LoginServletDao;
 import com.smartamd.service.PushToList;
 import com.smartamd.utils.JsonUtil;
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -327,7 +329,7 @@ public class LoginInfo {
         System.out.println("url:qurtyUserDerailsPhone");
         System.out.printf("opphone=%s,lo=%s,la=%s\n", opphone, lo, la);
         System.out.println("个推请求后再次detail请求时的s_content为" + s_content);
-        Map<String,Object> map=tuserMapper.selectUserByPhone(opphone,lo,la);
+        Map<String,Object> map=tuserMapper.selectUserByPhone(opphone, lo, la);
         System.out.println("content内容为："+s_content.get(opphone));
         map.put("CONTENT", s_content.get(opphone));
         System.out.println(map);
@@ -554,5 +556,143 @@ public class LoginInfo {
 
         System.out.println("htt  "+userID+userTypeQuery+kmNumber+tel+lo+la);
         return "mapList";
+    }
+
+    @RequestMapping("showDataGrid.do")
+    @ResponseBody
+    public String showDataGrid(HttpServletRequest request,HttpServletResponse response) throws Exception{
+        response.setContentType("text/javascript;charset=UTF-8");
+        Map<String, Object> result = new HashMap<String, Object>();
+        String userId,userTypeQuery,kmNumber,tel,lo,la,teamId;
+        List<Map<String,Object>> data = null;
+        List<Map<String,Object>> data1 = null;
+        List<Map<String,Object>> data2 = null;
+        int i,j;
+        //获取页面参数
+        userId=request.getParameter("userID");
+        userTypeQuery=request.getParameter("userTypeQuery");
+        kmNumber=request.getParameter("kmNumber");
+        tel=request.getParameter("tel");
+        lo=request.getParameter("lo");
+        la=request.getParameter("la");
+        teamId=request.getParameter("teamID");
+
+        System.out.println("teamId:"+teamId+"  userID:"+userId+"  userTypeQuery:"+userTypeQuery+
+                "  kmNumber:"+kmNumber+"  tel:"+tel+"  lo:"+lo+"  la:"+la);
+
+        int flag_int=Integer.parseInt(userTypeQuery);//userTypeQuery待查询的用户类型
+
+        if(!tel.isEmpty())//按手机查询
+        {
+            JSONArray jsonArray=new JSONArray();
+            data=tuserMapper.queryUserByTel(tel);
+            JSONObject jsonObject=new JSONObject();
+            jsonObject.put("USERNAME",data.get(0).get("USERNAME"));
+            jsonObject.put("PHONE",data.get(0).get("PHONE"));
+            jsonObject.put("USERID",data.get(0).get("USERID"));
+            jsonObject.put("LO", data.get(0).get("LO"));
+            jsonObject.put("LA", data.get(0).get("LA"));
+            jsonArray.add(jsonObject);
+            result.put("total", data.size());
+            result.put("rows", jsonArray);
+            JSONObject fromObject =JSONObject.fromObject(result);
+            System.out.println("htt test："+fromObject.toString());
+            return fromObject.toString();
+        }
+        else {
+            if (flag_int == 0)//查询农机手
+            {
+                JSONArray jsonArray = new JSONArray();
+                data = tuserMapper.queryMapDriver(lo, la, kmNumber);//查询userType=1农机手
+                for (i = 0; i < data.size(); i++) {
+                    if((Long)data.get(i).get("TEAMID")==Long.parseLong(teamId))
+                    {
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("USERNAME", data.get(i).get("USERNAME"));
+                        jsonObject.put("PHONE", data.get(i).get("PHONE"));
+                        jsonObject.put("USERID", data.get(i).get("USERID"));
+                        jsonObject.put("LO", data.get(i).get("LO"));
+                        jsonObject.put("LA", data.get(i).get("LA"));
+                        jsonArray.add(jsonObject);
+                    }
+
+                }
+                result.put("total", data.size());
+                result.put("rows", jsonArray);
+                JSONObject fromObject = JSONObject.fromObject(result);
+                System.out.println("htt test：" + fromObject.toString());
+                return fromObject.toString();
+            }
+            else if (flag_int == 1)//查询农户
+            {
+                int t=0;
+                JSONArray jsonArray = new JSONArray();
+                data = tuserMapper.queryMapFarmer(lo, la, kmNumber);//查询userType=0农户
+
+                for (i = 0; i < data.size(); i++) {
+                    System.out.println("htt htt"+data.get(i).get("TEAMID"));
+                    System.out.println("data.get(i).get(\"TEAMID\")的类型为"+data.get(i).get("TEAMID").getClass());
+                    System.out.println(data.get(i).get("TEAMID").getClass());
+                    System.out.println("teamid="+teamId);
+                    System.out.println("teamId的类型为"+teamId.getClass());
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("USERNAME", data.get(i).get("USERNAME"));
+                    jsonObject.put("PHONE", data.get(i).get("PHONE"));
+                    jsonObject.put("USERID", data.get(i).get("USERID"));
+                    jsonObject.put("LO", data.get(i).get("LO"));
+                    jsonObject.put("LA", data.get(i).get("LA"));
+                    jsonArray.add(jsonObject);
+
+                }
+                result.put("total",data.size());
+                result.put("rows", jsonArray);
+                JSONObject fromObject = JSONObject.fromObject(result);
+                System.out.println("htt test：" + fromObject.toString());
+                return fromObject.toString();
+            }
+            else if (flag_int == 2)//查询全部--农户+农机手
+            {
+                System.out.println(" htt 2");
+                JSONArray jsonArray = new JSONArray();
+                data1 = tuserMapper.queryMapFarmer(lo, la, kmNumber);//查询userType=-1--全部农户+农机手//查询userType=0农户
+                data2 = tuserMapper.queryMapDriver(lo, la, kmNumber);//查询userType=-1--全部农户+农机手//查询userType=1农机手
+                for (i = 0; i < data1.size(); i++) {
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("USERNAME", data1.get(i).get("USERNAME"));
+                    jsonObject.put("PHONE", data1.get(i).get("PHONE"));
+                    jsonObject.put("USERID", data1.get(i).get("USERID"));
+                    jsonObject.put("LO", data1.get(i).get("LO"));
+                    jsonObject.put("LA", data1.get(i).get("LA"));
+                    jsonArray.add(jsonObject);
+                }
+                System.out.println("i="+i);
+                for (j = 0; j < data2.size(); j++) {
+                    if((Long)data2.get(j).get("TEAMID")==Long.parseLong(teamId))
+                    {
+                        System.out.println("htt teamid"+(Long)data2.get(j).get("TEAMID"));
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("USERNAME", data2.get(j).get("USERNAME"));
+                        jsonObject.put("PHONE", data2.get(j).get("PHONE"));
+                        jsonObject.put("USERID", data2.get(j).get("USERID"));
+                        jsonObject.put("LO", data2.get(j).get("LO"));
+                        jsonObject.put("LA", data2.get(j).get("LA"));
+                        jsonArray.add(jsonObject);
+                    }
+
+                }
+                System.out.println("j="+j);
+                System.out.println("data1.size()+data2.size()="+data1.size()+data2.size());
+                result.put("total", data1.size()+data2.size());
+                result.put("rows", jsonArray);
+                JSONObject fromObject = JSONObject.fromObject(result);
+                System.out.println("htt test：" + fromObject.toString());
+                return fromObject.toString();
+            }
+            else
+            {
+                return "";
+            }
+        }
+
     }
 }

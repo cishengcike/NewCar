@@ -133,9 +133,36 @@
 								"&la="       + ${user['LA']});
 			}
 
+			function showDataGridWeb(){
+				var aType=document.getElementById("queryMapUserType").value;
+				var aPhone=document.getElementById("queryMapUserPhone").value;
+				var aDistance=document.getElementById("queryMapUserDistance").value;
+				$('#dg').datagrid({
+					url:'showDataGrid.do',
+					queryParams: {
+						userID:'${user['USERID']}',
+						userTypeQuery:aType,
+						kmNumber:aDistance,
+						tel:aPhone,
+						lo: '${user['LO']}',
+						la:'${user['LA']}',
+						teamID:'${user['TEAMID']}'
+					},
+
+					columns:[[
+						{field:'USERNAME',title:'用户名',width:100},
+						{field:'PHONE',title:'手机号',width:100},
+						{field:'USERID',title:'用户ID',width:100},
+						{field:'LO',title:'经度',width:100},
+						{field:'LA',title:'纬度',width:100}
+					]]
+				});
+
+			}
+
 		</script>
 
-
+		<div height:100><table id="dg";overflow-style="scrollbar"></table></div>
 		<div id="dlg" class="easyui-dialog" title="修改密码"
 			 data-options="iconCls:'icon-ok',resizable:false,closed:true,modal:true,draggable:false"
 			 style="width: 430px; height: 220px; padding: 10px;">
@@ -171,6 +198,8 @@
 				欢迎 <span style="font-weight: bold; color: red">${user['USERNAME']}</span>登陆BDS/GPS后台系统!!!
 				<a href="javascript:openUpdatePwd()">修改密码</a>
 				<a href="deleteUserByTel.do?tel=${user['TEL']}">注销用户</a>
+				<%--创建查看用户数据表格--%>
+				<a href="javascript:showDataGridWeb()">列表显示</a>
 				<c:if test="${user['TYPE']=='3'}">
 					<a href="historyPage.do">查询历史轨迹</a>
 				</c:if>

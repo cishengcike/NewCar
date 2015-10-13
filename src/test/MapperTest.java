@@ -47,7 +47,7 @@ public class MapperTest {
 
     @Test
     public void insertTuserTest() {
-        loginMapper.insertTuser("??????");
+        loginMapper.insertTuser("¶ÎÒàåĞ");
     }
 
 
