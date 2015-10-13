@@ -209,7 +209,7 @@ public class MapperTest {
         System.out.println(car_type);
         String phone = tuserMapper.selectPhoneByUserID(34);
         System.out.println(phone);
-        int res= tuserMapper.updateCarType(car_type,phone);
+        int res= tuserMapper.updateCarType(car_type, phone);
         System.out.println(res);
     }
 
@@ -222,6 +222,12 @@ public class MapperTest {
     @Test
     public void queryCarTypeTest() {
         loginMapper.updateCarType("12345678907", loginMapper.queryCarType("¬÷¬Û ’∏Ó"));
+    }
+
+    @Test
+    public void alterUserInformationPhoneTest() {
+       int a= loginServletDao.alterUserInformationPhone(492, "0", "", "");
+
     }
 
 }

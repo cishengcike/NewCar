@@ -74,18 +74,22 @@ public class LoginServletDao {
     public int alterUserInformationPhone(int userId ,String userType ,String address,String carType){
         int res=0,res2;
         try {
+            System.out.println("userid="+userId);
             Tuser tus=tuserMapper.selectByPrimaryKey(userId);
             if(!"´íÎó".equals(carType)){
                 int car_type=loginMapper.queryCarType(carType);
                 String phone = tuserMapper.selectPhoneByUserID(userId);
                 res2 = tuserMapper.updateCarType(car_type,phone);
+
             }
 
 
             tus.setUsertype(userType);
             tus.setAddress(address);
+            System.out.println(tus.getUsertype());
             res=tuserMapper.updateByPrimaryKey(tus);
         } catch (Exception e) {
+            System.out.println("error");
             return res;
         }
         return res ;

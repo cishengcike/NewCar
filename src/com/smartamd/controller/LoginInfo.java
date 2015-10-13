@@ -120,7 +120,7 @@ public class LoginInfo {
     public void alterUserInformationphone(HttpServletRequest request,
                                           HttpServletResponse response, String userID, String userType, String address, String carType)
             throws Exception {
-        System.out.printf("userType=%s,carType=%s\n", userType, carType);
+        System.out.printf(",userID=%s,userType=%s,carType=%s\n", userID, userType, carType);
 //        if("0".equals(userType)&&carType!=null)
 //            response.getWriter().print("{'success':" + 2 + "}");
         if ("4".equals(userType))
@@ -130,6 +130,8 @@ public class LoginInfo {
             if ("´íÎó".equals(carType)) {
                 int res = loginServletDao.alterUserInformationPhone(Integer.parseInt(userID), userType, address, carType);
                 response.getWriter().print("{'success':" + res + "}");
+                System.out.println("WAG SUCCESS = " + res);
+
             }
             else {
                 if ("0".equals(userType))
