@@ -11,11 +11,11 @@ import java.util.Map;
 public class CIDResolver {
 
     public static List<String> getCIDList(List<Map<String,Object>> list,String userID){
-        List<String> cid_list = new ArrayList<>();
+        List<String> cid_list = new ArrayList<String>();
         Iterator<Map<String,Object>> iterator=list.iterator();
         while(iterator.hasNext()){
             Map<String,Object> map=iterator.next();
-            if(Integer.parseInt(userID)==(int)map.get("USERID"))
+            if(Integer.parseInt(userID)==(Integer)map.get("USERID"))
                 iterator.remove();
         }
         for(Map<String,Object> map:list) {
@@ -27,7 +27,7 @@ public class CIDResolver {
     }
 
     public static List<String> getCIDList(Map<String,Object> map){
-        List<String> cid_list=new ArrayList<>();
+        List<String> cid_list=new ArrayList<String>();
         if(map.get("CID")!=null)
             cid_list.add(map.get("CID").toString());
         return cid_list;

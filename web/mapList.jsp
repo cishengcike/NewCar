@@ -19,7 +19,37 @@
 				margin: 0;
 				font-family: "微软雅黑";
 			}
+			div#luna
+			{
+				height:700px;
+				width:500px;
+				overflow:auto;
+				overflow-style:scrollbar;
+				display:block;
+
+			}
+			div#allinit
+			{
+				position:absolute;
+				right:0px;
+				top:70px;
+				height:750px;
+				width:500px;
+				display:none;
+				z-index: 321;
+			}
 		</style>
+
+		<script type="text/javascript">
+			function onclicks()
+			{
+				document.getElementById("allinit").style.display="none";
+			}
+			function onclickss()
+			{
+				document.getElementById("allinit").style.display="block";
+			}
+		</script>
 
 		<title>根据城市名设置地图中心点</title>
 
@@ -133,7 +163,12 @@
 								"&la="       + ${user['LA']});
 			}
 
-			function showDataGridWeb(){
+			function showDataGridAdminWeb(){
+				var teamIdWeb=document.getElementById("queryMapTeamType").value;
+				showDataGridWeb(teamIdWeb);
+			}
+
+			function showDataGridWeb(teamIdWeb){
 				var aType=document.getElementById("queryMapUserType").value;
 				var aPhone=document.getElementById("queryMapUserPhone").value;
 				var aDistance=document.getElementById("queryMapUserDistance").value;
@@ -146,7 +181,7 @@
 						tel:aPhone,
 						lo: '${user['LO']}',
 						la:'${user['LA']}',
-						teamID:'${user['TEAMID']}'
+						teamID:teamIdWeb
 					},
 
 					columns:[[
@@ -162,7 +197,13 @@
 
 		</script>
 
-		<div height:100><table id="dg";overflow-style="scrollbar"></table></div>
+		<div id="allinit">
+			<button onclick="onclicks()";right="100px">关闭用户列表</button><br/>
+			<div id="luna">
+				<table id="dg"></table>
+			</div>
+		</div>
+
 		<div id="dlg" class="easyui-dialog" title="修改密码"
 			 data-options="iconCls:'icon-ok',resizable:false,closed:true,modal:true,draggable:false"
 			 style="width: 430px; height: 220px; padding: 10px;">
@@ -198,10 +239,25 @@
 				欢迎 <span style="font-weight: bold; color: red">${user['USERNAME']}</span>登陆BDS/GPS后台系统!!!
 				<a href="javascript:openUpdatePwd()">修改密码</a>
 				<a href="deleteUserByTel.do?tel=${user['TEL']}">注销用户</a>
+
 				<%--创建查看用户数据表格--%>
-				<a href="javascript:showDataGridWeb()">列表显示</a>
+				<c:if test="${user['TYPE']=='2'}">
+					<a href="historyPage.do">查询历史轨迹</a>
+					<a href="javascript:showDataGridWeb(${user['TEAMID']})" onclick="onclickss()">列表显示</a>
+				</c:if>
+
+
 				<c:if test="${user['TYPE']=='3'}">
 					<a href="historyPage.do">查询历史轨迹</a>
+					<a href="javascript:showDataGridAdminWeb()" onclick="onclickss()">列表显示</a>
+					车队类型:<select  style="width:130px;" id="queryMapTeamType">
+					<option value="1"
+							<c:if test="${MAPTEAMTYPEQUERY==0}">selected='selected'</c:if>>徐庄</option>
+					<option value="2"
+							<c:if test="${MAPTEAMTYPEQUERY==1}">selected='selected'</c:if>>周庄</option>
+					<option value="-1"
+							<c:if test="${MAPTEAMTYPEQUERY==-1}">selected='selected'</c:if>>全部</option>
+					</select>
 				</c:if>
 
 			</div>
@@ -219,7 +275,7 @@
 				<input type="button" value="查询" onclick="queryMapUser()" />
 			</div>
 
-			<div id="allmap" style="height: 700px;"></div>
+			<div id="allmap" style="height: 1000px;"></div>
 		</div>
 
 		<script type="text/javascript">

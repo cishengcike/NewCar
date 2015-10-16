@@ -246,7 +246,7 @@
   <!-- htt  queryMapFarmer -->
   <select id="queryMapFarmer"
           resultType="map">
-    SELECT userID as USERID,lo as LO,la as LA,tel as PHONE,userName as USERNAME,tu.userType AS USERTYPE,tu.CID as CID,if(isnull(tu.teamId),0,tu.teamId) as TEAMID,
+    SELECT userID as USERID,lo as LO,la as LA,tel as PHONE,userName as USERNAME,tu.userType AS USERTYPE,if(isnull(tu.CID),'0',tu.CID) AS CID,if(isnull(tu.teamId),0,tu.teamId) as TEAMID,
 
     ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
     (tu.lo*PI()/180-#{lo}*PI()/180)/2),2)
@@ -266,7 +266,7 @@
   <!-- htt  queryMapDriver -->
   <select id="queryMapDriver"
           resultType="map">
-    SELECT tu.userId as USERID,tu.lo as LO,tu.la as LA,tu.tel as PHONE,tu.userName as USERNAME,tu.userType AS USERTYPE,tu.CID as CID,tc.type AS CARTYPE,if(isnull(tu.teamId),0,tu.teamId) as TEAMID,
+    SELECT tu.userId as USERID,tu.lo as LO,tu.la as LA,tu.tel as PHONE,tu.userName as USERNAME,tu.userType AS USERTYPE,if(isnull(tu.CID),'0',tu.CID) as CID ,tc.type AS CARTYPE,if(isnull(tu.teamId),0,tu.teamId) as TEAMID,
 
     ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
     (tu.lo*PI()/180-#{lo}*PI()/180)/2),2)
@@ -304,7 +304,7 @@
   <!-- SteinbockA-->
   <select id="queryMapDriverByType"
           resultType="map">
-    SELECT tu.userId as USERID,tu.lo as LO,tu.la as LA,tu.tel as PHONE,tu.userName as USERNAME,tu.userType AS USERTYPE,tu.CID as CID, tc.type AS CARTYPE,
+    SELECT tu.userId as USERID,tu.lo as LO,tu.la as LA,tu.tel as PHONE,tu.userName as USERNAME,tu.userType AS USERTYPE,if(isnull(tu.CID),'0',tu.CID) AS CID, tc.type AS CARTYPE,
 
     ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
     (tu.lo*PI()/180-#{lo}*PI()/180)/2),2)
@@ -323,7 +323,7 @@
   </select>
 
   <select id="queryMapDriverByPhone"  resultType="map">
-    SELECT tu.userid as USERID,tu.lo as LO,tu.la as LA,tu.tel as PHONE,tu.userName as USERNAME,tu.userType AS USERTYPE,tu.CID as CID, tc.type AS CARTYPE,
+    SELECT tu.userid as USERID,tu.lo as LO,tu.la as LA,tu.tel as PHONE,tu.userName as USERNAME,tu.userType AS USERTYPE,if(isnull(tu.CID),'0',tu.CID) AS CID , tc.type AS CARTYPE,
 
     (ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
     (tu.lo*PI()/180-#{lo}*PI()/180)/2),2)
@@ -336,7 +336,7 @@
 
 
   <select id="queryMapFarmerByPhone"  resultType="map">
-    SELECT userID as USERID,lo as LO,la as LA,tel as PHONE,userName as USERNAME,tu.userType AS USERTYPE,tu.CID as CID,
+    SELECT userID as USERID,lo as LO,la as LA,tel as PHONE,userName as USERNAME,tu.userType AS USERTYPE,if(isnull(tu.CID),'0',tu.CID) AS CID ,
 
     (ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
     (tu.lo*PI()/180-#{lo}*PI()/180)/2),2)
@@ -348,7 +348,7 @@
   </select>
 
   <select id="queryMapAll" resultType="map">
-    SELECT userID as USERID,lo as LO,la as LA,tel as PHONE,userName as USERNAME,tu.userType AS USERTYPE,tu.CID as CID,
+    SELECT userID as USERID,lo as LO,la as LA,tel as PHONE,userName as USERNAME,tu.userType AS USERTYPE,if(isnull(tu.CID),'0',tu.CID) AS CID ,
 
     ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
     (tu.lo*PI()/180-#{lo}*PI()/180)/2),2)
@@ -366,7 +366,7 @@
   </select>
 
   <select id="queryMapAllByPhone" resultType="map">
-    SELECT userID as USERID,lo as LO,la as LA,tel as PHONE,userName as USERNAME,tu.userType AS USERTYPE,tu.CID as CID,
+    SELECT userID as USERID,lo as LO,la as LA,tel as PHONE,userName as USERNAME,tu.userType AS USERTYPE,if(isnull(tu.CID),'0',tu.CID) as CID,
 
     (ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
     (tu.lo*PI()/180-#{lo}*PI()/180)/2),2)
@@ -406,5 +406,10 @@
 
   <select id="selectUserFromTcar" parameterType="java.lang.String" resultType="map">
     SELECT * FROM newcar.tcar WHERE driverTel=#{phone}
+  </select>
+
+  <select id="queryUserByPhone" parameterType="java.lang.String" resultType="map">
+    SELECT userID as USERID,lo as LO,la as LA,tel as PHONE,userName as USERNAME,tu.userType AS USERTYPE,if(isnull(tu.CID),'0',tu.CID) as CID ,if(isnull(tu.teamId),0,tu.teamId) as TEAMID
+    FROM tuser AS tu WHERE tel=#{phone}
   </select>
 </mapper>
