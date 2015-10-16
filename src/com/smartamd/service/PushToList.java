@@ -67,7 +67,7 @@ public class PushToList {
 
     //完成对手机的推送
     public static List<Target> getTarget(List<String> list) {
-        List<Target> targets = new ArrayList<>();
+        List<Target> targets = new ArrayList<Target>();
         for (String clientID : list) {
             Target target = new Target();
             target.setAppId(appId);
@@ -95,7 +95,7 @@ public class PushToList {
         //离线有效时间，单位为毫秒，可选
         message.setOfflineExpireTime(24 * 1000 * 3600);
 
-        List<Target> targets = new ArrayList<>();
+        List<Target> targets = new ArrayList<Target>();
         targets = getTarget(list);
         //获取taskID
         String taskId = push.getContentId(message);

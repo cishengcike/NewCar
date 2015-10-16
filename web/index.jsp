@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
     <script type="text/javascript" src="jquery.js"></script> 
     <script type="text/javascript" src="jquery.spritely-0.6.js"></script>
-    <script type="text/javascript" src="chur.min.js"></script>
+    <%--<script type="text/javascript" src="chur.min.js"></script>--%>
     <link rel="stylesheet" type="text/css" href="login.css" />
     <script src="http://siteapp.baidu.com/static/webappservice/uaredirect.js" type="text/javascript">
     </script><script type="text/javascript">uaredirect("indexPhone.jsp");</script>

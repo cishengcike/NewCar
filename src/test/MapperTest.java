@@ -96,7 +96,7 @@ public class MapperTest {
     @Test
     public void queryMapByPhoneTest() {
         List<Map<String, Object>> list1 = null;
-        List<Map<String, Object>> list2 = new ArrayList<>();
+        List<Map<String, Object>> list2 = new ArrayList<Map<String,Object>>();
         Map<String, Object> x = tuserMapper.queryMapFarmerByPhone("121.56425476074219", "31.29883575439453", "123456789");
         System.out.println(x);
         System.out.printf("");
@@ -125,8 +125,8 @@ public class MapperTest {
 
     @Test
     public void getTargetsTest(){
-        List<String> list = new ArrayList<>();
-        List<Target> list2 = new ArrayList<>();
+        List<String> list = new ArrayList<String>();
+        List<Target> list2 = new ArrayList<Target>();
         list.add("9495b9705e7dc951d77d9ed98bfe5f5e");
         list.add("333d19cd3a2d6cff61cef87a8236d8a5");
         list2= pushToList.getTarget(list);
@@ -135,8 +135,8 @@ public class MapperTest {
 
     @Test
     public void listTest(){
-        List<String> list = new ArrayList<>();
-        List<Target> targets = new ArrayList<>();
+        List<String> list = new ArrayList<String>();
+        List<Target> targets = new ArrayList<Target>();
         list.add("9495b9705e7dc951d77d9ed98bfe5f5e");
         list.add("333d19cd3a2d6cff61cef87a8236d8a5");
         for(String clientID : list){
@@ -164,7 +164,7 @@ public class MapperTest {
         Iterator<Map<String,Object>> iterator=list.iterator();
         while (iterator.hasNext()){
             Map<String,Object> map=iterator.next();
-            if((int)map.get("USERID")==12)
+            if((Integer)map.get("USERID")==12)
                 iterator.remove();
         }
 
@@ -180,7 +180,7 @@ public class MapperTest {
         List<Map<String,Object>> list=tuserMapper.queryMapAll("121.56128", "31.301811", "15");
         System.out.println(list.size());
 
-        List<String> cid_list = new ArrayList<>();
+        List<String> cid_list = new ArrayList<String>();
         for(Map<String,Object> map:list) {
 
             if(map.get("CID")!=null)
@@ -194,7 +194,7 @@ public class MapperTest {
 
     @Test
     public void selectUserByPhoneTest(){
-        Map<String,Object> map=tuserMapper.selectUserByPhone("13655204924", "121.56123", "31.30184");
+        Map<String,Object> map=tuserMapper.selectUserByPhone("15852386459", "121.56123", "31.30184");
         System.out.println(map);
     }
 
@@ -229,5 +229,12 @@ public class MapperTest {
        int a= loginServletDao.alterUserInformationPhone(492, "0", "", "");
 
     }
+
+    @Test
+    public void queryUserByPhoneTest(){
+        System.out.println(tuserMapper.queryUserByPhone("10000000012"));
+    }
+
+
 
 }
