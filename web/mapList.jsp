@@ -187,9 +187,8 @@
 					columns:[[
 						{field:'USERNAME',title:'用户名',width:100},
 						{field:'PHONE',title:'手机号',width:100},
-						{field:'USERID',title:'用户ID',width:100},
-						{field:'LO',title:'经度',width:100},
-						{field:'LA',title:'纬度',width:100}
+						{field:'LOGINTIME',title:'登录时间',width:200},
+						{field:'CARTYPENAME',title:'车辆类型',width:100}
 					]]
 				});
 
@@ -306,6 +305,14 @@
 				var map = new BMap.Map("allmap");          // 创建地图实例
 				var pointNow = new BMap.Point(loMap,laMap);  // 创建点坐标
 				map.centerAndZoom(pointNow, 15);                 // 初始化地图，设置中心点坐标和地图级别
+				//添加比例尺和缩放控件
+				var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});// 左上角，添加比例尺
+				var top_left_navigation = new BMap.NavigationControl();  //左上角，添加默认缩放平移控件
+				var top_right_navigation = new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_SMALL}); //右上角，仅包含平移和缩放按钮
+				//添加控件和比例尺
+				map.addControl(top_left_control);
+				map.addControl(top_left_navigation);
+				map.addControl(top_right_navigation);
 				var opts={
 					width:200,
 					height:200

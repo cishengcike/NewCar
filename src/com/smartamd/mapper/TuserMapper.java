@@ -47,7 +47,7 @@ List<Map<String,Object>> queryMapDriverByType(@Param("lo") String lo_param, @Par
     Map<String,Object> queryMapAllByPhone(@Param("lo") String lo_param, @Param("la") String la_param, @Param("phone") String phone);
 
 
-    int updateUser(@Param("phone") String phone, @Param("CID") String CID, @Param("lo") String lo, @Param("la") String la);
+    int updateUser(@Param("phone") String phone, @Param("CID") String CID, @Param("lo") String lo, @Param("la") String la,@Param("gpsTime") String gpsTime);
 
     Map<String,Object> selectUserByPhone(@Param("opphone") String opphone, @Param("lo") String lo, @Param("la") String la);
 

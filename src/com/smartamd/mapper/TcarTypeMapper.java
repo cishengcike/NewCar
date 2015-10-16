@@ -1,6 +1,7 @@
 package com.smartamd.mapper;
 
 import com.smartamd.model.TcarType;
+import org.apache.ibatis.annotations.Param;
 
 public interface TcarTypeMapper {
     int deleteByPrimaryKey(Integer typeid);

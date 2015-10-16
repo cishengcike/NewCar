@@ -246,7 +246,8 @@
   <!-- htt  queryMapFarmer -->
   <select id="queryMapFarmer"
           resultType="map">
-    SELECT userID as USERID,lo as LO,la as LA,tel as PHONE,userName as USERNAME,tu.userType AS USERTYPE,if(isnull(tu.CID),'0',tu.CID) AS CID,if(isnull(tu.teamId),0,tu.teamId) as TEAMID,
+    SELECT userID as USERID,lo as LO,la as LA,tel as PHONE,userName as USERNAME,tu.userType AS USERTYPE,tu.CID as CID,
+    if(isnull(tu.teamId),0,tu.teamId) as TEAMID,tu.loginTime AS LOGINTIME,
 
     ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
     (tu.lo*PI()/180-#{lo}*PI()/180)/2),2)
@@ -266,7 +267,8 @@
   <!-- htt  queryMapDriver -->
   <select id="queryMapDriver"
           resultType="map">
-    SELECT tu.userId as USERID,tu.lo as LO,tu.la as LA,tu.tel as PHONE,tu.userName as USERNAME,tu.userType AS USERTYPE,if(isnull(tu.CID),'0',tu.CID) as CID ,tc.type AS CARTYPE,if(isnull(tu.teamId),0,tu.teamId) as TEAMID,
+    SELECT tu.userId as USERID,tu.lo as LO,tu.la as LA,tu.tel as PHONE,tu.userName as USERNAME,tu.userType AS USERTYPE,
+    tu.CID as CID,tc.type AS CARTYPE,if(isnull(tu.teamId),0,tu.teamId) as TEAMID,tct.typeName  AS CARTYPENAME,tu.loginTime AS LOGINTIME,
 
     ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
     (tu.lo*PI()/180-#{lo}*PI()/180)/2),2)
@@ -274,8 +276,9 @@
     POW(SIN(
     (tu.la*PI()/180-#{la}*PI()/180)/2),2)))*1000)/1000 as DISTANCE
 
-    FROM  tuser as tu  inner  join  tcar as tc   on   tu.tel=tc.driverTel
+    FROM  tuser as tu , tcar as tc,tcartype as tct
     where
+    tu.tel=tc.driverTel AND tct.typeId=tc.type AND
     ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
     (tu.lo*PI()/180-#{lo}*PI()/180)/2),2)
     +COS(tu.lo*PI()/180)*COS(#{lo}*PI()/180)*
@@ -284,7 +287,7 @@
 
   </select>
   <select id="queryUserByTel" resultType="map">
-    select  userID as USERID,lo as LO,la as LA,tel as PHONE,userName as USERNAME
+    select  userID as USERID,lo as LO,la as LA,tel as PHONE,userName as USERNAME,userType AS  USERTYPE,loginTime AS LOGINTIME
     from tuser
     where tel= #{userTel}
   </select>
@@ -378,7 +381,7 @@
   </select>
 
   <update id="updateUser" >
-    update tuser set CID=#{CID} ,lo=#{lo},la=#{la} WHERE tel=#{phone}
+    update tuser set CID=#{CID} ,lo=#{lo},la=#{la},gpsTime=#{gpsTime} WHERE tel=#{phone}
   </update>
 
   <select id="selectUserByPhone"  resultType="map">

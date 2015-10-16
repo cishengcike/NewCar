@@ -20,7 +20,7 @@ import java.util.*;
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "file:/home/aaron/IdeaProjects/WEB/NewCar_IDEA/web/WEB-INF/dispatcher-servlet.xml")
+@ContextConfiguration(locations = "file:D:/IdeaProjects/NewCar_IDEA_10_13/web/WEB-INF/dispatcher-servlet.xml")
 public class MapperTest {
 
     @Autowired
@@ -227,7 +227,6 @@ public class MapperTest {
     @Test
     public void alterUserInformationPhoneTest() {
        int a= loginServletDao.alterUserInformationPhone(492, "0", "", "");
-
     }
 
     @Test

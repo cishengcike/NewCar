@@ -25,6 +25,11 @@
     carId, teamId, positionId, carNo, simNo, machineNo, type, joinTime, driverName, driverTel, 
     driverAddress, lo, la, status, remark, Extra1, Extra2, Extra3
   </sql>
+  <select id="selectCarNameByCarId" resultType="java.lang.String">
+    select  tct.typeName AS TYPENAME
+    from tcar as tc,tcartype as tct
+    where tc.type=tct.typeId AND tc.driverTel=#{TEL}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
