@@ -5,6 +5,8 @@ public class ServiceStation {
 
     private Integer type;
 
+    private String linkman;
+
     private String stationname;
 
     private String stationaddress;
@@ -33,6 +35,14 @@ public class ServiceStation {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public String getLinkman() {
+        return linkman;
+    }
+
+    public void setLinkman(String linkman) {
+        this.linkman = linkman;
     }
 
     public String getStationname() {
