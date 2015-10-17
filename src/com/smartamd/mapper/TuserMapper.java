@@ -28,6 +28,8 @@ public interface TuserMapper {
     //≤È—Ø≈©ªß
     List<Map<String,Object>> queryMapFarmer(@Param("lo") String lo_param, @Param("la") String la_param, @Param("kmNumber") String kmNumber_param);
 
+    List<Map<String,Object>> queryMapFarmerPhone(@Param("lo") String lo_param, @Param("la") String la_param, @Param("kmNumber") String kmNumber_param);
+
     List<Map<String,Object>> queryUserByTel(@Param("userTel") String tel);
     int updatePassword(@Param("userID") int userID, @Param("new_password") String new_password);
     int deleteByTel(@Param("tel") String atel);
@@ -47,7 +49,7 @@ List<Map<String,Object>> queryMapDriverByType(@Param("lo") String lo_param, @Par
     Map<String,Object> queryMapAllByPhone(@Param("lo") String lo_param, @Param("la") String la_param, @Param("phone") String phone);
 
 
-    int updateUser(@Param("phone") String phone, @Param("CID") String CID, @Param("lo") String lo, @Param("la") String la,@Param("gpsTime") String gpsTime);
+    int updateUser(@Param("phone") String phone, @Param("CID") String CID, @Param("lo") String lo, @Param("la") String la,@Param("loginTime") String loginTime);
 
     Map<String,Object> selectUserByPhone(@Param("opphone") String opphone, @Param("lo") String lo, @Param("la") String la);
 

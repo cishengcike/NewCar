@@ -102,7 +102,7 @@ public class LoginInfo {
         //System.out.println(userType+phone+pwd+userName);
         //手机号已被注册
         if (dataa.size() > 0) {
-            response.getWriter().print("{'success':3}");
+            response.getWriter().print("{'success':2}");
             return;
         }
         int cou = loginServletDao.addUser(userName, pwd, phone, userType, carType);
@@ -212,7 +212,7 @@ public class LoginInfo {
         {
             if (phone == null) {
 
-                data = tuserMapper.queryMapFarmer(lo, la, kmNumber);//查询userType=0农户
+                data = tuserMapper.queryMapFarmerPhone(lo, la, kmNumber);//查询userType=0农户
                 response.getWriter().print("{'farmer':" + data + "}");
             } else {
                 Map<String, Object> map = tuserMapper.queryMapFarmerByPhone(lo, la, phone);
@@ -227,6 +227,8 @@ public class LoginInfo {
             if (phone == null) {
                 data1 = tuserMapper.queryMapFarmer(lo, la, kmNumber);//查询userType=-1--全部农户+农机手//查询userType=0农户
                 data2 = tuserMapper.queryMapDriver(lo, la, kmNumber);//查询userType=-1--全部农户+农机手//查询userType=1农机手
+                System.out.println(data1);
+                System.out.println(data2);
                 response.getWriter().print("{'farmer':" + data1 + ",'driver':" + data2 + "}");
             } else {
                 System.out.println("phone不为空");

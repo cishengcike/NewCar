@@ -264,6 +264,28 @@
     (tu.la*PI()/180-#{la}*PI()/180)/2),2)))*1000)/1000 &lt;=#{kmNumber} AND tu.userType=0
 
   </select>
+
+  <!-- htt  queryMapFarmerPhone -->
+  <select id="queryMapFarmerPhone"
+          resultType="map">
+    SELECT userID as USERID,lo as LO,la as LA,tel as PHONE,userName as USERNAME,tu.userType AS USERTYPE,tu.CID as CID,
+    if(isnull(tu.teamId),0,tu.teamId) as TEAMID,
+
+    ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
+    (tu.lo*PI()/180-#{lo}*PI()/180)/2),2)
+    +COS(tu.lo*PI()/180)*COS(#{lo}*PI()/180)*
+    POW(SIN(
+    (tu.la*PI()/180-#{la}*PI()/180)/2),2)))*1000)/1000 as DISTANCE
+
+    FROM tuser as tu
+    where
+    ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
+    (tu.lo*PI()/180-#{lo}*PI()/180)/2),2)
+    +COS(tu.lo*PI()/180)*COS(#{lo}*PI()/180)*
+    POW(SIN(
+    (tu.la*PI()/180-#{la}*PI()/180)/2),2)))*1000)/1000 &lt;=#{kmNumber} AND tu.userType=0
+
+  </select>
   <!-- htt  queryMapDriver -->
   <select id="queryMapDriver"
           resultType="map">
@@ -381,7 +403,7 @@
   </select>
 
   <update id="updateUser" >
-    update tuser set CID=#{CID} ,lo=#{lo},la=#{la},gpsTime=#{gpsTime} WHERE tel=#{phone}
+    update tuser set CID=#{CID} ,lo=#{lo},la=#{la},loginTime=#{loginTime} WHERE tel=#{phone}
   </update>
 
   <select id="selectUserByPhone"  resultType="map">

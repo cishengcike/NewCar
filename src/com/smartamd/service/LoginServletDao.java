@@ -42,7 +42,10 @@ public class LoginServletDao {
 
             if("0".equals(userType))
             {
+                System.out.println("userType==0");
+                System.out.println(tuser.getUsername());
                 temp1= tuserMapper.insertSelective(tuser);//新用户已经插入Tuser表
+                System.out.println("temp1="+temp1);
                 res=temp1;
             }
             else if ("1".equals(userType))//农机手，增加处理步骤

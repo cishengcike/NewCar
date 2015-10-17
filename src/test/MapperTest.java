@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -20,7 +22,7 @@ import java.util.*;
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "file:D:/IdeaProjects/NewCar_IDEA_10_13/web/WEB-INF/dispatcher-servlet.xml")
+@ContextConfiguration(locations = "file:D:/IdeaProjects/Web/NewV/web/WEB-INF/dispatcher-servlet.xml")
 public class MapperTest {
 
     @Autowired
@@ -118,10 +120,7 @@ public class MapperTest {
 //
 //    }
 
-    @Test
-    public void updateTuserTest() {
-        tuserMapper.updateUser("13655204924", "12345", "123", "12345");
-    }
+
 
     @Test
     public void getTargetsTest(){
@@ -232,6 +231,14 @@ public class MapperTest {
     @Test
     public void queryUserByPhoneTest(){
         System.out.println(tuserMapper.queryUserByPhone("10000000012"));
+    }
+
+    @Test
+    public void updateUserTest() {
+        Date dt = new Date();
+        DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        int a = tuserMapper.updateUser("12345678900", "116", "116", "70", df.format(dt));
+        System.out.println(a);
     }
 
 
