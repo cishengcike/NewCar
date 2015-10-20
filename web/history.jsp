@@ -100,9 +100,7 @@
         var PT2=new BMap.Point(hisLoLa[FINAL_LENGTH-1].lo,hisLoLa[FINAL_LENGTH-1].la);
         var mark1=new BMap.Marker(PT1);
         var mark2=new BMap.Marker(PT2);
-        alert("test");
         map.addOverlay(mark1);
-        alert("mark1");
         map.addOverlay(mark2);
 
 
