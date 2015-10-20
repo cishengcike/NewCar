@@ -194,6 +194,38 @@
 
 			}
 
+			function showCarDataGridAdminWeb(){
+				var teamIdWeb=document.getElementById("queryMapTeamType").value;
+				showCarDataGridWeb(teamIdWeb);
+			}
+
+			function showCarDataGridWeb(teamIdWeb)
+			{
+				var aType=document.getElementById("queryMapUserType").value;
+				var aPhone=document.getElementById("queryMapUserPhone").value;
+				var aDistance=document.getElementById("queryMapUserDistance").value;
+
+				$('#dg').datagrid({
+					url:'showCarDataGrid.do',
+					queryParams: {
+						userID:'${user['USERID']}',
+						userTypeQuery:aType,
+						kmNumber:aDistance,
+						tel:aPhone,
+						lo: '${user['LO']}',
+						la:'${user['LA']}',
+						teamID:teamIdWeb
+					},
+
+					columns:[[
+						{field:'USERNAME',title:'用户名',width:100},
+						{field:'PHONE',title:'手机号',width:100},
+						{field:'LOGINTIME',title:'登录时间',width:200},
+						{field:'MACHINENO',title:'设备编号',width:100}
+					]]
+				});
+			}
+
 		</script>
 
 		<div id="allinit">
@@ -242,13 +274,15 @@
 				<%--创建查看用户数据表格--%>
 				<c:if test="${user['TYPE']=='2'}">
 					<a href="historyPage.do">查询历史轨迹</a>
-					<a href="javascript:showDataGridWeb(${user['TEAMID']})" onclick="onclickss()">列表显示</a>
+					<a href="javascript:showDataGridWeb(${user['TEAMID']})" onclick="onclickss()">用户显示</a>
+					<a href="javascript:showCarDataGridWeb(${user['TEAMID']})" onclick="onclickss()">农机显示</a>
 				</c:if>
 
 
 				<c:if test="${user['TYPE']=='3'}">
 					<a href="historyPage.do">查询历史轨迹</a>
-					<a href="javascript:showDataGridAdminWeb()" onclick="onclickss()">列表显示</a>
+					<a href="javascript:showDataGridAdminWeb()" onclick="onclickss()">用户显示</a>
+					<a href="javascript:showCarDataGridAdminWeb()" onclick="onclickss()">农机显示</a>
 					车队类型:<select  style="width:130px;" id="queryMapTeamType">
 					<option value="1"
 							<c:if test="${MAPTEAMTYPEQUERY==0}">selected='selected'</c:if>>徐庄</option>
@@ -266,8 +300,10 @@
 									<c:if test="${MAPUSERTYPEQUERY==1}">selected='selected'</c:if>>农机手</option>
 							<option value="1"
 									<c:if test="${MAPUSERTYPEQUERY==0}">selected='selected'</c:if>>农户</option>
+							<option value="3"
+									<c:if test="${MAPUSERTYPEQUERY==-1}">selected='selected'</c:if>>农机手与农户</option>
 							<option value="2"
-									<c:if test="${MAPUSERTYPEQUERY==-1}">selected='selected'</c:if>>全部</option>
+									<c:if test="${MAPUSERTYPEQUERY==2}">selected='selected'</c:if>>农机</option>
 						</select>
 				手机号码:<input type="text" id="queryMapUserPhone"/>
 				距离范围:<input type="text" value="${KMNUMBER}" id="queryMapUserDistance" />公里
@@ -342,6 +378,8 @@
 				var driverMapTemp='${driver}';
 				var driverSizeMap="${driverSize}";
 				var userByPhoneMap='${userByPhoneWeb}';
+				var machineMapTemp='${machine}';
+				var machineSizeMap="${machineSize}";
 
 				var pointQuery=new Array();
 				var markerQuery=new Array();
@@ -350,7 +388,7 @@
 				var i;
 
 
-				if(!(userByPhoneMap===temp)) {
+				if(!(userByPhoneMap===temp)) {//按手机号查询
 					var userByPhone=eval(userByPhoneMap);
 					document.getElementById("queryMapUserPhone").value =userByPhone[0]['PHONE'];
 					pointQuery[0]=new window.BMap.Point(userByPhone[0]['LO'],userByPhone[0]['LA']);
@@ -406,6 +444,36 @@
 							contentQuery[i] += contenEnd;
 							var username = driverMap[i]['USERNAME'];
 							var teamID=driverMap[i]['TEAMID'];
+							if(teamID==1)
+								var myIcon = new BMap.Icon("icon_xuzhuang.png",new BMap.Size(50,50));
+							else
+								var myIcon = new BMap.Icon("car.png", new BMap.Size(50,50));
+							markerQuery[i] = new BMap.Marker(pointQuery[i],{icon:myIcon});
+							map.addOverlay(markerQuery[i]);
+							var label = new BMap.Label(username,{offset:new BMap.Size(20,-10)});
+							markerQuery[i].setLabel(label);
+							infoWin[i] = new BMap.InfoWindow(contentQuery[i], opts);
+							markerQuery[i].addEventListener("click", (function (k) {
+								return function () {
+									map.openInfoWindow(infoWin[k], pointQuery[k]);
+								}
+
+							})(i));
+						}
+					}
+					if(!(machineMapTemp === temp))//查询  农机
+					{
+						var machineMap = eval(machineMapTemp);
+						for (i = 0; i < machineSizeMap; i++) {
+							pointQuery[i] = new window.BMap.Point(machineMap[i]['LO'], machineMap[i]['LA']);
+							contentQuery[i] = contenStart +
+									"<tr>" +
+									"<td>" + machineMap[i]['USERNAME'] + "</td>" +
+									"<td>" + machineMap[i]['PHONE'] + "</td>" +
+									"</tr>";
+							contentQuery[i] += contenEnd;
+							var username = machineMap[i]['USERNAME'];
+							var teamID=machineMap[i]['TEAMID'];
 							if(teamID==1)
 								var myIcon = new BMap.Icon("icon_xuzhuang.png",new BMap.Size(50,50));
 							else

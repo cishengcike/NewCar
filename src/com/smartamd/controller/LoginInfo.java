@@ -360,36 +360,49 @@ public class LoginInfo {
      */
     @RequestMapping(value = "historyRoute.do")
     public String historyRoute(String drivertel, Model model) {
-        int carID = queryLoLaMapper.queryCarID(drivertel);
-        List<QueryLoLa> list = queryLoLaMapper.queryLoLa(carID);
-        model.addAttribute("FIRST_LENGTH", list.size());
+        System.out.println("url:historyRoute.do");
+        try {
+            int carID = queryLoLaMapper.queryCarID(drivertel);
+            List<QueryLoLa> list = queryLoLaMapper.queryLoLa(String.valueOf(carID));
+            model.addAttribute("FIRST_LENGTH", list.size());
+            int length = list.size();
+            model.addAttribute("flo", list.get(length - 1).getLo());
+            model.addAttribute("fla", list.get(length - 1).getLa());
+            Distance distance = new Distance();
+            int i = 0, j = 1;
+            System.out.println("初始长度" + list.size());
 
-        int length = list.size();
-        model.addAttribute("flo", list.get(length - 1).getLo());
-        model.addAttribute("fla", list.get(length - 1).getLa());
-        Distance distance = new Distance();
-        int i = 0;
-        System.out.println("初始长度" + list.size());
+            //两个坐标距离相差少于MAX_DISTANCE不再地图上显示
+            while (j <= length - 1) {
+                double lo1, la1, lo2, la2;
+                lo1 = list.get(i).getLo();
+                la1 = list.get(i).getLa();
+                lo2 = list.get(j).getLo();
+                la2 = list.get(j).getLa();
+                if (distance.getDistance(lo1, la1, lo2, la2) < MAX_DISTANCE) {
+                    list.remove(j);
 
-        //两个坐标距离相差少于MAX_DISTANCE不再地图上显示
-        while (i < length - 1) {
-            double lo1, la1, lo2, la2;
-            lo1 = list.get(i).getLo();
-            la1 = list.get(i).getLa();
-            lo2 = list.get(i + 1).getLo();
-            la2 = list.get(i + 1).getLa();
-            if (distance.getDistance(lo1, la1, lo2, la2) < MAX_DISTANCE) {
-                list.remove(i + 1);
-                length = length - 1;
-            } else i++;
+                    length = length - 1;
+                } else {
+                    i++;
+                    j++;
+                }
+            }
+            System.out.println("处理后长度" + list.size());
+//        for (QueryLoLa ll : list)
+//            System.out.println(ll.toString());
+
+
+            JSONArray jsonArray = JSONArray.fromObject(list);
+            model.addAttribute("historyLoLa", jsonArray);
+            model.addAttribute("FINAL_LENGTH", list.size());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error";
         }
-        for (QueryLoLa queryLoLa : list) {
-            System.out.println(queryLoLa.toString());
-        }
-        JSONArray jsonArray = JSONArray.fromObject(list);
-        model.addAttribute("historyLoLa", jsonArray);
-        model.addAttribute("FINAL_LENGTH", list.size());
         return "history";
+
     }
 
     /**
@@ -545,8 +558,19 @@ public class LoginInfo {
                 System.out.println(JsonUtil.toJsonString(data) + "农户");
                 System.out.println(data.size() + "农户");
                 //response.getWriter().print("{'farmer':" + data + "}");
-            } else if (flag_int == 2)//查询全部--农户+农机手
+            }
+            else if(flag_int == 2)//查询农机
             {
+                data=tcarMapper.queryCar(lo, la, kmNumber);
+                request.setAttribute("machine", JsonUtil.toJsonString(data));
+                request.setAttribute("machineSize", data.size());
+                request.setAttribute("MAPUSERTYPEQUERY", 2);
+                System.out.println(JsonUtil.toJsonString(data) + "农机");
+                System.out.println(data.size() + "农机");
+            }
+            else if (flag_int == 3)//查询全部--农户+农机手
+            {
+                System.out.println("全部");
                 data1 = tuserMapper.queryMapFarmer(lo, la, kmNumber);//查询userType=-1--全部农户+农机手//查询userType=0农户
                 data2 = tuserMapper.queryMapDriver(lo, la, kmNumber);//查询userType=-1--全部农户+农机手//查询userType=1农机手
                 request.setAttribute("farmer", JsonUtil.toJsonString(data1));
@@ -595,6 +619,26 @@ public class LoginInfo {
         {
             JSONArray jsonArray = new JSONArray();
             data = tuserMapper.queryUserByTel(tel);//更改10.13
+            if(data.size()==0)
+            {
+                System.out.println("无");
+                JSONObject jsonObject = new JSONObject();
+                System.out.println("无1");
+                jsonObject.put("USERNAME", "无");
+                System.out.println("无2");
+                jsonObject.put("PHONE", "无");
+                System.out.println("无3");
+                jsonObject.put("LOGINTIME", "无");
+                System.out.println("无4");
+                jsonObject.put("MACHINENO", "无");
+                System.out.println("无5");
+                jsonArray.add(jsonObject);
+                result.put("total", data.size());
+                result.put("rows", jsonArray);
+                JSONObject fromObject = JSONObject.fromObject(result);
+                System.out.println("htt test：" + fromObject.toString());
+                return fromObject.toString();
+            }
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("USERNAME", data.get(0).get("USERNAME"));
             jsonObject.put("PHONE", data.get(0).get("PHONE"));
@@ -622,11 +666,32 @@ public class LoginInfo {
             JSONObject fromObject = JSONObject.fromObject(result);
             System.out.println("htt test：" + fromObject.toString());
             return fromObject.toString();
-        } else {
+        }
+        else {
             if (flag_int == 0)//查询农机手
             {
                 JSONArray jsonArray = new JSONArray();
                 data = tuserMapper.queryMapDriver(lo, la, kmNumber);//查询userType=1农机手
+                if(data.size()==0)
+                {
+                    System.out.println("无");
+                    JSONObject jsonObject = new JSONObject();
+                    System.out.println("无1");
+                    jsonObject.put("USERNAME", "无");
+                    System.out.println("无2");
+                    jsonObject.put("PHONE", "无");
+                    System.out.println("无3");
+                    jsonObject.put("LOGINTIME", "无");
+                    System.out.println("无4");
+                    jsonObject.put("MACHINENO", "无");
+                    System.out.println("无5");
+                    jsonArray.add(jsonObject);
+                    result.put("total", data.size());
+                    result.put("rows", jsonArray);
+                    JSONObject fromObject = JSONObject.fromObject(result);
+                    System.out.println("htt test：" + fromObject.toString());
+                    return fromObject.toString();
+                }
                 if (Long.parseLong(teamId) == -1)//此情况为，查询用户类型为农机手，且车队类型为全部，此时teamId=全部的id号 -1
                 {
                     System.out.println("农机手 全部");
@@ -643,7 +708,8 @@ public class LoginInfo {
                         jsonObject.put("CARTYPENAME", data.get(j).get("CARTYPENAME"));
                         jsonArray.add(jsonObject);
                     }
-                } else//                  有teamid
+                }
+                else//                  有teamid
                 {
                     for (i = 0; i < data.size(); i++) {
                         if ((Long) data.get(i).get("TEAMID") == Long.parseLong(teamId))//按车队显示
@@ -669,12 +735,32 @@ public class LoginInfo {
                 JSONObject fromObject = JSONObject.fromObject(result);
                 System.out.println("农机手，车队或者全部" + fromObject);
                 return fromObject.toString();
-            } else if (flag_int == 1)//查询农户
+            }
+            else if (flag_int == 1)//查询农户
             {
                 int t = 0;
                 JSONArray jsonArray = new JSONArray();
                 data = tuserMapper.queryMapFarmer(lo, la, kmNumber);//查询userType=0农户
-
+                if(data.size()==0)
+                {
+                    System.out.println("无");
+                    JSONObject jsonObject = new JSONObject();
+                    System.out.println("无1");
+                    jsonObject.put("USERNAME", "无");
+                    System.out.println("无2");
+                    jsonObject.put("PHONE", "无");
+                    System.out.println("无3");
+                    jsonObject.put("LOGINTIME", "无");
+                    System.out.println("无4");
+                    jsonObject.put("MACHINENO", "无");
+                    System.out.println("无5");
+                    jsonArray.add(jsonObject);
+                    result.put("total", data.size());
+                    result.put("rows", jsonArray);
+                    JSONObject fromObject = JSONObject.fromObject(result);
+                    System.out.println("htt test：" + fromObject.toString());
+                    return fromObject.toString();
+                }
                 for (i = 0; i < data.size(); i++) {                                   //农户不属于车队
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("USERNAME", data.get(i).get("USERNAME"));
@@ -691,11 +777,54 @@ public class LoginInfo {
                 result.put("rows", jsonArray);
                 JSONObject fromObject = JSONObject.fromObject(result);
                 return fromObject.toString();
-            } else if (flag_int == 2)//查询全部--农户+农机手
+            }
+            else if (flag_int == 2)//农机
             {
+                JSONArray jsonArray = new JSONArray();
+                System.out.println("请点击车辆列表");
+                JSONObject jsonObject = new JSONObject();
+                System.out.println("无1");
+                jsonObject.put("USERNAME", "请点击农机显示");
+                System.out.println("无2");
+                jsonObject.put("PHONE", "");
+                System.out.println("无3");
+                jsonObject.put("LOGINTIME", "");
+                System.out.println("无4");
+                jsonObject.put("MACHINENO", "");
+                System.out.println("无5");
+                jsonArray.add(jsonObject);
+                result.put("total", 1);
+                result.put("rows", jsonArray);
+                JSONObject fromObject = JSONObject.fromObject(result);
+                System.out.println("htt test：" + fromObject.toString());
+                return fromObject.toString();
+            }
+            else if (flag_int == 3)//查询全部--农户+农机手
+            {
+                System.out.println("全部 列表");
                 JSONArray jsonArray = new JSONArray();
                 data1 = tuserMapper.queryMapFarmer(lo, la, kmNumber);//查询userType=-1--全部农户+农机手//查询userType=0农户
                 data2 = tuserMapper.queryMapDriver(lo, la, kmNumber);//查询userType=-1--全部农户+农机手//查询userType=1农机手
+                if((data1.size()+data2.size())==0)
+                {
+                    System.out.println("无");
+                    JSONObject jsonObject = new JSONObject();
+                    System.out.println("无1");
+                    jsonObject.put("USERNAME", "无");
+                    System.out.println("无2");
+                    jsonObject.put("PHONE", "无");
+                    System.out.println("无3");
+                    jsonObject.put("LOGINTIME", "无");
+                    System.out.println("无4");
+                    jsonObject.put("MACHINENO", "无");
+                    System.out.println("无5");
+                    jsonArray.add(jsonObject);
+                    result.put("total", data.size());
+                    result.put("rows", jsonArray);
+                    JSONObject fromObject = JSONObject.fromObject(result);
+                    System.out.println("htt test：" + fromObject.toString());
+                    return fromObject.toString();
+                }
                 if (Long.parseLong(teamId) == -1)//此情况为，查询用户类型为全部，且车队类型也为全部，此时teamId=全部的id号 -1
                 {
                     for (j = 0; j < data2.size(); j++) {
@@ -710,7 +839,8 @@ public class LoginInfo {
                         jsonObject.put("CARTYPENAME", data2.get(j).get("CARTYPENAME"));
                         jsonArray.add(jsonObject);
                     }
-                } else //此情况为，查询的用户类型为全部，但车队类型为teamId
+                }
+                else //此情况为，查询的用户类型为全部，但车队类型为teamId
                 {
                     for (j = 0; j < data2.size(); j++) {
                         if ((Long) data2.get(j).get("TEAMID") == Long.parseLong(teamId)) {
@@ -746,14 +876,156 @@ public class LoginInfo {
                 result.put("rows", jsonArray);
                 JSONObject fromObject = JSONObject.fromObject(result);
                 return fromObject.toString();
-            } else {
+            }
+            else {
                 return "";
             }
         }
     }
+    @RequestMapping("showCarDataGrid.do")
+    @ResponseBody
+    //@ResponseBody默认返回数据类型Content-Type不带编码信息
+    //已修改，在配置文件dispatcher-servlet.xml中,使注解的返回类型改为Content-Type:text/plain;charset=UTF-8
+    public String showCarDataGrid(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        Map<String, Object> result = new HashMap<String, Object>();
+        String userId, kmNumber, tel, lo, la, teamId;
+        List<Map<String, Object>> data = null;
+        List<Map<String, Object>> data1 = null;
+        List<Map<String, Object>> data2 = null;
+        int i, j;
+        //获取页面参数
+        userId = request.getParameter("userID");
+        kmNumber = request.getParameter("kmNumber");
+        tel = request.getParameter("tel");
+        lo = request.getParameter("lo");
+        la = request.getParameter("la");
+        teamId = request.getParameter("teamID");
+
+        System.out.println("农机  " + "teamId:" + teamId + "  userID:" + userId + "  kmNumber:" + kmNumber + "  tel:" + tel + "  lo:" + lo + "  la:" + la);
+
+        if (!tel.isEmpty())//按车辆手机查询
+        {
+            JSONArray jsonArray = new JSONArray();
+            data = tcarMapper.queryCarByTel(tel);//查询范围内，查询农机
+            System.out.println("size:" + data.size());
+            System.out.println("where");
+
+            if(data.size()==0)
+            {
+                System.out.println("无");
+                JSONObject jsonObject = new JSONObject();
+                System.out.println("无1");
+                jsonObject.put("USERNAME", "无");
+                System.out.println("无2");
+                jsonObject.put("PHONE", "无");
+                System.out.println("无3");
+                jsonObject.put("LOGINTIME", "无");
+                System.out.println("无4");
+                jsonObject.put("MACHINENO", "无");
+                System.out.println("无5");
+                jsonArray.add(jsonObject);
+            }
+            else
+            {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("USERNAME", data.get(0).get("USERNAME"));
+                jsonObject.put("PHONE", data.get(0).get("PHONE"));
+                if (data.get(0).get("LOGINTIME") == null) {
+                    jsonObject.put("LOGINTIME", "无");
+                } else {
+                    jsonObject.put("LOGINTIME", data.get(0).get("LOGINTIME").toString());
+                }
+                jsonObject.put("MACHINENO", data.get(0).get("MACHINENO"));
+                jsonArray.add(jsonObject);
+            }
+
+
+            result.put("total", data.size());
+            result.put("rows", jsonArray);
+            JSONObject fromObject = JSONObject.fromObject(result);
+            System.out.println("htt test：" + fromObject.toString());
+            return fromObject.toString();
+        }
+        else//不按手机号查询
+        {
+            JSONArray jsonArray = new JSONArray();
+            data = tcarMapper.queryCar(lo, la, kmNumber);//查询范围内，查询农机
+            System.out.println("size:" + data.size());
+            System.out.println("where");
+            if(data.size()==0)
+            {
+                System.out.println("无");
+                JSONObject jsonObject = new JSONObject();
+                System.out.println("无1");
+                jsonObject.put("USERNAME", "无");
+                System.out.println("无2");
+                jsonObject.put("PHONE", "无");
+                System.out.println("无3");
+                jsonObject.put("LOGINTIME", "无");
+                System.out.println("无4");
+                jsonObject.put("MACHINENO", "无");
+                System.out.println("无5");
+                jsonArray.add(jsonObject);
+                result.put("total", data.size());
+                result.put("rows", jsonArray);
+                JSONObject fromObject = JSONObject.fromObject(result);
+                System.out.println("htt test：" + fromObject.toString());
+                return fromObject.toString();
+            }
+            if (Long.parseLong(teamId) == -1)//此情况为，查询农机，且车队类型为全部，此时teamId=全部的id号 -1
+            {
+                System.out.println("农机 全部");
+                System.out.println("农机 全部 TEAMID" + data.get(0).get("TEAMID"));
+                System.out.println("农机 全部 TEAMID" + data.get(2).get("TEAMID"));
+                for (j = 0; j < data.size(); j++) {
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("USERNAME", data.get(j).get("USERNAME"));
+                    jsonObject.put("PHONE", data.get(j).get("PHONE"));
+                    if (data.get(j).get("LOGINTIME") == null) {
+                        jsonObject.put("LOGINTIME", "无");
+                    } else {
+                        jsonObject.put("LOGINTIME", data.get(j).get("LOGINTIME").toString());
+                    }
+                    jsonObject.put("MACHINENO", data.get(j).get("MACHINENO"));
+                    jsonArray.add(jsonObject);
+                }
+            } else//                  有teamid
+            {
+                System.out.println("teamid2:" + teamId);
+                System.out.println("data.get(i).get(\"TEAMID\"):"+data.get(0).get("TEAMID").getClass());
+                for (i = 0; i < data.size(); i++) {
+                    if ((Long) data.get(i).get("TEAMID") == Long.parseLong(teamId))//按车队显示
+                    {
+                        System.out.println("teamid3:" + teamId);
+                        System.out.println("where  农车");
+                        System.out.println("农机 车队 TEAMID" + data.get(i).get("TEAMID"));
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("USERNAME", data.get(i).get("USERNAME"));
+                        jsonObject.put("PHONE", data.get(i).get("PHONE"));
+                        jsonObject.put("MACHINENO", data.get(i).get("MACHINENO"));
+                        if (data.get(i).get("LOGINTIME") == null) {
+                            jsonObject.put("LOGINTIME", "无");
+                        } else {
+                            jsonObject.put("LOGINTIME", data.get(i).get("LOGINTIME").toString());
+                        }
+                        jsonArray.add(jsonObject);
+                    }
+
+                }
+            }
+
+            result.put("total", data.size());
+            result.put("rows", jsonArray);
+            JSONObject fromObject = JSONObject.fromObject(result);
+            System.out.println("农机，车队或者全部" + fromObject);
+            return fromObject.toString();
+        }
+    }
 
     @RequestMapping("service.do")
-    public void service(HttpServletRequest request, HttpServletResponse response, String lo, String la, String kmNumber) {
+    public void service(HttpServletRequest request, HttpServletResponse response, String lo, String la, String kmNumber,String phone) {
+        System.out.println("service.do");
+        System.out.printf("phone=%s,lo=%s,la=%s,knNumber=%s", phone, lo, la, kmNumber);
         List<Map<String, Object>> ss = serviceStationMapper.queryServiceStation(lo, la, kmNumber);
         try {
             response.getWriter().print("{'service':" + ss + "}");

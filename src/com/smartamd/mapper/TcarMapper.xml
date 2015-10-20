@@ -249,4 +249,22 @@
       Extra3 = #{extra3,jdbcType=VARCHAR}
     where carId = #{carid,jdbcType=INTEGER}
   </update>
+
+  <select id="queryCarByTel" resultType="map">
+    SELECT if(isnull(tu.teamId),0,tu.teamId) as TEAMID,tc.carid AS CARID,tc.lo AS LO,tc.la AS LA,tc.driverTel AS PHONE,tc.carno AS CARNO,tc.type AS CARTYPE,tc.machineNo AS MACHINENO,
+    tu.loginTime AS LOGINTIME,tu.userName AS USERNAME
+    FROM tcar AS tc,tuser AS tu
+    WHERE drivertel=#{tel} AND tu.tel=#{tel}
+  </select>
+
+  <select id="queryCar" resultType="map" >
+    SELECT if(isnull(tu.teamId),0,tu.teamId) as TEAMID,tc.carid AS CARID,tc.lo AS LO,tc.la AS LA,tc.driverTel AS PHONE,tc.carno AS CARNO,tc.type AS CARTYPE,tc.machineNo AS MACHINENO,
+    tu.loginTime AS LOGINTIME,tu.userName AS USERNAME
+    FROM tcar as tc, tuser AS tu
+    where tc.driverTel=tu.tel AND ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
+    (tc.lo*PI()/180-#{lo}*PI()/180)/2),2)
+    +COS(tc.lo*PI()/180)*COS(#{lo}*PI()/180)*
+    POW(SIN(
+    (tc.la*PI()/180-#{la}*PI()/180)/2),2)))*1000)/1000 &lt;=#{kmNumber}
+  </select>
 </mapper>

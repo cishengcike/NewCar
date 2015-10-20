@@ -1,9 +1,8 @@
 package test;
 
 import com.gexin.rp.sdk.base.impl.Target;
-import com.smartamd.mapper.LoginMapper;
-import com.smartamd.mapper.ServiceStationMapper;
-import com.smartamd.mapper.TuserMapper;
+import com.smartamd.mapper.*;
+import com.smartamd.model.QueryLoLa;
 import com.smartamd.model.Tuser;
 import com.smartamd.service.CIDResolver;
 import com.smartamd.service.LoginServletDao;
@@ -38,6 +37,12 @@ public class MapperTest {
     private CIDResolver cidResolver;
     @Autowired
     private ServiceStationMapper serviceStationMapper;
+
+    @Autowired
+    private TcarMapper tcarMapper;
+
+    @Autowired
+    private QueryLoLaMapper queryLoLaMapper;
 
     @Test
     public void addUserTest() {
@@ -249,6 +254,22 @@ public class MapperTest {
         List<Map<String, Object>> map = serviceStationMapper.queryServiceStation("116", "34", "1500");
         for(Map<String,Object> ss:map)
             System.out.println(ss);
+    }
+
+    @Test
+    public void queryCarByTelTest(){
+        System.out.println(tcarMapper.queryCarByTel("13852109735"));
+    }
+
+    @Test
+    public void queryCarTest(){
+        System.out.println(tcarMapper.queryCar("121.560934912226", "31.3019976198599", "150"));
+    }
+
+    @Test
+    public void queryLoLaTest(){
+        List<QueryLoLa> list=queryLoLaMapper.queryLoLa("14729214257");
+        System.out.println(list.size());
     }
 
 
