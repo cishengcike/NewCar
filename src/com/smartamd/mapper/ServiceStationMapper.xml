@@ -136,4 +136,20 @@
       Extra2 = #{extra2,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="queryServiceStation" resultType="map">
+    SELECT linkman as LINKMAN,stationName as STATIONNAME,stationTel as STATIONTEL,lo as LO,la as LA,
+    ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
+    (lo*PI()/180-#{lo}*PI()/180)/2),2)
+    +COS(lo*PI()/180)*COS(#{lo}*PI()/180)*
+    POW(SIN(
+    (la*PI()/180-#{la}*PI()/180)/2),2)))*1000)/1000 as DISTANCE
+    FROM servicestation
+    WHERE  ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
+    (lo*PI()/180-#{lo}*PI()/180)/2),2)
+    +COS(lo*PI()/180)*COS(#{lo}*PI()/180)*
+    POW(SIN(
+    (la*PI()/180-#{la}*PI()/180)/2),2)))*1000)/1000 &lt;=#{kmNumber}
+
+  </select>
 </mapper>

@@ -1,9 +1,6 @@
 package com.smartamd.controller;
 
-import com.smartamd.mapper.LoginMapper;
-import com.smartamd.mapper.QueryLoLaMapper;
-import com.smartamd.mapper.TcarMapper;
-import com.smartamd.mapper.TuserMapper;
+import com.smartamd.mapper.*;
 import com.smartamd.model.QueryLoLa;
 import com.smartamd.service.CIDResolver;
 import com.smartamd.service.Distance;
@@ -21,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -46,6 +44,9 @@ public class LoginInfo {
 
     @Autowired
     private QueryLoLaMapper queryLoLaMapper;
+
+    @Autowired
+    private ServiceStationMapper serviceStationMapper;
 
     private static Map<String, String> s_content = new HashMap<String, String>();
 
@@ -749,5 +750,17 @@ public class LoginInfo {
                 return "";
             }
         }
+    }
+
+    @RequestMapping("service.do")
+    public void service(HttpServletRequest request, HttpServletResponse response, String lo, String la, String kmNumber) {
+        List<Map<String, Object>> ss = serviceStationMapper.queryServiceStation(lo, la, kmNumber);
+        try {
+            response.getWriter().print("{'service':" + ss + "}");
+        } catch (IOException e) {
+            System.out.println("service.do Exception");
+            e.printStackTrace();
+        }
+
     }
 }

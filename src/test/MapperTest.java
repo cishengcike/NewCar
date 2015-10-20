@@ -2,6 +2,7 @@ package test;
 
 import com.gexin.rp.sdk.base.impl.Target;
 import com.smartamd.mapper.LoginMapper;
+import com.smartamd.mapper.ServiceStationMapper;
 import com.smartamd.mapper.TuserMapper;
 import com.smartamd.model.Tuser;
 import com.smartamd.service.CIDResolver;
@@ -35,6 +36,8 @@ public class MapperTest {
     private PushToList pushToList;
 
     private CIDResolver cidResolver;
+    @Autowired
+    private ServiceStationMapper serviceStationMapper;
 
     @Test
     public void addUserTest() {
@@ -239,6 +242,13 @@ public class MapperTest {
         DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         int a = tuserMapper.updateUser("12345678900", "116", "116", "70", df.format(dt));
         System.out.println(a);
+    }
+
+    @Test
+    public void queryServiceStationTest() {
+        List<Map<String, Object>> map = serviceStationMapper.queryServiceStation("116", "34", "1500");
+        for(Map<String,Object> ss:map)
+            System.out.println(ss);
     }
 
 

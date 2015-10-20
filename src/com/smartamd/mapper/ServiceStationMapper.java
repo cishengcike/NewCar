@@ -1,6 +1,10 @@
 package com.smartamd.mapper;
 
 import com.smartamd.model.ServiceStation;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Map;
 
 public interface ServiceStationMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +18,6 @@ public interface ServiceStationMapper {
     int updateByPrimaryKeySelective(ServiceStation record);
 
     int updateByPrimaryKey(ServiceStation record);
+
+    List<Map<String,Object>> queryServiceStation(@Param("lo") String lo,@Param("la") String la,@Param("kmNumber")String kmNumber);
 }
