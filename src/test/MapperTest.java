@@ -1,11 +1,11 @@
 package test;
 
 import com.gexin.rp.sdk.base.impl.Target;
-import com.smartamd.mapper.LoginMapper;
-import com.smartamd.mapper.ServiceStationMapper;
-import com.smartamd.mapper.TuserMapper;
+import com.smartamd.mapper.*;
+import com.smartamd.model.QueryLoLa;
 import com.smartamd.model.Tuser;
 import com.smartamd.service.CIDResolver;
+import com.smartamd.service.Distance;
 import com.smartamd.service.LoginServletDao;
 import com.smartamd.service.PushToList;
 import org.junit.Test;
@@ -38,6 +38,12 @@ public class MapperTest {
     private CIDResolver cidResolver;
     @Autowired
     private ServiceStationMapper serviceStationMapper;
+
+    @Autowired
+    private TcarMapper tcarMapper;
+
+    @Autowired
+    private QueryLoLaMapper queryLoLaMapper;
 
     @Test
     public void addUserTest() {
@@ -246,9 +252,31 @@ public class MapperTest {
 
     @Test
     public void queryServiceStationTest() {
-        List<Map<String, Object>> map = serviceStationMapper.queryServiceStation("116", "34", "1500");
+        List<Map<String, Object>> map = serviceStationMapper.queryServiceStation("116", "34", "3000");
         for(Map<String,Object> ss:map)
             System.out.println(ss);
+    }
+
+    @Test
+    public void queryCarByTelTest(){
+        System.out.println(tcarMapper.queryCarByTel("13852109735"));
+    }
+
+    @Test
+    public void queryCarTest(){
+        System.out.println(tcarMapper.queryCar("121.560934912226", "31.3019976198599", "150"));
+    }
+
+    @Test
+    public void queryLoLaTest(){
+        List<QueryLoLa> list=queryLoLaMapper.queryLoLa("14729214257");
+        System.out.println(list.size());
+    }
+
+    @Test
+    public void distanceTest(){
+        Distance distance=new Distance();
+        System.out.println(distance.getDistance(117.528890933903, 34.2751100009932,117.467144634213, 34.2428511378437));
     }
 
 

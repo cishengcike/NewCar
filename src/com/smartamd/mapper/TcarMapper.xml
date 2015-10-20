@@ -249,4 +249,20 @@
       Extra3 = #{extra3,jdbcType=VARCHAR}
     where carId = #{carid,jdbcType=INTEGER}
   </update>
+
+  <select id="queryCarByTel" resultType="map">
+    SELECT carId AS CARID,lo AS LO,la AS LA,driverTel AS PHONE,carNo AS CARNO,type AS CARTYPE
+    FROM newcar.tcar
+    WHERE drivertel=#{tel}
+  </select>
+
+  <select id="queryCar" resultType="map" >
+    SELECT carid AS CARID,lo AS LO,la AS LA,driverTel AS PHONE,carno AS CARNO,type AS CARTYPE
+    FROM newcar.tcar
+    where ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
+    (lo*PI()/180-#{lo}*PI()/180)/2),2)
+    +COS(lo*PI()/180)*COS(#{lo}*PI()/180)*
+    POW(SIN(
+    (la*PI()/180-#{la}*PI()/180)/2),2)))*1000)/1000 &lt;=#{kmNumber}
+  </select>
 </mapper>

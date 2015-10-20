@@ -1,1 +1,1 @@
-XXX&2.1&2.1 version&http://192.168.1.112:8080/NongJi.apk
+XXX&2.1&2.1 version&http://202.120.222.205:80/NongJi.apk

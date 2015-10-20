@@ -4,7 +4,7 @@
 
 
 
-    <select id="queryLoLa" parameterType="java.lang.Integer" resultType="com.smartamd.model.QueryLoLa">
+    <select id="queryLoLa" parameterType="java.lang.String" resultType="com.smartamd.model.QueryLoLa">
         SELECT lo,la FROM tposition where carId=#{carID}
     </select>
 

@@ -54,7 +54,7 @@ public class LoginInfo {
 
     private static DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
-    private final int MAX_DISTANCE = 5000;
+    private final int MAX_DISTANCE = 10000;
 
 //    @Autowired
 //    private UsertypeMapper usertypeMapper;
@@ -360,32 +360,39 @@ public class LoginInfo {
      */
     @RequestMapping(value = "historyRoute.do")
     public String historyRoute(String drivertel, Model model) {
+        System.out.println("url:historyRoute.do");
         int carID = queryLoLaMapper.queryCarID(drivertel);
-        List<QueryLoLa> list = queryLoLaMapper.queryLoLa(carID);
+        System.out.println("carid=" + carID);
+        List<QueryLoLa> list = queryLoLaMapper.queryLoLa(String.valueOf(carID));
         model.addAttribute("FIRST_LENGTH", list.size());
-
         int length = list.size();
         model.addAttribute("flo", list.get(length - 1).getLo());
         model.addAttribute("fla", list.get(length - 1).getLa());
         Distance distance = new Distance();
-        int i = 0;
+        int i = 0, j = 1;
         System.out.println("初始长度" + list.size());
 
         //两个坐标距离相差少于MAX_DISTANCE不再地图上显示
-        while (i < length - 1) {
+        while (j <= length - 1) {
             double lo1, la1, lo2, la2;
             lo1 = list.get(i).getLo();
             la1 = list.get(i).getLa();
-            lo2 = list.get(i + 1).getLo();
-            la2 = list.get(i + 1).getLa();
+            lo2 = list.get(j).getLo();
+            la2 = list.get(j).getLa();
             if (distance.getDistance(lo1, la1, lo2, la2) < MAX_DISTANCE) {
-                list.remove(i + 1);
+                list.remove(j);
+
                 length = length - 1;
-            } else i++;
+            } else {
+                i++;
+                j++;
+            }
         }
-        for (QueryLoLa queryLoLa : list) {
-            System.out.println(queryLoLa.toString());
-        }
+        System.out.println("处理后长度" + list.size());
+//        for (QueryLoLa ll : list)
+//            System.out.println(ll.toString());
+
+
         JSONArray jsonArray = JSONArray.fromObject(list);
         model.addAttribute("historyLoLa", jsonArray);
         model.addAttribute("FINAL_LENGTH", list.size());
@@ -753,8 +760,12 @@ public class LoginInfo {
     }
 
     @RequestMapping("service.do")
-    public void service(HttpServletRequest request, HttpServletResponse response, String lo, String la, String kmNumber) {
+    public void service(HttpServletRequest request, HttpServletResponse response, String lo, String la, String kmNumber, String phone) {
+        System.out.println("service.do");
+        System.out.printf("phone=%s,lo=%s,la=%s,knNumber=%s\n", phone, lo, la, kmNumber);
         List<Map<String, Object>> ss = serviceStationMapper.queryServiceStation(lo, la, kmNumber);
+        for (Map<String, Object> map : ss)
+            System.out.println(map);
         try {
             response.getWriter().print("{'service':" + ss + "}");
         } catch (IOException e) {
