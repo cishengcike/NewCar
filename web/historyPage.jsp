@@ -54,9 +54,9 @@
   <div style="text-align: center;">
     <form name="input" action="historyRoute.do" method="post">
       请输入车辆对应的电话号码：<input type="text" name="drivertel">
-      请选择开始时间:<input type="text" id="example_1" name="startTime" />
-      请选择结束时间<input type="text" id="example_2" name="lastTime" />
-      <input type="submit" value="确认"> <a href="queryAllUserCar.do">返回到查询页面</a>
+      点击框内选择开始时间:<input type="text" id="example_1" name="startTime" />
+      点击框内选择结束时间<input type="text" id="example_2" name="lastTime" />
+      <input type="submit" value="确认"> <a href="queryAllUserCar.do">点击返回到查询页面</a>
     </form>
   </div>
 
