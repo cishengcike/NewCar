@@ -1002,9 +1002,7 @@ public class LoginInfo {
                 for (i = 0; i < data.size(); i++) {
                     if ((Long) data.get(i).get("TEAMID") == Long.parseLong(teamId))//按车队显示
                     {
-                        System.out.println("teamid3:" + teamId);
-                        System.out.println("where  农车");
-                        System.out.println("农机 车队 TEAMID" + data.get(i).get("TEAMID"));
+//                        System.out.println("农机 车队 TEAMID" + data.get(i).get("TEAMID"));
                         JSONObject jsonObject = new JSONObject();
                         jsonObject.put("USERNAME", data.get(i).get("USERNAME"));
                         jsonObject.put("PHONE", data.get(i).get("PHONE"));
@@ -1023,7 +1021,6 @@ public class LoginInfo {
             result.put("total", data.size());
             result.put("rows", jsonArray);
             JSONObject fromObject = JSONObject.fromObject(result);
-            System.out.println("农机，车队或者全部" + fromObject);
             return fromObject.toString();
         }
     }
@@ -1031,8 +1028,10 @@ public class LoginInfo {
     @RequestMapping("service.do")
     public void service(HttpServletRequest request, HttpServletResponse response, String lo, String la, String kmNumber,String phone) {
         System.out.println("service.do");
-        System.out.printf("phone=%s,lo=%s,la=%s,knNumber=%s", phone, lo, la, kmNumber);
+        System.out.printf("phone=%s,lo=%s,la=%s,knNumber=%s\n", phone, lo, la, kmNumber);
         List<Map<String, Object>> ss = serviceStationMapper.queryServiceStation(lo, la, kmNumber);
+        for(Map<String,Object> map:ss)
+            System.out.println(map);
         try {
             response.getWriter().print("{'service':" + ss + "}");
         } catch (IOException e) {
