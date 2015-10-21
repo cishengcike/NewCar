@@ -66,6 +66,8 @@
     <script type="text/javascript"
             src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
     <link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css"/>
+
+
 </head>
 <body>
 <style type="text/css">
@@ -189,6 +191,7 @@
                 /*{field:'LOGINTIME',title:'登录时间',width:200},*/
                 {field: 'CARTYPENAME', title: '车辆类型', width: 200}
             ]]
+
         });
 
     }
@@ -206,6 +209,7 @@
 
         $('#dg').datagrid({
             url: 'showCarDataGrid.do',
+            singleSelect:true,
             queryParams: {
                 userID: '${user['USERID']}',
                 userTypeQuery: aType,
@@ -223,12 +227,25 @@
                 {field: 'MACHINENO', title: '设备编号', width: 200}
             ]]
         });
+
+    }
+
+    function getSelected() {
+        alert("te");
+        var row = $('#dg').datagrid('getSelected');
+        alert("test");
+        alert("row=" + row);
+        if (row) {
+            alert("username=" + row.USERNAME);
+        }
     }
 
 </script>
 
 <div id="allinit">
     <button onclick="onclicks()" ;right="100px">关闭列表</button>
+    <button onclick="getSelected()" ;right="100px">选中该行</button>
+
     <br/>
 
     <div id="luna">
