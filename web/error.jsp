@@ -16,4 +16,5 @@
 </html>
 <script>
   alert("请返回并输入正确的手机号");
+  location.href='historyPage.do';
 </script>

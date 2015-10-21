@@ -22,7 +22,7 @@
 			div#luna
 			{
 				height:700px;
-				width:500px;
+				width:600px;
 				overflow:auto;
 				overflow-style:scrollbar;
 				display:block;
@@ -34,7 +34,7 @@
 				right:0px;
 				top:70px;
 				height:750px;
-				width:500px;
+				width:600px;
 				display:none;
 				z-index: 321;
 			}
@@ -188,7 +188,7 @@
 						{field:'USERNAME',title:'用户名',width:100},
 						{field:'PHONE',title:'手机号',width:100},
 						{field:'LOGINTIME',title:'登录时间',width:200},
-						{field:'CARTYPENAME',title:'车辆类型',width:100}
+						{field:'CARTYPENAME',title:'车辆类型',width:200}
 					]]
 				});
 
@@ -218,10 +218,10 @@
 					},
 
 					columns:[[
-						{field:'USERNAME',title:'用户名',width:100},
+						{field:'USERNAME',title:'机主名',width:100},
 						{field:'PHONE',title:'手机号',width:100},
 						{field:'LOGINTIME',title:'登录时间',width:200},
-						{field:'MACHINENO',title:'设备编号',width:100}
+						{field:'MACHINENO',title:'设备编号',width:200}
 					]]
 				});
 			}
@@ -229,7 +229,7 @@
 		</script>
 
 		<div id="allinit">
-			<button onclick="onclicks()";right="100px">关闭用户列表</button><br/>
+			<button onclick="onclicks()";right="100px">关闭列表</button><br/>
 			<div id="luna">
 				<table id="dg"></table>
 			</div>
@@ -274,15 +274,13 @@
 				<%--创建查看用户数据表格--%>
 				<c:if test="${user['TYPE']=='2'}">
 					<a href="historyPage.do">查询历史轨迹</a>
-					<a href="javascript:showDataGridWeb(${user['TEAMID']})" onclick="onclickss()">用户显示</a>
-					<a href="javascript:showCarDataGridWeb(${user['TEAMID']})" onclick="onclickss()">农机显示</a>
+					<a href="javascript:showCarDataGridWeb(${user['TEAMID']})" onclick="onclickss()">农机列表</a>
 				</c:if>
 
 
 				<c:if test="${user['TYPE']=='3'}">
 					<a href="historyPage.do">查询历史轨迹</a>
-					<a href="javascript:showDataGridAdminWeb()" onclick="onclickss()">用户显示</a>
-					<a href="javascript:showCarDataGridAdminWeb()" onclick="onclickss()">农机显示</a>
+					<a href="javascript:showCarDataGridAdminWeb()" onclick="onclickss()">农机列表</a>
 					车队类型:<select  style="width:130px;" id="queryMapTeamType">
 					<option value="1"
 							<c:if test="${MAPTEAMTYPEQUERY==0}">selected='selected'</c:if>>徐庄</option>
@@ -295,6 +293,12 @@
 
 			</div>
 			<div style="height: 40px; text-align: center;">
+				<c:if test="${user['TYPE']=='2'}">
+					<a href="javascript:showDataGridWeb(${user['TEAMID']})" onclick="onclickss()">用户列表</a>
+				</c:if>
+				<c:if test="${user['TYPE']=='3'}">
+					<a href="javascript:showDataGridAdminWeb()" onclick="onclickss()">用户列表</a>
+				</c:if>
 				用户类型:<select  style="width:130px;" id="queryMapUserType">
 							<option value="0"
 									<c:if test="${MAPUSERTYPEQUERY==1}">selected='selected'</c:if>>农机手</option>
@@ -357,7 +361,7 @@
 						"<table	class='gridtable'> "+
 						"<thead>"+
 						"<tr>"+
-							"<th>用户名</th>"+
+							"<th>机主名</th>"+
 							"<th>电话号码</th>"+
 						"</tr>"+
 						"</thead>"+
