@@ -51,7 +51,7 @@
     <file url="file://$PROJECT_DIR$/web/jquery.js" charset="GBK" />
     <file url="file://$PROJECT_DIR$/web/jquery.min.js" charset="GBK" />
     <file url="file://$PROJECT_DIR$/web/jquery.spritely-0.6.js" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/web/js" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/web/js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/web/login.css" charset="GBK" />
     <file url="file://$PROJECT_DIR$/web/main.css" charset="GBK" />
     <file url="file://$PROJECT_DIR$/web/mapList.jsp" charset="GBK" />
