@@ -22,7 +22,7 @@
 			div#luna
 			{
 				height:700px;
-				width:500px;
+				width:400px;
 				overflow:auto;
 				overflow-style:scrollbar;
 				display:block;
@@ -34,7 +34,7 @@
 				right:0px;
 				top:70px;
 				height:750px;
-				width:500px;
+				width:400px;
 				display:none;
 				z-index: 321;
 			}
@@ -151,7 +151,8 @@
 				});
 			}
 			function  queryMapUser(){//aType,aPhone,aDistance
-				var aType=document.getElementById("queryMapUserType").value;
+				/*var aType=document.getElementById("queryMapUserType").value;*/
+				var aType=2;
 				var aPhone=document.getElementById("queryMapUserPhone").value;
 				var aDistance=document.getElementById("queryMapUserDistance").value;
 				location.href=encodeURI("queryMapNoddessUser.do?" +
@@ -169,7 +170,8 @@
 			}
 
 			function showDataGridWeb(teamIdWeb){
-				var aType=document.getElementById("queryMapUserType").value;
+				/*var aType=document.getElementById("queryMapUserType").value;*/
+				var aType=2;
 				var aPhone=document.getElementById("queryMapUserPhone").value;
 				var aDistance=document.getElementById("queryMapUserDistance").value;
 				$('#dg').datagrid({
@@ -187,8 +189,8 @@
 					columns:[[
 						{field:'USERNAME',title:'用户名',width:100},
 						{field:'PHONE',title:'手机号',width:100},
-						{field:'LOGINTIME',title:'登录时间',width:200},
-						{field:'CARTYPENAME',title:'车辆类型',width:100}
+						/*{field:'LOGINTIME',title:'登录时间',width:200},*/
+						{field:'CARTYPENAME',title:'车辆类型',width:200}
 					]]
 				});
 
@@ -201,7 +203,8 @@
 
 			function showCarDataGridWeb(teamIdWeb)
 			{
-				var aType=document.getElementById("queryMapUserType").value;
+				/*var aType=document.getElementById("queryMapUserType").value;*/
+				var aType=2;
 				var aPhone=document.getElementById("queryMapUserPhone").value;
 				var aDistance=document.getElementById("queryMapUserDistance").value;
 
@@ -220,8 +223,8 @@
 					columns:[[
 						{field:'USERNAME',title:'用户名',width:100},
 						{field:'PHONE',title:'手机号',width:100},
-						{field:'LOGINTIME',title:'登录时间',width:200},
-						{field:'MACHINENO',title:'设备编号',width:100}
+						/*{field:'LOGINTIME',title:'登录时间',width:200},*/
+						{field:'MACHINENO',title:'设备编号',width:200}
 					]]
 				});
 			}
@@ -274,15 +277,12 @@
 				<%--创建查看用户数据表格--%>
 				<c:if test="${user['TYPE']=='2'}">
 					<a href="historyPage.do">查询历史轨迹</a>
-					<a href="javascript:showDataGridWeb(${user['TEAMID']})" onclick="onclickss()">用户显示</a>
-					<a href="javascript:showCarDataGridWeb(${user['TEAMID']})" onclick="onclickss()">农机显示</a>
+					<a href="javascript:showCarDataGridWeb(${user['TEAMID']})" onclick="onclickss()">农机列表</a>
 				</c:if>
-
 
 				<c:if test="${user['TYPE']=='3'}">
 					<a href="historyPage.do">查询历史轨迹</a>
-					<a href="javascript:showDataGridAdminWeb()" onclick="onclickss()">用户显示</a>
-					<a href="javascript:showCarDataGridAdminWeb()" onclick="onclickss()">农机显示</a>
+					<a href="javascript:showCarDataGridAdminWeb()" onclick="onclickss()">农机列表</a>
 					车队类型:<select  style="width:130px;" id="queryMapTeamType">
 					<option value="1"
 							<c:if test="${MAPTEAMTYPEQUERY==0}">selected='selected'</c:if>>徐庄</option>
@@ -295,6 +295,12 @@
 
 			</div>
 			<div style="height: 40px; text-align: center;">
+				<%--<c:if test="${user['TYPE']=='2'}">
+					<a href="javascript:showDataGridWeb(${user['TEAMID']})" onclick="onclickss()">用户列表</a>
+				</c:if>
+				<c:if test="${user['TYPE']=='3'}">
+					<a href="javascript:showDataGridAdminWeb()" onclick="onclickss()">用户列表</a>
+				</c:if>
 				用户类型:<select  style="width:130px;" id="queryMapUserType">
 							<option value="0"
 									<c:if test="${MAPUSERTYPEQUERY==1}">selected='selected'</c:if>>农机手</option>
@@ -304,7 +310,7 @@
 									<c:if test="${MAPUSERTYPEQUERY==-1}">selected='selected'</c:if>>农机手与农户</option>
 							<option value="2"
 									<c:if test="${MAPUSERTYPEQUERY==2}">selected='selected'</c:if>>农机</option>
-						</select>
+						</select>--%>
 				手机号码:<input type="text" id="queryMapUserPhone"/>
 				距离范围:<input type="text" value="${KMNUMBER}" id="queryMapUserDistance" />公里
 				<input type="button" value="查询" onclick="queryMapUser()" />
@@ -398,12 +404,24 @@
 							"<td>" + userByPhone[0]['PHONE'] + "</td>" +
 							"</tr>";
 					contentQuery[0] += contenEnd;
-					markerQuery[0]=new BMap.Marker(pointQuery[0]);
+					var username = userByPhone[0]['USERNAME'];
+					//alert("username  "+username);
+					var teamID=userByPhone[0]['TEAMID'];
+					if(teamID==1)
+						var myIcon = new BMap.Icon("icon_xuzhuang.png",new BMap.Size(50,50));
+					else
+						var myIcon = new BMap.Icon("car.png", new BMap.Size(50,50));
+					markerQuery[0] = new BMap.Marker(pointQuery[0],{icon:myIcon});
 					map.addOverlay(markerQuery[0]);
-					infoWin[0]=new BMap.InfoWindow(contentQuery[0],opts);
-					markerQuery[0].addEventListener("click", function () {
-						map.openInfoWindow(infoWin[0],pointQuery[0]);
-					});
+					var label = new BMap.Label(username,{offset:new BMap.Size(20,-10)});
+					markerQuery[0].setLabel(label);
+					infoWin[0] = new BMap.InfoWindow(contentQuery[0], opts);
+					markerQuery[0].addEventListener("click", (function (k) {
+						return function () {
+							map.openInfoWindow(infoWin[k], pointQuery[k]);
+						}
+
+					})(0));
 				}
 				else {
 					if (!(farmerMapTemp === temp)) {

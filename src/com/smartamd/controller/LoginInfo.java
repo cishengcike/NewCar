@@ -533,13 +533,21 @@ public class LoginInfo {
         List<Map<String, Object>> data2 = null;
         int flag_int = Integer.parseInt(userTypeQuery);//userTypeQuery待查询的用户类型
         request.getSession().setAttribute("KMNUMBER", kmNumber);
-        if (!tel.isEmpty())//按手机查询
+        /*if (!tel.isEmpty())//按手机查询，查tuser表  应该改成查car表
         {
             data = tuserMapper.queryUserByTel(tel);
             request.setAttribute("userByPhoneWeb", JsonUtil.toJsonString(data));
             System.out.println(data.size() + "手机");
             System.out.println(JsonUtil.toJsonString(data) + "手机");
-        } else {
+        } */
+        if (!tel.isEmpty())//按手机查询，改成查car表
+        {
+            data = tcarMapper.queryCarByTel(tel);
+            request.setAttribute("userByPhoneWeb", JsonUtil.toJsonString(data));
+            System.out.println(data.size() + "手机");
+            System.out.println(JsonUtil.toJsonString(data) + "手机");
+        }
+        else {
             if (flag_int == 0)//查询农机手
             {
                 data = tuserMapper.queryMapDriver(lo, la, kmNumber);//查询userType=1农机手
@@ -592,6 +600,7 @@ public class LoginInfo {
 
     @RequestMapping("showDataGrid.do")
     @ResponseBody
+    //用户列表功能已隐藏
     //@ResponseBody默认返回数据类型Content-Type不带编码信息
     //已修改，在配置文件dispatcher-servlet.xml中,使注解的返回类型改为Content-Type:text/plain;charset=UTF-8
     public String showDataGrid(HttpServletRequest request, HttpServletResponse response) throws Exception {
