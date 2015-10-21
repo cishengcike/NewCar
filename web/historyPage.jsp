@@ -50,6 +50,7 @@
 </head>
 
 <body>
+
 <div style="width: 100%; heigth: 100%; margin-top: 10px;">
   <div style="text-align: center;">
     <form name="input" action="historyRoute.do" method="post">
