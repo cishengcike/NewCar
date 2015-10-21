@@ -268,7 +268,7 @@ public class MapperTest {
 
     @Test
     public void queryLoLaTest(){
-        List<QueryLoLa> list=queryLoLaMapper.queryLoLa("14729214257");
+        List<QueryLoLa> list=queryLoLaMapper.queryLoLa("171","2015-07-17 14:44:56","2015-07-17 14:50:04");
         System.out.println(list.size());
     }
 

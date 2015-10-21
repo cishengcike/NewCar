@@ -356,11 +356,13 @@ public class LoginInfo {
      * @return
      */
     @RequestMapping(value = "historyRoute.do")
-    public String historyRoute(String drivertel, Model model) {
+    public String historyRoute(String drivertel,String startTime,String lastTime, Model model) {
         System.out.println("url:historyRoute.do");
         try {
+            System.out.println("startTime="+startTime);
+            System.out.println("lastTime="+lastTime);
             int carID = queryLoLaMapper.queryCarID(drivertel);
-            List<QueryLoLa> list = queryLoLaMapper.queryLoLa(String.valueOf(carID));
+            List<QueryLoLa> list = queryLoLaMapper.queryLoLa(String.valueOf(carID),startTime,lastTime);
             model.addAttribute("FIRST_LENGTH", list.size());
             int length = list.size();
             model.addAttribute("flo", list.get(length - 1).getLo());
