@@ -219,7 +219,7 @@
             },
 
             columns: [[
-                {field: 'USERNAME', title: '用户名', width: 100},
+                {field: 'USERNAME', title: '机主名', width: 100},
                 {field: 'PHONE', title: '手机号', width: 100},
                 /*{field:'LOGINTIME',title:'登录时间',width:200},*/
                 {field: 'MACHINENO', title: '设备编号', width: 200}
@@ -230,7 +230,7 @@
 </script>
 
 <div id="allinit">
-    <button onclick="onclicks()" ;right="100px">关闭用户列表</button>
+    <button onclick="onclicks()" ;right="100px">关闭列表</button>
     <br/>
 
     <div id="luna">
@@ -368,7 +368,7 @@
                 "<table	class='gridtable'> " +
                 "<thead>" +
                 "<tr>" +
-                "<th>用户名</th>" +
+                "<th>机主名</th>" +
                 "<th>电话号码</th>" +
                 "</tr>" +
                 "</thead>" +
