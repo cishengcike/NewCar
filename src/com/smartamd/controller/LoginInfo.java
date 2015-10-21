@@ -2,10 +2,7 @@ package com.smartamd.controller;
 
 import com.smartamd.mapper.*;
 import com.smartamd.model.QueryLoLa;
-import com.smartamd.service.CIDResolver;
-import com.smartamd.service.Distance;
-import com.smartamd.service.LoginServletDao;
-import com.smartamd.service.PushToList;
+import com.smartamd.service.*;
 import com.smartamd.utils.JsonUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -371,7 +368,6 @@ public class LoginInfo {
             Distance distance = new Distance();
             int i = 0, j = 1;
             System.out.println("初始长度" + list.size());
-
             //两个坐标距离相差少于MAX_DISTANCE不再地图上显示
             while (j <= length - 1) {
                 double lo1, la1, lo2, la2;
@@ -391,7 +387,6 @@ public class LoginInfo {
             System.out.println("处理后长度" + list.size());
 //        for (QueryLoLa ll : list)
 //            System.out.println(ll.toString());
-
 
             JSONArray jsonArray = JSONArray.fromObject(list);
             model.addAttribute("historyLoLa", jsonArray);
@@ -430,6 +425,7 @@ public class LoginInfo {
             response.getWriter().print(-5);
             return;
         }
+//        pwd = MD5.MD5Trans(pwd);
         List<Map<String, Object>> data = loginMapper.loginTrue(phone, pwd);//取出指定电话和密码的用户信息
         if (data.size() > 0) {
             request.getSession().setAttribute("user", data.get(0));//用户的信息放入到id=user
@@ -469,6 +465,7 @@ public class LoginInfo {
             response.getWriter().print("手机号码已经被注册!!!");
             return;
         }
+        pwd= MD5.MD5Trans(pwd);
         int cou = loginServletDao.addUser(userName, pwd, phone, userType, carType);
         System.out.println("cou=" + cou);
         if (cou > 0) {
