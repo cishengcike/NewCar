@@ -244,7 +244,7 @@
 
 <div id="allinit">
     <button onclick="onclicks()" ;right="100px">关闭列表</button>
-    <button onclick="getSelected()" ;right="100px">选中该行</button>
+    <%--<button onclick="getSelected()" ;right="100px">选中该行</button>--%>
 
     <br/>
 

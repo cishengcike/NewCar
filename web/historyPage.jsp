@@ -16,7 +16,7 @@
     .demo h4{height:32px; line-height:32px; font-size:14px}
     .demo h4 span{font-weight:500; font-size:12px}
     .demo p{line-height:28px;}
-    input{width:200px; height:20px; line-height:20px; padding:2px; border:1px solid #d3d3d3}
+    /*input{width:200px; height:20px; line-height:20px; padding:2px; border:1px solid #d3d3d3}*/
     pre{padding:6px 0 0 0; color:#666; line-height:20px; background:#f7f7f7}
 
     .ui-timepicker-div .ui-widget-header { margin-bottom: 8px;}
@@ -55,8 +55,8 @@
   <div style="text-align: center;">
     <form name="input" action="historyRoute.do" method="post">
       请输入车辆对应的电话号码：<input type="text" name="drivertel">
-      点击框内选择开始时间:<input type="text" id="example_1" name="startTime" />
-      点击框内选择结束时间<input type="text" id="example_2" name="lastTime" />
+      <%--点击框内选择开始时间:<input type="text" id="example_1" name="startTime" />--%>
+      <%--点击框内选择结束时间<input type="text" id="example_2" name="lastTime" />--%>
       <input type="submit" value="确认"> <a href="queryAllUserCar.do">点击返回到查询页面</a>
     </form>
   </div>
