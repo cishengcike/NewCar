@@ -57,6 +57,11 @@ public class LoginServletDao {
                     temp1 = tuserMapper.insertSelective(tuser);
                     temp2 = loginMapper.updateCarType(phone, (loginMapper.queryCarType(carType)));
                 }
+                else{
+                    System.out.println("农机手注册没有车");
+                    temp1=tuserMapper.insertSelective(tuser);
+                    temp2=1;
+                }
                 System.out.println("temp1=" + temp1);
                 System.out.println("temp2=" + temp2);
 
@@ -82,8 +87,8 @@ public class LoginServletDao {
             if(!"错误".equals(carType)){
                 int car_type=loginMapper.queryCarType(carType);
                 String phone = tuserMapper.selectPhoneByUserID(userId);
-                res2 = tuserMapper.updateCarType(car_type,phone);
-
+                if(tuserMapper.selectUserFromTcar(phone)!=null)
+                   res2 = tuserMapper.updateCarType(car_type,phone);
             }
 
 
