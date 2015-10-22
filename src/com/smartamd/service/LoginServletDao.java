@@ -53,14 +53,14 @@ public class LoginServletDao {
                 System.out.println("usertype==1");
                 Map<String,Object> driver=tuserMapper.selectUserFromTcar(phone);
                 System.out.println("driver="+driver);
-                if(driver.size()!=0) {
+                if(driver!=null) {
                     temp1 = tuserMapper.insertSelective(tuser);
                     temp2 = loginMapper.updateCarType(phone, (loginMapper.queryCarType(carType)));
                 }
                 else{
                     System.out.println("农机手注册没有车");
                     temp1=tuserMapper.insertSelective(tuser);
-                    temp2=1;
+                    temp2 = tuserMapper.insertTcarWhileRegister(phone);
                 }
                 System.out.println("temp1=" + temp1);
                 System.out.println("temp2=" + temp2);
@@ -87,8 +87,7 @@ public class LoginServletDao {
             if(!"错误".equals(carType)){
                 int car_type=loginMapper.queryCarType(carType);
                 String phone = tuserMapper.selectPhoneByUserID(userId);
-                if(tuserMapper.selectUserFromTcar(phone)!=null)
-                   res2 = tuserMapper.updateCarType(car_type,phone);
+                res2 = tuserMapper.updateCarType(car_type,phone);
             }
 
 

@@ -437,4 +437,8 @@
     SELECT userID as USERID,lo as LO,la as LA,tel as PHONE,userName as USERNAME,tu.userType AS USERTYPE,if(isnull(tu.CID),'0',tu.CID) as CID ,if(isnull(tu.teamId),0,tu.teamId) as TEAMID
     FROM tuser AS tu WHERE tel=#{phone}
   </select>
+
+  <insert id="insertTcarWhileRegister" parameterType="java.lang.String">
+    INSERT INTO tcar (driverTel,simNo,machineNo) VALUES (#{phone},0,0)
+  </insert>
 </mapper>

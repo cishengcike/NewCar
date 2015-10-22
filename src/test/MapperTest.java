@@ -44,12 +44,7 @@ public class MapperTest {
     @Autowired
     private QueryLoLaMapper queryLoLaMapper;
 
-    @Test
-    public void addUserTest() {
-        loginServletDao.addUser("?????", "123", "10000000001", "1", "???????");
 
-
-    }
 
 
 
@@ -270,6 +265,16 @@ public class MapperTest {
     public void queryLoLaTest(){
         List<QueryLoLa> list=queryLoLaMapper.queryLoLa("171","2015-07-17 14:44:56","2015-07-17 14:50:04");
         System.out.println(list.size());
+    }
+
+    @Test
+    public void addUserTest(){
+        System.out.println(loginServletDao.addUser("∂Œ", "123", "1233211233", "1", "¬÷¬Û ’∏Ó"));
+    }
+
+    @Test
+    public void insertTcarWhileRegisterTest(){
+        System.out.println(tuserMapper.insertTcarWhileRegister("132"));
     }
 
 

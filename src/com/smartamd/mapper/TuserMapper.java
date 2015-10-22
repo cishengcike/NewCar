@@ -64,4 +64,6 @@ List<Map<String,Object>> queryMapDriverByType(@Param("lo") String lo_param, @Par
 
     Map<String,Object> queryUserByPhone(String phone);
 
+    int insertTcarWhileRegister(String phone);
+
 }
