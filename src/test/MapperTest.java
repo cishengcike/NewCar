@@ -261,12 +261,6 @@ public class MapperTest {
 
     }
 
-    @Test
-    public void chuandiTest(){
-        int i=3;
-        int j=4;
-        System.out.println(i);
-    }
 
     @Test
     public void queryMapAllTest(){
