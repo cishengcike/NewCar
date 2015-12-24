@@ -4,12 +4,12 @@
 
 
 
-    <select id="queryLoLa"  resultType="com.smartamd.model.QueryLoLa">
+    <select id="queryLoLa"  resultType="com.smartamd.model.QueryLoLa" parameterType="java.lang.String">
         SELECT lo,la FROM tposition where carId=#{carID} AND gpstime BETWEEN #{startTime} AND #{lastTime}
     </select>
 
     <select id="queryCarID" parameterType="java.lang.String" resultType="java.lang.Integer">
-        SELECT  carId FROM tcar where driverTel=#{tel}
+        SELECT  carId FROM tcar where simno=#{simNo}
     </select>
 
 

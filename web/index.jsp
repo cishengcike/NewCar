@@ -25,7 +25,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
     <script type="text/javascript" src="jquery.js"></script> 
     <script type="text/javascript" src="jquery.spritely-0.6.js"></script>
-    <%--<script type="text/javascript" src="chur.min.js"></script>--%>
     <link rel="stylesheet" type="text/css" href="login.css" />
     <script src="http://siteapp.baidu.com/static/webappservice/uaredirect.js" type="text/javascript">
     </script><script type="text/javascript">uaredirect("indexPhone.jsp");</script>
@@ -70,11 +69,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
    	<form action="" method="post" id="fm">
-	    <div id="clouds" class="stage"></div>
-	    <div class="loginmain">
-	    </div>
+
     <div class="row-fluid">
-        <h1>农机定位调度平台</h1>
+		<div class="img"></div>
+        <h1><img width="" height="50px"  src="/img/listImg/555.png" />&nbsp;&nbsp;&nbsp;农机定位调度管理平台&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
         <p>
             <label>帐&nbsp;&nbsp;&nbsp;号：<input type="text"   id="phone"  name="username" style="height:30px" /></label>
         </p>
@@ -89,7 +87,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           
         <input type="button" value=" 登 录 " class="btn btn-primary btn-large login" onclick="loginPwd()" />
          <input type="button" value=" 注 册 " class="btn btn-primary btn-large login" onclick="zhuce()" />
-    </div>  
+    </div>
     </form>
   </body>
 </html>

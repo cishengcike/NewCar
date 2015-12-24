@@ -3,9 +3,9 @@ package test;
 import com.gexin.rp.sdk.base.impl.Target;
 import com.smartamd.mapper.*;
 import com.smartamd.model.QueryLoLa;
-import com.smartamd.model.Tuser;
 import com.smartamd.service.CIDResolver;
 import com.smartamd.service.LoginServletDao;
+import com.smartamd.service.MD5;
 import com.smartamd.service.PushToList;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by aaron on 15-8-13.
@@ -45,16 +46,10 @@ public class MapperTest {
     private QueryLoLaMapper queryLoLaMapper;
 
 
-
-
-
-
-
     @Test
     public void insertTuserTest() {
         loginMapper.insertTuser("段亦逍");
     }
-
 
 
     @Test
@@ -74,14 +69,17 @@ public class MapperTest {
     }
 
     @Test
+    public void adminTest() {
+        System.out.println(MD5.MD5Trans("Guangdian2014"));
+
+    }
+
+    @Test
     public void queryMapTest() {
         List<Map<String, Object>> list = null;
-        list = tuserMapper.queryMapDriver("121.56095123291016", "31.30206871032715", "500000");
-        System.out.println(list.get(0));
-        System.out.println(list.get(1));
-        System.out.println(list.get(2));
-        System.out.println(list.get(3));
-        System.out.println(list.get(4));
+        list = tuserMapper.queryMapDriver("121.56095123291016", "31.30206871032715", "11500000");
+        System.out.println(list.size());
+
 
 //        System.out.println("??????????"+list);
 //
@@ -101,12 +99,10 @@ public class MapperTest {
     @Test
     public void queryMapByPhoneTest() {
         List<Map<String, Object>> list1 = null;
-        List<Map<String, Object>> list2 = new ArrayList<Map<String,Object>>();
-        Map<String, Object> x = tuserMapper.queryMapFarmerByPhone("121.56425476074219", "31.29883575439453", "123456789");
-        System.out.println(x);
-        System.out.printf("");
+        List<Map<String, Object>> list2 = new ArrayList<Map<String, Object>>();
+         List<Map<String,Object>> mm = tuserMapper.queryMapDriverByPhone("121.560924939438", "31.3019659047683","10000000012");
+            System.out.println(mm);
     }
-
 
 
 //    @Test
@@ -124,25 +120,24 @@ public class MapperTest {
 //    }
 
 
-
     @Test
-    public void getTargetsTest(){
+    public void getTargetsTest() {
         List<String> list = new ArrayList<String>();
         List<Target> list2 = new ArrayList<Target>();
         list.add("9495b9705e7dc951d77d9ed98bfe5f5e");
         list.add("333d19cd3a2d6cff61cef87a8236d8a5");
-        list2= pushToList.getTarget(list);
+        list2 = pushToList.getTarget(list);
         System.out.println(list2.get(0).getClientId());
     }
 
     @Test
-    public void listTest(){
+    public void listTest() {
         List<String> list = new ArrayList<String>();
         List<Target> targets = new ArrayList<Target>();
         list.add("9495b9705e7dc951d77d9ed98bfe5f5e");
         list.add("333d19cd3a2d6cff61cef87a8236d8a5");
-        for(String clientID : list){
-            Target target=new Target();
+        for (String clientID : list) {
+            Target target = new Target();
             target.setClientId(clientID);
             targets.add(target);
 
@@ -154,69 +149,30 @@ public class MapperTest {
 
 
 
-    @Test
-    public void queryMapAllTest() {
-        List<Map<String,Object>> list=null;
-        list=tuserMapper.queryMapAll("121.56128", "31.301811", "15");
-        System.out.println(list.size());
-        for(Map<String,Object> map:list){
-            System.out.println(map);
-        }
-        System.out.println("???????");
-        Iterator<Map<String,Object>> iterator=list.iterator();
-        while (iterator.hasNext()){
-            Map<String,Object> map=iterator.next();
-            if((Integer)map.get("USERID")==12)
-                iterator.remove();
-        }
-
-        for(Map<String,Object> map:list){
-            System.out.println(map);
-        }
-        System.out.println(list.size());
-
-    }
 
     @Test
-    public void getCIDListTest(){
-        List<Map<String,Object>> list=tuserMapper.queryMapAll("121.56128", "31.301811", "15");
-        System.out.println(list.size());
-
-        List<String> cid_list = new ArrayList<String>();
-        for(Map<String,Object> map:list) {
-
-            if(map.get("CID")!=null)
-
-                cid_list.add(map.get("CID").toString());
-
-        }
-        System.out.println(cid_list.size());
-
-    }
-
-    @Test
-    public void selectUserByPhoneTest(){
-        Map<String,Object> map=tuserMapper.selectUserByPhone("15852386459", "121.56123", "31.30184");
+    public void selectUserByPhoneTest() {
+        Map<String, Object> map = tuserMapper.selectUserByPhone("15852386459", "121.56123", "31.30184");
         System.out.println(map);
     }
 
     @Test
-    public void selectUserTelByUserIDTest(){
+    public void selectUserTelByUserIDTest() {
         System.out.println(tuserMapper.selectUserTelByUserID("12"));
     }
 
     @Test
-    public void updateCarTypeTest(){
-        int car_type=loginMapper.queryCarType("??????");
+    public void updateCarTypeTest() {
+        int car_type = loginMapper.queryCarType("??????");
         System.out.println(car_type);
         String phone = tuserMapper.selectPhoneByUserID(34);
         System.out.println(phone);
-        int res= tuserMapper.updateCarType(car_type, phone);
+        int res = tuserMapper.updateCarType(car_type, phone);
         System.out.println(res);
     }
 
     @Test
-    public void selectUserFromTcarTest(){
+    public void selectUserFromTcarTest() {
         System.out.println(loginMapper.queryCarType("轮麦收割 "));
 
     }
@@ -228,11 +184,11 @@ public class MapperTest {
 
     @Test
     public void alterUserInformationPhoneTest() {
-       int a= loginServletDao.alterUserInformationPhone(492, "0", "", "");
+        int a = loginServletDao.alterUserInformationPhone(492, "0", "", "");
     }
 
     @Test
-    public void queryUserByPhoneTest(){
+    public void queryUserByPhoneTest() {
         System.out.println(tuserMapper.queryUserByPhone("10000000012"));
     }
 
@@ -247,36 +203,107 @@ public class MapperTest {
     @Test
     public void queryServiceStationTest() {
         List<Map<String, Object>> map = serviceStationMapper.queryServiceStation("116", "34", "1500");
-        for(Map<String,Object> ss:map)
+        for (Map<String, Object> ss : map)
             System.out.println(ss);
     }
 
-    @Test
-    public void queryCarByTelTest(){
-        System.out.println(tcarMapper.queryCarByTel("13852109735"));
-    }
 
     @Test
-    public void queryCarTest(){
+    public void queryCarTest() {
         System.out.println(tcarMapper.queryCar("121.560934912226", "31.3019976198599", "150"));
     }
 
     @Test
-    public void queryLoLaTest(){
-        List<QueryLoLa> list=queryLoLaMapper.queryLoLa("171","2015-07-17 14:44:56","2015-07-17 14:50:04");
+    public void queryLoLaTest() {
+        List<QueryLoLa> list = queryLoLaMapper.queryLoLa("171","2015-11-1","2015-11-2");
         System.out.println(list.size());
     }
 
     @Test
-    public void addUserTest(){
+    public void addUserTest() {
         System.out.println(loginServletDao.addUser("段", "123", "1233211233", "1", "轮麦收割"));
     }
 
     @Test
-    public void insertTcarWhileRegisterTest(){
+    public void insertTcarWhileRegisterTest() {
         System.out.println(tuserMapper.insertTcarWhileRegister("132"));
     }
 
+    @Test
+    public void queryCarByTelTest() {
+        List<Map<String, Object>> list = tcarMapper.queryCarByTel("10000000019");
+        System.out.println(list.size());
+        System.out.println(list.get(0).toString());
+        System.out.println(list);
+    }
+
+    @Test
+    public void queryServiceStationByPhoneTest() {
+        System.out.println(serviceStationMapper.queryServiceStationByPhone("121.561411", "31.301739", "89290786"));
+    }
+
+    @Test
+    public void queryMapDriverTest() {
+        List<Map<String, Object>> ll = tuserMapper.queryMapDriverByType("121.561411", "31.301739", "15000", 1);
+        for (Map<String, Object> map : ll)
+            System.out.println(map);
+        System.out.println(ll.size());
+
+    }
+
+    @Test
+    public void queryMapDriverPhone() {
+        List<Map<String, Object>> ll = tuserMapper.queryMapDriverPhone("121.561411", "31.301739", "13852109092");
+        for (Map<String, Object> map : ll)
+            System.out.println(map);
+        List<Map<String, Object>> mm = ll.stream().distinct().collect(Collectors.toList());
+        mm.forEach(o-> System.out.println(o));
+
+    }
+
+    @Test
+    public void chuandiTest(){
+        int i=3;
+        int j=4;
+        System.out.println(i);
+    }
+
+    @Test
+    public void queryMapAllTest(){
+        List<Map<String,Object>> ll=tuserMapper.queryMapAll("121.561411", "31.301739", "1500000");
+        System.out.println(ll.size());
+    }
+
+    //htt 填写车辆lo,la
+    @Test
+    public void carNullTest(){
+        double lo;
+        double la;
+        Integer carId=null;
+        Random random = new Random();
+        List<Map<String, Object>> data = null;
+        //取出所有车户数据
+        data=tcarMapper.selectAll();
+        System.out.println("data size "+data.size());
+        if(data.size()>0)
+        {
+
+            for(int i=0;i<data.size();i++)
+            {
+                lo=117.333424620056;
+                la=34.2866402303996;
+                if(data.get(i).get("LO")==null)
+                {
+                    System.out.println("i="+i+" lo:"+data.get(i).get("LO"));
+                    double temp=Math.abs(random.nextDouble())*0.1;
+                    lo=lo+temp;
+                    la=la+temp;
+                    carId=(Integer)data.get(i).get("CARID");
+                    tcarMapper.updateNullCar(lo,la,carId);
+                }
+            }
+        }
+    }
 
 
 }

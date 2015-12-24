@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.smartamd.mapper.ServiceStationMapper" >
-  <resultMap id="BaseResultMap" type="com.smartamd.model.ServiceStation" >
+  <resultMap id="BaseResultMap" type="test.model.servicestation" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="linkman" property="linkman" jdbcType="VARCHAR" />
     <result column="stationName" property="stationname" jdbcType="VARCHAR" />
     <result column="stationAddress" property="stationaddress" jdbcType="VARCHAR" />
     <result column="stationTel" property="stationtel" jdbcType="VARCHAR" />
     <result column="lo" property="lo" jdbcType="DOUBLE" />
     <result column="la" property="la" jdbcType="DOUBLE" />
-    <result column="Extra1" property="extra1" jdbcType="VARCHAR" />
-    <result column="Extra2" property="extra2" jdbcType="VARCHAR" />
+    <result column="products" property="products" jdbcType="VARCHAR" />
+    <result column="sales" property="sales" jdbcType="VARCHAR" />
+    <result column="star" property="star" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="test.model.servicestation" extends="BaseResultMap" >
+    <result column="photo" property="photo" jdbcType="LONGVARBINARY" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, type, stationName, stationAddress, stationTel, lo, la, Extra1, Extra2
+    id, type, linkman, stationName, stationAddress, stationTel, lo, la, products, sales,
+    star
+  </sql>
+  <sql id="Blob_Column_List" >
+    photo
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -149,7 +158,18 @@
     (lo*PI()/180-#{lo}*PI()/180)/2),2)
     +COS(lo*PI()/180)*COS(#{lo}*PI()/180)*
     POW(SIN(
-    (la*PI()/180-#{la}*PI()/180)/2),2)))*1000)/1000 &lt;=#{kmNumber}
+    (la*PI()/180-#{la}*PI()/180)/2),2)))*1000)/1000 &lt;=#{kmNumber} ORDER BY DISTANCE ASC
 
+  </select>
+
+  <select id="queryServiceStationByPhone" resultType="map">
+    SELECT linkman as LINKMAN,stationName as STATIONNAME,stationTel as STATIONTEL,lo as LO,la as LA,
+    ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
+    (lo*PI()/180-#{lo}*PI()/180)/2),2)
+    +COS(lo*PI()/180)*COS(#{lo}*PI()/180)*
+    POW(SIN(
+    (la*PI()/180-#{la}*PI()/180)/2),2)))*1000)/1000 as DISTANCE
+    FROM servicestation
+    WHERE stationTel=#{phone} ORDER BY DISTANCE ASC
   </select>
 </mapper>

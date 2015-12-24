@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.smartamd.mapper.TcarMapper" >
-  <resultMap id="BaseResultMap" type="com.smartamd.model.Tcar" >
+  <resultMap id="BaseResultMap" type="test.model.tcar" >
     <id column="carId" property="carid" jdbcType="INTEGER" />
     <result column="teamId" property="teamid" jdbcType="INTEGER" />
     <result column="positionId" property="positionid" jdbcType="INTEGER" />
@@ -17,13 +17,13 @@
     <result column="la" property="la" jdbcType="DOUBLE" />
     <result column="status" property="status" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
-    <result column="Extra1" property="extra1" jdbcType="VARCHAR" />
+    <result column="gpsTime" property="gpstime" jdbcType="TIMESTAMP" />
     <result column="Extra2" property="extra2" jdbcType="VARCHAR" />
     <result column="Extra3" property="extra3" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    carId, teamId, positionId, carNo, simNo, machineNo, type, joinTime, driverName, driverTel, 
-    driverAddress, lo, la, status, remark, Extra1, Extra2, Extra3
+    carId, teamId, positionId, carNo, simNo, machineNo, type, joinTime, driverName, driverTel,
+    driverAddress, lo, la, status, remark, gpsTime, Extra2, Extra3
   </sql>
   <select id="selectCarNameByCarId" resultType="java.lang.String">
     select  tct.typeName AS TYPENAME
@@ -251,14 +251,14 @@
   </update>
 
   <select id="queryCarByTel" resultType="map">
-    SELECT if(isnull(tu.teamId),0,tu.teamId) as TEAMID,tc.carid AS CARID,tc.lo AS LO,tc.la AS LA,tc.driverTel AS PHONE,tc.carno AS CARNO,tc.type AS CARTYPE,tc.machineNo AS MACHINENO,
+    SELECT if(isnull(tu.teamId),0,tu.teamId) as TEAMID,tc.carid AS CARID,tc.lo AS LO,tc.la AS LA,tc.driverTel AS PHONE,tc.carno AS CARNO,tc.type AS CARTYPE,tc.machineNo AS MACHINENO,tc.simNo AS SIMNO,
     tu.loginTime AS LOGINTIME,tu.userName AS USERNAME
-    FROM tcar AS tc,tuser AS tu
-    WHERE drivertel=#{tel} AND tu.tel=#{tel}
+    FROM tcar AS tc INNER JOIN tuser as tu ON  tc.driverTel=tu.tel
+    WHERE drivertel=#{tel}
   </select>
 
   <select id="queryCar" resultType="map" >
-    SELECT if(isnull(tu.teamId),0,tu.teamId) as TEAMID,tc.carid AS CARID,tc.lo AS LO,tc.la AS LA,tc.driverTel AS PHONE,tc.carno AS CARNO,tc.type AS CARTYPE,tc.machineNo AS MACHINENO,
+    SELECT if(isnull(tu.teamId),0,tu.teamId) as TEAMID,tc.carid AS CARID,tc.lo AS LO,tc.la AS LA,tc.driverTel AS PHONE,tc.carno AS CARNO,tc.type AS CARTYPE,tc.machineNo AS MACHINENO,tc.simNo AS SIMNO,
     tu.loginTime AS LOGINTIME,tu.userName AS USERNAME
     FROM tcar as tc, tuser AS tu
     where tc.driverTel=tu.tel AND ROUND(6378.138*2*ASIN(SQRT(POW(SIN(
@@ -267,4 +267,17 @@
     POW(SIN(
     (tc.la*PI()/180-#{la}*PI()/180)/2),2)))*1000)/1000 &lt;=#{kmNumber}
   </select>
+
+  <!--htt 2015-11-18-->
+  <select id="selectAll" resultType="map">
+    SELECT carId AS CARID ,lo AS LO,la AS LA
+    FROM tcar
+  </select>
+  <update id="updateNullCar" >
+    UPDATE tcar
+    SET  lo=#{lo},
+    la=#{la}
+    WHERE carId=#{carId}
+  </update>
+
 </mapper>

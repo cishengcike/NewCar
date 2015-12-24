@@ -1,13 +1,13 @@
  body {
      display: block;
-    background-image:url(003.jpg);
-    overflow: hidden; 
+    overflow: hidden;
+
   	background-repeat:repeat ;
  	background-position: center top;  
   
-} 
+}
 
-@font-face {
+ @font-face {
     font-family: fzqt;
     src: url("font/fzqt.ttf");
 }
@@ -45,14 +45,13 @@
     position: absolute;
     margin-left: -260px;
     margin-top: -160px;
+    margin-right: -260px;
     left: 50%;
     top: 50%;
-    background: #FFF;
+    right:50%;
+    background: #FFFFFF;
     border-top-left-radius: 30px;
     border-bottom-right-radius: 30px;
-    background: -moz-linear-gradient(top, #FFF, #CCC);
-    background: -webkit-linear-gradient(top, #FFF, #CCC);
-    background: -o-linear-gradient(top, #FFF, #CCC);
 }
 
  #clouds {
@@ -61,11 +60,15 @@
 } 
 
 .row-fluid h1 {
-    padding: 25px 0;
-    color: #0b9cd3;
-    font-family: fzqt;
-}
 
+    padding: 18px 0;
+    color: blue;
+    font-weight:bold;
+
+}
+.img{
+    border: none;
+}
 .row-fluid hr {
     width: 80%;
     border: none;

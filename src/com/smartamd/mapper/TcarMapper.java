@@ -25,4 +25,8 @@ public interface TcarMapper {
     List<Map<String,Object>> queryCarByTel(@Param("tel") String tel);
 
     List<Map<String,Object>> queryCar(@Param("lo") String lo,@Param("la")String la,@Param("kmNumber") String kmNumber);
+
+    //htt 2015-11-18
+    List<Map<String,Object>>selectAll();
+    int updateNullCar(@Param("lo") Double lo,@Param("la")Double la,@Param("carId") Integer carId);
 }

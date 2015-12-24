@@ -21,8 +21,8 @@
               <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
               <property name="url" value="jdbc:mysql://127.0.0.1:3306/newcar?useUnicode=true&amp;characterEncoding=utf8"></property>
 
-              <property name="username" value="root"></property>
-              <property name="password" value="thirteen"></property>
+              <property name="username" value="admin"></property>
+              <property name="password" value="admin"></property>
        </bean>
 
        <!-- mybatis -->

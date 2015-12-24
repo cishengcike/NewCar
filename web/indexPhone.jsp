@@ -20,7 +20,6 @@
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
     <script type="text/javascript" src="jquery.js"></script> 
     <script type="text/javascript" src="jquery.spritely-0.6.js"></script>
-    <%--<script type="text/javascript" src="chur.min.js"></script>--%>
     <link rel="stylesheet" type="text/css" href="login.css" />
     <!-- <script src="http://siteapp.baidu.com/static/webappservice/uaredirect.js" type="text/javascript">
     </script><script type="text/javascript">uaredirect("index.jsp");</script> -->
@@ -67,11 +66,9 @@ function bangzhu(){
   
 <body>
 	<form action="" method="post" id="fm">
-	    <div id="clouds" class="stage"></div>
-	    <div class="loginmain">
-	    </div>
+
     <div class="row-fluid">
-        <h1>农机定位调度平台</h1>
+        <h1><img width="" height="50px"  src="/img/listImg/555.png" />&nbsp;农机定位调度管理平台</h1>
         <p>
             <label>帐&nbsp;&nbsp;&nbsp;号：<input type="text"   id="phone"  name="username" style="height:30px" /></label>
         </p>

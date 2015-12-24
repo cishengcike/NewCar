@@ -32,7 +32,7 @@ public class Tcar {
 
     private String remark;
 
-    private String extra1;
+    private String gpstime;
 
     private String extra2;
 
@@ -158,12 +158,12 @@ public class Tcar {
         this.remark = remark == null ? null : remark.trim();
     }
 
-    public String getExtra1() {
-        return extra1;
+    public String getGpstime() {
+        return gpstime;
     }
 
-    public void setExtra1(String extra1) {
-        this.extra1 = extra1 == null ? null : extra1.trim();
+    public void setGpstime(String gpstime) {
+        this.gpstime = gpstime;
     }
 
     public String getExtra2() {

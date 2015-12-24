@@ -15,6 +15,14 @@
 </body>
 </html>
 <script>
-  alert("请返回并输入正确的手机号");
-  location.href='historyPage.do';
+  var code=${errorCode};
+  if(code==1)
+  { alert("请返回并输入正确的sim卡号");
+    location.href='historyPage.do';
+  }
+  else {
+    alert("在该时间内车辆没有上传经纬度");
+    location.href='historyPage.do';
+  }
+
 </script>

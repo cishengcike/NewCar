@@ -17,9 +17,13 @@ public class ServiceStation {
 
     private Double la;
 
-    private String extra1;
+    private String products;
 
-    private String extra2;
+    private String sales;
+
+    private Byte star;
+
+    private byte[] photo;
 
     public Integer getId() {
         return id;
@@ -42,7 +46,7 @@ public class ServiceStation {
     }
 
     public void setLinkman(String linkman) {
-        this.linkman = linkman;
+        this.linkman = linkman == null ? null : linkman.trim();
     }
 
     public String getStationname() {
@@ -85,19 +89,35 @@ public class ServiceStation {
         this.la = la;
     }
 
-    public String getExtra1() {
-        return extra1;
+    public String getProducts() {
+        return products;
     }
 
-    public void setExtra1(String extra1) {
-        this.extra1 = extra1 == null ? null : extra1.trim();
+    public void setProducts(String products) {
+        this.products = products == null ? null : products.trim();
     }
 
-    public String getExtra2() {
-        return extra2;
+    public String getSales() {
+        return sales;
     }
 
-    public void setExtra2(String extra2) {
-        this.extra2 = extra2 == null ? null : extra2.trim();
+    public void setSales(String sales) {
+        this.sales = sales == null ? null : sales.trim();
+    }
+
+    public Byte getStar() {
+        return star;
+    }
+
+    public void setStar(Byte star) {
+        this.star = star;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
     }
 }

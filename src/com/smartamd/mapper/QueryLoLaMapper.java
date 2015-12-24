@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface QueryLoLaMapper {
      List<QueryLoLa> queryLoLa(@Param("carID") String carID,@Param("startTime")String startTime,@Param("lastTime")String lastTime);
-     int queryCarID(String driver1tel);
+     int queryCarID(String simNo);
 
 }

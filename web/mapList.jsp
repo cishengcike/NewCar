@@ -49,7 +49,7 @@
         }
     </script>
 
-    <title>根据城市名设置地图中心点</title>
+    <title>农机定位调度平台</title>
 
     <!--引入Jquery生产版（最小化和压缩版）-->
     <script type="text/javascript" src="js/jquery.min.js"></script>
@@ -155,12 +155,26 @@
         var aPhone = document.getElementById("queryMapUserPhone").value;
         var aDistance = document.getElementById("queryMapUserDistance").value;
         location.href = encodeURI("queryMapNoddessUser.do?" +
-        "userID=" + ${user['USERID']}+
-                "&userTypeQuery=" + aType +
-        "&kmNumber=" + aDistance +
-        "&tel=" + aPhone +
-        "&lo=" + ${user['LO']} +
-                "&la=" + ${user['LA']});
+                "userID=" + ${user['USERID']}+
+                        "&userTypeQuery=" + aType +
+                "&kmNumber=" + aDistance +
+                "&tel=" + aPhone +
+                "&lo=" + ${user['LO']} +
+                        "&la=" + ${user['LA']});
+    }
+
+    function queryServiceStation() {//aType,aPhone,aDistance
+        /*var aType=document.getElementById("queryMapUserType").value;*/
+        var aType = 2;
+        var aPhone = document.getElementById("queryMapUserPhone").value;
+        var aDistance = document.getElementById("queryMapUserDistance").value;
+        location.href = encodeURI("serviceWeb.do?" +
+                "userID=" + ${user['USERID']}+
+                        "&userTypeQuery=" + aType +
+                "&kmNumber=" + aDistance +
+                "&tel=" + aPhone +
+                "&lo=" + ${user['LO']} +
+                        "&la=" + ${user['LA']});
     }
 
     function showDataGridAdminWeb() {
@@ -209,7 +223,7 @@
 
         $('#dg').datagrid({
             url: 'showCarDataGrid.do',
-            singleSelect:true,
+            singleSelect: true,
             queryParams: {
                 userID: '${user['USERID']}',
                 userTypeQuery: aType,
@@ -224,7 +238,36 @@
                 {field: 'USERNAME', title: '机主名', width: 100},
                 {field: 'PHONE', title: '手机号', width: 100},
                 /*{field:'LOGINTIME',title:'登录时间',width:200},*/
-                {field: 'MACHINENO', title: '设备编号', width: 200}
+//                {field: 'MACHINENO', title: '设备编号', width: 200}
+                {field: 'MACHINENO', title: 'sim卡号', width: 200}
+            ]]
+        });
+
+    }
+
+    function showServiceDataGridWeb() {
+        /*var aType=document.getElementById("queryMapUserType").value;*/
+//        var aType = 2;
+//        var aPhone = document.getElementById("queryMapUserPhone").value;
+        var aDistance = document.getElementById("queryMapUserDistance").value;
+
+        $('#dg').datagrid({
+            url: 'showServiceDataGridWeb.do',
+            singleSelect: true,
+            queryParams: {
+                <%--userID: '${user['USERID']}',--%>
+                kmNumber: aDistance,
+                lo: '${user['LO']}',
+                la: '${user['LA']}'
+            },
+
+            columns: [[
+                {field: 'LINKMAN', title: '联系人', width: 100},
+                {field: 'STATIONTEL', title: '联系电话', width: 100},
+                {field: 'STATIONNAME', title: '维修站名', width: 200}
+                /*{field:'LOGINTIME',title:'登录时间',width:200},*/
+//                {field: 'MACHINENO', title: '设备编号', width: 200}
+
             ]]
         });
 
@@ -240,6 +283,17 @@
         }
     }
 
+    function deleteUserByTel(){
+        if(confirm("确认注销用户？"))
+        {
+            location.href=encodeURI("deleteUserByTel.do?" +
+                    "tel=" + ${user['TEL']});
+        }
+        else
+        {
+            alert("取消成功！");
+        }
+    }
 </script>
 
 <div id="allinit">
@@ -284,11 +338,11 @@
 </div>
 
 <div style="width: 100%; heigth: 100%; margin-top: 10px;">
-    <div style="text-align:center;">
+    <div style="text-align:center">
         欢迎 <span style="font-weight: bold; color: red">${user['USERNAME']}</span>登陆BDS/GPS后台系统!!!
         <a href="javascript:openUpdatePwd()">修改密码</a>
-        <a href="deleteUserByTel.do?tel=${user['TEL']}">注销用户</a>
-
+        <a href="javascript:deleteUserByTel(${user['TEL']})">注销用户</a>
+        <%--<a href="deleteUserByTel.do?tel=${user['TEL']}">注销用户</a>--%>
         <%--创建查看用户数据表格--%>
         <c:if test="${user['TYPE']=='2'}">
             <a href="historyPage.do">查询历史轨迹</a>
@@ -310,8 +364,10 @@
             </option>
             </select>
         </c:if>
-
+        <a href="returnIndex.do">退出</a>
     </div>
+    <span style="font-weight: bold;color:black;float:right;margin-right: 100px">客服电话 0516-83258656</span>
+
     <div style="height: 40px; text-align: center;">
         <%--<c:if test="${user['TYPE']=='2'}">
             <a href="javascript:showDataGridWeb(${user['TEAMID']})" onclick="onclickss()">用户列表</a>
@@ -331,7 +387,9 @@
                 </select>--%>
         手机号码:<input type="text" id="queryMapUserPhone"/>
         距离范围:<input type="text" value="${KMNUMBER}" id="queryMapUserDistance"/>公里
-        <input type="button" value="查询" onclick="queryMapUser()"/>
+        <input type="button" value="查询农机" onclick="queryMapUser()"/>
+        <input type="button" value="查询维修站" onclick="queryServiceStation()"/>
+        <%--<a href="javascript:showServiceDataGridWeb()" onclick="onclickss()">维修站列表</a>--%>
     </div>
 
     <div id="allmap" style="height: 1000px;"></div>
@@ -342,12 +400,12 @@
     $(function () {
         //自定义标注
         function addMarker(point, conten, opts) {  // 创建图标对象
-            var myIcon = new BMap.Icon("user.png", new BMap.Size(50, 50), {
-                offset: new BMap.Size(10, 25),
-                imageOffset: new BMap.Size(0, 0)   // 设置图片偏移
-            });
+//            var myIcon = new BMap.Icon("user.png", new BMap.Size(50, 50), {
+//                offset: new BMap.Size(10, 25),
+//                imageOffset: new BMap.Size(0, 0)   // 设置图片偏移
+//            });
             // 创建标注对象并添加到地图
-            var marker = new BMap.Marker(point, {icon: myIcon});
+            var marker = new BMap.Marker(point);
             map.addOverlay(marker);
             var infoWindow = new BMap.InfoWindow(conten, opts);//创建信息窗口对象
             marker.addEventListener("click", function () {//创建标注的监听
@@ -363,7 +421,7 @@
         }
         var map = new BMap.Map("allmap");          // 创建地图实例
         var pointNow = new BMap.Point(loMap, laMap);  // 创建点坐标
-        map.centerAndZoom(pointNow, 15);                 // 初始化地图，设置中心点坐标和地图级别
+        map.centerAndZoom(pointNow, 17);                 // 初始化地图，设置中心点坐标和地图级别
         //添加比例尺和缩放控件
         var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});// 左上角，添加比例尺
         var top_left_navigation = new BMap.NavigationControl();  //左上角，添加默认缩放平移控件
@@ -406,6 +464,9 @@
         var userByPhoneMap = '${userByPhoneWeb}';
         var machineMapTemp = '${machine}';
         var machineSizeMap = "${machineSize}";
+        var serviceMapTemp = '${service}';
+        var serviceSizeMap = "${serviceSize}";
+
 
         var pointQuery = new Array();
         var markerQuery = new Array();
@@ -498,8 +559,9 @@
             if (!(machineMapTemp === temp))//查询  农机
             {
                 var machineMap = eval(machineMapTemp);
+//                alert("农机个数="+machineSizeMap);
                 for (i = 0; i < machineSizeMap; i++) {
-                    pointQuery[i] = new window.BMap.Point(machineMap[i]['LO'], machineMap[i]['LA']);
+                    pointQuery[i] = new BMap.Point(machineMap[i]['LO'], machineMap[i]['LA']);
                     contentQuery[i] = contenStart +
                             "<tr>" +
                             "<td>" + machineMap[i]['USERNAME'] + "</td>" +
@@ -524,6 +586,39 @@
                     })(i));
                 }
             }
+            if (!(serviceMapTemp === temp))//查询 维修站
+            {
+
+                var serviceMap = eval(serviceMapTemp);
+                for (i = 0; i < serviceSizeMap; i++) {
+                    pointQuery[i] = new window.BMap.Point(serviceMap[i]['LO'], serviceMap[i]['LA']);
+                    contentQuery[i] = contenStart +
+                            "<tr>" +
+                            "<td>" + serviceMap[i]['STATIONNAME'] + "</td>" +
+                            "<td>" + serviceMap[i]['STATIONTEL'] + "</td>" +
+                            "</tr>";
+                    contentQuery[i] += contenEnd;
+                    var username = serviceMap[i]['STATIONNAME'];
+//                    var teamID = serviceMap[i]['TEAMID'];
+//                    if (teamID == 1)
+//                        var myIcon = new BMap.Icon("icon_xuzhuang.png", new BMap.Size(50, 50));
+//                    else
+//                        var myIcon = new BMap.Icon("car.png", new BMap.Size(50, 50));
+
+                    myIcon = new BMap.Icon("1111.png", new BMap.Size(50, 50));
+                    markerQuery[i] = new BMap.Marker(pointQuery[i], {icon: myIcon});
+                    map.addOverlay(markerQuery[i]);
+                    var label = new BMap.Label(username, {offset: new BMap.Size(20, -10)});
+                    markerQuery[i].setLabel(label);
+                    infoWin[i] = new BMap.InfoWindow(contentQuery[i], opts);
+                    markerQuery[i].addEventListener("click", (function (k) {
+                        return function () {
+                            map.openInfoWindow(infoWin[k], pointQuery[k]);
+                        }
+                    })(i));
+                }
+            }
+
         }
     });
 </script>

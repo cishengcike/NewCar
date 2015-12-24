@@ -31,11 +31,11 @@ public class Tuser {
 
     private Integer longcount;
 
-    private String extra1;
+    private Double area;
 
-    private String extra2;
+    private String crops;
 
-    private String extra3;
+    private byte[] photo;
 
     public Integer getUserid() {
         return userid;
@@ -157,33 +157,20 @@ public class Tuser {
         this.longcount = longcount;
     }
 
-    public String getExtra1() {
-        return extra1;
-    }
+    public Double getArea() {return area;}
 
-    public void setExtra1(String extra1) {
-        this.extra1 = extra1 == null ? null : extra1.trim();
-    }
+    public void setArea(Double area) {this.area = area;}
 
-    public String getExtra2() {
-        return extra2;
-    }
+    public String getCrops() {return crops;}
 
-    public void setExtra2(String extra2) {
-        this.extra2 = extra2 == null ? null : extra2.trim();
-    }
+    public void setCrops(String crops) {this.crops = crops == null ? null : crops.trim();}
 
-    public String getExtra3() {
-        return extra3;
-    }
+    public byte[] getPhoto() {return photo;}
 
-    public void setExtra3(String extra3) {
-        this.extra3 = extra3 == null ? null : extra3.trim();
-
-    }
+    public void setPhoto(byte[] photo) {this.photo = photo;}
 
     @Override
-    public String toString(){
-        return ("userid="+userid+"  username"+username+"  tel"+tel+"\n");
+    public String toString() {
+        return ("userid=" + userid + "  username" + username + "  tel" + tel + "\n");
     }
 }

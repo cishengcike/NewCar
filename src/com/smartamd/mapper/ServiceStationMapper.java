@@ -20,4 +20,6 @@ public interface ServiceStationMapper {
     int updateByPrimaryKey(ServiceStation record);
 
     List<Map<String,Object>> queryServiceStation(@Param("lo") String lo,@Param("la") String la,@Param("kmNumber")String kmNumber);
+
+    List<Map<String,Object>> queryServiceStationByPhone(@Param("lo") String lo,@Param("la") String la,@Param("phone")String phone);
 }
